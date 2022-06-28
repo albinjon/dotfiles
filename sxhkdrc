@@ -40,7 +40,7 @@ alt + Escape
 # quit/restart bspwm
 alt + shift + {e,r}
     bspc {quit,wm -r}
-
+# Commenting for the heck of it
 # close and kill
 alt + {_,shift + }q
     bspc node -{c,k}
