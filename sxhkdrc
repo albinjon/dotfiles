@@ -35,6 +35,16 @@ alt + n
 alt + Escape
     pkill -USR1 -x sxhkd
 
+Print
+    flameshot gui -c
+shift+print
+    flameshot full
+XF86AudioRaiseVolume
+    pulsemixer --change-volume +5
+XF86AudioLowerVolume
+    pulsemixer --change-volume -5
+XF86AudioMute
+    pulsemixer --toggle-mute
 ####################### BSP WM #######################
 
 # quit/restart bspwm

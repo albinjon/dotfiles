@@ -153,14 +153,50 @@ content-background = ${colors.black}
 
 [module/bspwm]
 type = internal/bspwm
-ws-icon-0 = I;%{F#d19a66}  
-ws-icon-1 = II;%{F#61afef}亂   
-ws-icon-2 = III;%{F#e06c75}    
-ws-icon-3 = IV;%{F#98c379}阮
-ws-icon-4 = V;%{F#56b6c2}ﭮ
+
+; Only show workspaces defined on the same output as the bar
+; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; But if you rename your bspwm monitors with bspc -n this option will no longer
+; behave correctly.
+; Default: true
+pin-workspaces = true
+
+; Output mode flags after focused state label
+; Default: false
+inline-mode = false
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = false
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Set the scroll cycle direction 
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+
+; Only scroll through occupied workspaces
+; Default: false
+; New in version 3.6.0
+occupied-scroll = true
+ws-icon-0 = code;♚
+ws-icon-1 = office;♛
+ws-icon-2 = graphics;♜
+ws-icon-3 = mail;♝
+ws-icon-4 = web;♞
 ws-icon-default = ♟
 
 label-focused = "%icon%"
+
 label-focused-background = ${colors.black}
 ;label-focused-underline= ${colors.cyan}
 label-focused-foreground = ${colors.cyan}
@@ -357,7 +393,7 @@ format-foreground = ${colors.green}
 format-foreground-error = ${colors.red}
 format-background = ${colors.black}
 click-left = kitty -e $SHELL -c 'sudo pacman -Syu'
-click-right = bspc rule -a \* -o state=floating ; sleep 0.015 ; kitty -e $SHELL -c 'yay -Qu | less'
+click-right = bspc rule -a \\* -o state=floating ; sleep 0.015 ; kitty -e $SHELL -c 'yay -Qu | less'
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [module/windowtitle]
