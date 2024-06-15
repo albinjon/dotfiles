@@ -1,0 +1,2 @@
+launch bash
+launch env FOO=BAR nvim
