@@ -712,3 +712,5 @@
 2024/06/15 09:55:41 stat /Users/albin/.config/nvim.bak/nvim: no such file or directory
 2024/06/15 09:55:41 Clipboard render function get item state error
 2024/06/15 09:55:41 stat /Users/albin/.config/nvim.bak/nvim: no such file or directory
+2024/06/15 20:41:27 error get file info
+2024/06/15 20:41:27 stat /Users/albin/.config/sketchybar: no such file or directory
