@@ -12,6 +12,8 @@ return {
         "typescript-language-server",
         "vue-language-server",
         "eslint-lsp",
+        "html-lsp",
+        "css-lsp",
       },
     },
   },

@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:~/Programmering/apps:$PATH
+export DENO_INSTALL="/Users/albin/.deno"
+export PATH=$HOME/bin:$DENO_INSTALL/bin:/usr/local/bin:~/Programmering/apps:$PATH
 export XDG_CONFIG_HOME="$HOME/.config"
 # Path to your oh-my-zsh installation.
 alias gcam="git commit -am "

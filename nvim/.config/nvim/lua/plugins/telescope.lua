@@ -41,12 +41,7 @@ return {
         kmopt("Recent Files (CWD)")
       )
       vim.keymap.set("n", "<leader>fR", ":Telescope oldfiles hidden=true<cr>", kmopt("Recent Files (All)"))
-      vim.keymap.set(
-        "n",
-        "<leader>ff",
-        ":Telescope find_files no_ignore=true no_ignore_parent=true hidden=true<cr>",
-        kmopt("Find Files")
-      )
+      vim.keymap.set("n", "<leader>ff", ":Telescope find_files hidden=true<cr>", kmopt("Find Files"))
       vim.api.nvim_set_keymap(
         "n",
         "<leader>fp",

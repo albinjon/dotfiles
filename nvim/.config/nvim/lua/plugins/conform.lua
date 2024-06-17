@@ -1,6 +1,11 @@
 return {
   "stevearc/conform.nvim",
   opts = {
+    formatters = {
+      -- prettier = {
+      --   prepend_args = { "--single-attribute-per-line" },
+      -- }
+    },
     formatters_by_ft = {
       javascript = { "prettier" },
       typescript = { "prettier" },

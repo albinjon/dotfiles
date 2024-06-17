@@ -277,7 +277,7 @@ return {
             mode = "",
           },
         },
-        page_size = 100,
+        page_size = 1000,
         progress = {
           spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
           text_prefix = "Executing...",

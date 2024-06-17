@@ -20,7 +20,7 @@ spacebar -m config power_icon_color 0xffEBCB8B
 spacebar -m config battery_icon_color 0xffcdd6f4
 spacebar -m config dnd_icon_color 0xffE5E9F0
 spacebar -m config clock_icon_color 0xffcdd6f4
-spacebar -m config space_icon_strip   󰒱      󰶍 󰆼   
+spacebar -m config space_icon_strip   󰒱     󰶍 󰆼   
 spacebar -m config power_icon_strip 󰂌 
 spacebar -m config space_icon 
 spacebar -m config clock_icon 
