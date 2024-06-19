@@ -61,6 +61,7 @@ return {
         ["wd"] = "which_key_ignore",
         ["<space>"] = "which_key_ignore",
         w = {
+          name = "windows",
           ["s"] = {
             function()
               split_and_switch_buffer("v")
@@ -72,6 +73,14 @@ return {
               split_and_switch_buffer("h")
             end,
             "Split Horizontally",
+          },
+          q = {
+            "<cmd>w<cr><cmd>Bdelete<cr>",
+            "Close and write file",
+          },
+          Q = {
+            "<cmd>Bdelete!<cr>",
+            "Close and abandon file",
           },
         },
         f = {

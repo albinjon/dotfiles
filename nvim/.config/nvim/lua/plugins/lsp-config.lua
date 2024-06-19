@@ -11,7 +11,7 @@ return {
         "shfmt",
         "typescript-language-server",
         "vue-language-server",
-        "eslint-lsp",
+        "prettierd",
         "html-lsp",
         "css-lsp",
       },
@@ -37,7 +37,6 @@ return {
         },
         filetypes = { "vue" },
       })
-      lspconfig.volar.setup({})
     end,
   },
   {

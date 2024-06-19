@@ -4,6 +4,10 @@
 
 --
 
+-- local function close_buffer()
+--   vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
+-- end
+
 local function del_map(mode, prefix, commands)
   for i = 1, #commands do
     vim.keymap.del(mode, prefix .. commands[i])
@@ -35,6 +39,11 @@ vim.keymap.set({ "i", "c" }, "<M-Left>", "<S-Left>", { desc = "Move cursor word 
 vim.keymap.set({ "i", "c" }, "<M-Right>", "<S-Right>", { desc = "Move cursor word forwards" })
 vim.keymap.set({ "i", "c" }, "<M-Del>", "<S-Right><C-W>", { desc = "Delete word forwards" })
 vim.keymap.set({ "n" }, "<leader>ww", ":q<cr>", { desc = "Close window", noremap = true, silent = true })
+vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
+-- vim.keymap.set("n", "<C-M-l>", "<S-Right>", { desc = "Resize window" })
+vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
+vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
+vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
 vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
 
 -- restore the session for the current directory
