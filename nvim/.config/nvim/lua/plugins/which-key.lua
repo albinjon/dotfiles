@@ -75,7 +75,7 @@ return {
             "Split Horizontally",
           },
           q = {
-            "<cmd>w<cr><cmd>Bdelete<cr>",
+            "<cmd>up<cr><cmd>Bdelete<cr>",
             "Close and write file",
           },
           Q = {

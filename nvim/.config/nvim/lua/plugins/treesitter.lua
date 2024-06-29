@@ -23,6 +23,7 @@ return {
         "markdown_inline",
         "printf",
         "python",
+        "prisma",
         "query",
         "regex",
         "vue",

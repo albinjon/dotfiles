@@ -11,7 +11,8 @@ return {
         "shfmt",
         "typescript-language-server",
         "vue-language-server",
-        "prettierd",
+        "tailwindcss-language-server",
+        --"prettierd",
         "html-lsp",
         "css-lsp",
       },
@@ -25,17 +26,30 @@ return {
       local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
         .. "/node_modules/@vue/language-server"
       local lspconfig = require("lspconfig")
+      local util = lspconfig.util
+      lspconfig.tailwindcss.setup({
+        cmd = { "tailwindcss-language-server", "--stdio" },
+        filetypes = { "html", "css", "vue" },
+        root_dir = util.root_pattern(".git"),
+        single_file_support = false,
+      })
+      -- lspconfig.eslint.setup({
+      --   root_dir = util.root_pattern(".git"),
+      -- })
       lspconfig.tsserver.setup({
+        root_dir = function(fname)
+          return util.root_pattern("package-lock.json")(fname) or util.root_pattern(".git")
+        end,
         init_options = {
           plugins = {
             {
               name = "@vue/typescript-plugin",
               location = vue_language_server_path,
-              languages = { "vue" },
+              languages = { "vue", "javascript", "typescript" },
             },
           },
         },
-        filetypes = { "vue" },
+        filetypes = { "vue", "javascript", "typescript" },
       })
     end,
   },

@@ -30,6 +30,9 @@ local commands = {
   "-",
   "w-",
   "ww",
+  "sd",
+  "ss",
+  "sS",
 }
 
 del_map("n", "<leader>", commands)
