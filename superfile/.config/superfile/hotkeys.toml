@@ -3,7 +3,7 @@
 # Global hotkeys (cannot conflict with other hotkeys)
 
 # I know this is not really that "vim", but the control flow is different.
-confirm = ['enter', 'l']
+confirm = ['enter', '']
 quit = ['q', ''] # also know as, theprimeagen troller
 
 # movement
@@ -54,7 +54,7 @@ cancel_typing = ['esc', '']
 
 # =================================================================================================
 # Normal mode hotkeys (can conflict with other modes, cannot conflict with global hotkeys)
-parent_directory = ['-', 'h']
+parent_directory = ['-', 'backspace']
 search_bar = ['/', '']
 
 # =================================================================================================

@@ -45,9 +45,6 @@ vim.keymap.set({ "n" }, "<leader>ww", ":q<cr>", { desc = "Close window", noremap
 vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
 -- vim.keymap.set("n", "<C-M-l>", "<S-Right>", { desc = "Resize window" })
 vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
-vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
-vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
-vim.keymap.set("n", "<C-å>", "<C-]>", { desc = "Follow link" })
 
 -- restore the session for the current directory
 vim.api.nvim_set_keymap("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]], {})

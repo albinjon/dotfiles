@@ -130,7 +130,6 @@ ctrl + cmd + alt - f : yabai -m space --layout float
 # cmd - h : skhd -k "cmd +  - ´"
 cmd - h [
 "firefox": :
-"kitty": skhd -k "cmd + alt - left" 
 ]
 ctrl - m [
 "kitty": skhd -k "ctrl - t"
