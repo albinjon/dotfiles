@@ -56,6 +56,9 @@ return {
           local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
+          local map_v = function(keys, func, desc)
+            vim.keymap.set('v', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          end
 
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
@@ -89,6 +92,7 @@ return {
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
+          map_v('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.

@@ -70,8 +70,10 @@ return {
       -- Document existing key chains
       local wk = require 'which-key'
       wk.register({
-        ['c'] = { name = '[c]ode', c = { '<cmd>lua require("dap").continue()<cr>', '[c]ontinue' } },
-        ['d'] = { name = '[d]ebug (dap)', _ = 'which_key_ignore' },
+        ['c'] = { name = '[c]ode', _ = 'which_key_ignore' },
+        ['d'] = { name = '[d]ebug (dap)', {
+          c = { '<cmd>lua require("dap").continue()<cr>', '[c]ontinue' },
+        } },
         ['f'] = { name = '[f]iles', d = { confirm_and_delete_buffer, 'Delete file' }, E = { '<cmd>Explore<cr>', '[e]xplore (netrw)' } },
         ['fe'] = { name = '[f]ile [e]xplorer', _ = 'which_key_ignore' },
         ['r'] = { name = '[r]ename', _ = 'which_key_ignore' },
