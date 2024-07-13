@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
   'kndndrj/nvim-dbee',
   dependencies = {
@@ -11,7 +12,7 @@ return {
   end,
 
   config = function()
-    require('dbee').setup {
+    require('dbee').setup({
       call_log = {
         buffer_options = {},
         candies = {
@@ -279,12 +280,28 @@ return {
         },
         page_size = 1000,
         progress = {
-          spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
+          spinner = {
+            '⠋',
+            '⠙',
+            '⠹',
+            '⠸',
+            '⠼',
+            '⠴',
+            '⠦',
+            '⠧',
+            '⠇',
+            '⠏',
+          },
           text_prefix = 'Executing...',
         },
         window_options = {},
       },
-    }
-    vim.keymap.set('n', '<leader>po', "<cmd>lua require('dbee').toggle()<CR>", { noremap = true, silent = true })
+    })
+    vim.keymap.set(
+      'n',
+      '<leader>po',
+      "<cmd>lua require('dbee').toggle()<CR>",
+      { noremap = true, silent = true }
+    )
   end,
 }

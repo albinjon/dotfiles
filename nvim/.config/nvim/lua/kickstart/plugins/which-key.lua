@@ -76,7 +76,7 @@ return {
         } },
         ['f'] = { name = '[f]iles', d = { confirm_and_delete_buffer, 'Delete file' }, E = { '<cmd>Explore<cr>', '[e]xplore (netrw)' } },
         ['fe'] = { name = '[f]ile [e]xplorer', _ = 'which_key_ignore' },
-        ['r'] = { name = '[r]ename', _ = 'which_key_ignore' },
+        ['r'] = { name = '[r]eload', b = { '<cmd>bufdo e<cr>', '[r]eload all [b]uffers' }, f = { '<cmd>e<cr>', '[r]eload [f]ile' } },
         ['s'] = {
           name = '[s]plits/[s]earch',
           ['l'] = {

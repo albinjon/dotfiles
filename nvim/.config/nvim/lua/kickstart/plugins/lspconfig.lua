@@ -92,6 +92,7 @@ return {
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
+          map('<leader>cl', '<cmd>LspInfo<cr>', 'Info')
           map_v('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
 
           -- Opens a popup that displays documentation about the word under your cursor
