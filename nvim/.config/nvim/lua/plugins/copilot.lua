@@ -1,5 +1,6 @@
 return {
   'zbirenbaum/copilot.lua',
+  cmd = 'Copilot',
   event = 'InsertEnter',
   config = function()
     require('copilot').setup({
@@ -14,26 +15,6 @@ return {
         },
       },
     })
-    local panel = require('copilot.panel')
-    vim.keymap.set(
-      { 'n' },
-      '<leader>cpe',
-      '<cmd>Copilot enable<cr>',
-      { desc = '[e]nable copilot', noremap = true, silent = true }
-    )
-    vim.keymap.set(
-      { 'n' },
-      '<leader>cpd',
-      '<cmd>Copilot disable<cr>',
-      { desc = '[d]isable copilot', noremap = true, silent = true }
-    )
-    vim.keymap.set('n', '<leader>cpp', function()
-      panel.open({ ratio = 0.5, position = 'right' })
-    end, { desc = '[c]o[p]ilot [p]anel' })
-    -- create refresh keymap
-    vim.keymap.set('n', '<leader>cpr', function()
-      panel.refresh()
-    end, { desc = '[c]o[p]ilot [r]efresh' })
   end,
 }
 -- i should

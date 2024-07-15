@@ -60,6 +60,26 @@ vim.api.nvim_set_keymap(
   { desc = '[D]isable session saving' }
 )
 
+-- Copilot, can't have the keymaps in the plugin file since it's lazy loaded.
+vim.keymap.set(
+  { 'n' },
+  '<leader>cpe',
+  '<cmd>Copilot enable<cr>',
+  { desc = '[e]nable copilot', noremap = true, silent = true }
+)
+vim.keymap.set(
+  { 'n' },
+  '<leader>cpd',
+  '<cmd>Copilot disable<cr>',
+  { desc = '[d]isable copilot', noremap = true, silent = true }
+)
+vim.keymap.set('n', '<leader>cpp', function()
+  require('copilot.panel').open({ ratio = 0.5, position = 'right' })
+end, { desc = '[c]o[p]ilot [p]anel' })
+vim.keymap.set('n', '<leader>cpr', function()
+  require('copilot.panel').refresh()
+end, { desc = '[c]o[p]ilot [r]efresh' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
