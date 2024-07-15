@@ -70,19 +70,18 @@ return {
               ['<c-i>'] = 'which_key',
               ['<c-j>'] = 'move_selection_next',
               ['<c-k>'] = 'move_selection_previous',
+              ['<leader>sj'] = 'file_split',
+              ['<leader>sl'] = 'file_vsplit',
             },
           },
         },
-        -- pickers = {}
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
 
           file_browser = {
-            grouped = true,
-            depth = false,
-            select_buffer = true,
+            git_status = false,
           },
         },
       })
@@ -103,84 +102,32 @@ return {
       local builtin = require('telescope.builtin')
       local telescope = require('telescope')
       local file_browser = require('telescope').extensions.file_browser
-      vim.keymap.set(
-        'n',
-        '<leader>sh',
-        builtin.help_tags,
-        { desc = '[s]earch [h]elp' }
-      )
-      vim.keymap.set(
-        'n',
-        '<leader>sk',
-        builtin.keymaps,
-        { desc = '[s]earch [k]eymaps' }
-      )
-      vim.keymap.set(
-        'n',
-        '<leader>st',
-        builtin.builtin,
-        { desc = '[s]earch [s]elect Telescope' }
-      )
-      vim.keymap.set(
-        'n',
-        '<leader>sw',
-        builtin.grep_string,
-        { desc = '[s]earch current [w]ord' }
-      )
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
+      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
+      vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
+      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
       vim.keymap.set('v', '<leader>sg', function()
         builtin.grep_string({ search = get_selected() })
       end, { desc = '[g]rep visually selected string' })
-      vim.keymap.set(
-        'n',
-        '<leader>sn',
-        telescope.extensions.notify.notify,
-        { desc = '[s]earch [n]otifications' }
-      )
-      vim.keymap.set(
-        'n',
-        '<leader>sg',
-        builtin.live_grep,
-        { desc = '[s]earch live [g]rep' }
-      )
-      vim.keymap.set(
-        'n',
-        '<leader>s.',
-        builtin.resume,
-        { desc = '[s]earch resume (.)' }
-      )
-      vim.keymap.set(
-        'n',
-        '<leader>fr',
-        builtin.oldfiles,
-        { desc = '[f]ind [r]ecent Files' }
-      )
-      vim.keymap.set(
-        'n',
-        '<leader>ff',
-        builtin.find_files,
-        { desc = '[f]ind [f]iles' }
-      )
-      vim.keymap.set(
-        'n',
-        '<leader><leader>',
-        builtin.buffers,
-        { desc = '[ ] Find existing buffers' }
-      )
+      vim.keymap.set('n', '<leader>sn', telescope.extensions.notify.notify, { desc = '[s]earch [n]otifications' })
+      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[s]earch live [g]rep' })
+      vim.keymap.set('n', '<leader>s.', builtin.resume, { desc = '[s]earch resume (.)' })
+      vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[f]ind [r]ecent Files' })
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]ind [f]iles' })
+      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- local finder = require('telescope').extensions.file_browser.finder
-      vim.keymap.set('n', '<space>fb', function()
-        file_browser.file_browser()
+      vim.keymap.set('n', '<space>fe', function()
+        file_browser.file_browser({ cwd = vim.fn.expand('%:p:h') })
       end, { desc = '[f]ile [b]rowser' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(
-          require('telescope.themes').get_dropdown({
-            winblend = 10,
-            previewer = false,
-          })
-        )
+        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
+          winblend = 10,
+          previewer = false,
+        }))
       end, { desc = '[/] Fuzzily search in current buffer' })
 
       -- It's also possible to pass additional configuration options.
@@ -196,6 +143,9 @@ return {
       vim.keymap.set('n', '<leader>fc', function()
         builtin.find_files({ cwd = vim.fn.stdpath('config') })
       end, { desc = '[f]ind [c]onfig files' })
+      vim.keymap.set('n', '<leader>sc', function()
+        builtin.live_grep({ cwd = vim.fn.stdpath('config') })
+      end, { desc = '[s]earch [c]onfig files' })
     end,
   },
 }

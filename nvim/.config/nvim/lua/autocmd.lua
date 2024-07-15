@@ -3,7 +3,7 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   pattern = { '*.txt' },
   callback = function()
     if vim.o.filetype == 'help' then
-      vim.cmd.wincmd 'L'
+      vim.cmd.wincmd('L')
     end
   end,
 })
@@ -13,9 +13,9 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 vim.api.nvim_create_autocmd('BufRead', {
   pattern = '*',
   callback = function()
-    if vim.fn.expand('%'):match '^scp://' then
+    if vim.fn.expand('%'):match('^scp://') then
       vim.defer_fn(function()
-        vim.cmd 'filetype detect'
+        vim.cmd('filetype detect')
       end, 10)
     end
   end,

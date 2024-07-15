@@ -6,60 +6,19 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set(
-  'n',
-  '[d',
-  vim.diagnostic.goto_prev,
-  { desc = 'Go to previous [D]iagnostic message' }
-)
-vim.keymap.set(
-  'n',
-  ']d',
-  vim.diagnostic.goto_next,
-  { desc = 'Go to next [D]iagnostic message' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>e',
-  vim.diagnostic.open_float,
-  { desc = 'Show diagnostic [E]rror messages' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>qf',
-  vim.diagnostic.setloclist,
-  { desc = 'Open diagnostic [Q]uickfix list' }
-)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Movement keymaps
-vim.keymap.set(
-  { 'i', 'c' },
-  '<M-BS>',
-  '<C-W>',
-  { desc = 'Delete word backwards' }
-)
-vim.keymap.set(
-  { 'i', 'c' },
-  '<M-Left>',
-  '<S-Left>',
-  { desc = 'Move cursor word backwards' }
-)
-vim.keymap.set(
-  { 'i', 'c' },
-  '<M-Right>',
-  '<S-Right>',
-  { desc = 'Move cursor word forwards' }
-)
+vim.keymap.set({ 'i', 'c' }, '<M-BS>', '<C-W>', { desc = 'Delete word backwards' })
+vim.keymap.set({ 'i', 'c' }, '<M-Left>', '<S-Left>', { desc = 'Move cursor word backwards' })
+vim.keymap.set({ 'i', 'c' }, '<M-Right>', '<S-Right>', { desc = 'Move cursor word forwards' })
 vim.keymap.set('n', '<C-å>', '<C-]>', { desc = 'Follow link' })
-vim.keymap.set('n', '-', '$', { desc = 'End of line' })
 
 -- Deletion keymaps
-vim.keymap.set(
-  { 'i', 'c' },
-  '<M-Del>',
-  '<S-Right><C-W>',
-  { desc = 'Delete word forwards' }
-)
+vim.keymap.set({ 'i', 'c' }, '<M-Del>', '<S-Right><C-W>', { desc = 'Delete word forwards' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -74,30 +33,10 @@ vim.keymap.set(
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set(
-  'n',
-  '<C-h>',
-  '<C-w><C-h>',
-  { desc = 'Move focus to the left window' }
-)
-vim.keymap.set(
-  'n',
-  '<C-l>',
-  '<C-w><C-l>',
-  { desc = 'Move focus to the right window' }
-)
-vim.keymap.set(
-  'n',
-  '<C-j>',
-  '<C-w><C-j>',
-  { desc = 'Move focus to the lower window' }
-)
-vim.keymap.set(
-  'n',
-  '<C-k>',
-  '<C-w><C-k>',
-  { desc = 'Move focus to the upper window' }
-)
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Persistence
 vim.api.nvim_set_keymap(
@@ -129,10 +68,7 @@ vim.api.nvim_set_keymap(
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup(
-    'kickstart-highlight-yank',
-    { clear = true }
-  ),
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,

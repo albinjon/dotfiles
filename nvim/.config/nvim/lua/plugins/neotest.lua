@@ -3,7 +3,7 @@
 local function find_git_root()
   local current_dir = vim.fn.getcwd()
   local git_dir = current_dir
-  local home_dir = vim.fn.expand '~'
+  local home_dir = vim.fn.expand('~')
 
   while git_dir ~= '/' and git_dir ~= home_dir do
     if vim.fn.isdirectory(git_dir .. '/.git') == 1 then
@@ -16,6 +16,7 @@ local function find_git_root()
 end
 
 return {
+  event = 'VeryLazy',
   'nvim-neotest/neotest',
   dependencies = {
     'nvim-neotest/nvim-nio',
@@ -25,9 +26,9 @@ return {
     'thenbe/neotest-playwright',
   },
   config = function()
-    local nt = require 'neotest'
+    local nt = require('neotest')
     vim.keymap.set('n', '<leader>trd', function()
-      nt.run.run { strategy = 'dap' }
+      nt.run.run({ strategy = 'dap' })
     end, { desc = 'run test with DAP' })
     vim.keymap.set('n', '<leader>trr', function()
       nt.run.run()
@@ -35,9 +36,9 @@ return {
     vim.keymap.set('n', '<leader>tra', function()
       nt.run.run()
     end, { desc = 'run nearest test' })
-    require('neotest').setup {
+    require('neotest').setup({
       adapters = {
-        require('neotest-playwright').adapter {
+        require('neotest-playwright').adapter({
           options = {
             persist_project_selection = true,
             enable_dynamic_test_discovery = true,
@@ -52,12 +53,12 @@ return {
               require('neotest').playwright.attachment()
             end, { desc = 'show test attachments' })
           end,
-        },
+        }),
       },
       consumers = {
         -- add to your list of consumers
         playwright = require('neotest-playwright.consumers').consumers,
       },
-    }
+    })
   end,
 }

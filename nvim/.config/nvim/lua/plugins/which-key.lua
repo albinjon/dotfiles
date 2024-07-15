@@ -17,23 +17,23 @@ local function confirm_and_delete_buffer()
   local confirm = vim.fn.confirm('Delete buffer and file?', '&Yes\n&No', 2)
 
   if confirm == 1 then
-    os.remove(vim.fn.expand '%')
+    os.remove(vim.fn.expand('%'))
     vim.api.nvim_buf_delete(0, { force = true })
   end
 end
 
 local function split_and_switch_buffer(split_type)
   if split_type == 'v' then
-    vim.cmd 'vsplit'
+    vim.cmd('vsplit')
   else
-    vim.cmd 'split'
+    vim.cmd('split')
   end
 
   local new_win = vim.api.nvim_get_current_win()
 
-  vim.cmd 'wincmd p'
+  vim.cmd('wincmd p')
 
-  local recent_buffers = vim.fn.getbufinfo { buflisted = 1 }
+  local recent_buffers = vim.fn.getbufinfo({ buflisted = 1 })
   if #recent_buffers <= 1 then
     vim.api.nvim_set_current_win(new_win)
     return
@@ -53,9 +53,9 @@ local function split_and_switch_buffer(split_type)
 end
 
 local function search_help()
-  local original_register = vim.fn.getreg '"'
-  vim.cmd 'normal! "vy'
-  local selected_text = vim.fn.getreg '"'
+  local original_register = vim.fn.getreg('"')
+  vim.cmd('normal! "vy')
+  local selected_text = vim.fn.getreg('"')
   vim.fn.setreg('"', original_register)
   vim.cmd('help ' .. selected_text)
 end
@@ -68,28 +68,39 @@ return {
       require('which-key').setup()
 
       -- Document existing key chains
-      local wk = require 'which-key'
+      local wk = require('which-key')
       wk.register({
         ['c'] = { name = '[c]ode', _ = 'which_key_ignore' },
-        ['d'] = { name = '[d]ebug (dap)', {
-          c = { '<cmd>lua require("dap").continue()<cr>', '[c]ontinue' },
-        } },
-        ['f'] = { name = '[f]iles', d = { confirm_and_delete_buffer, 'Delete file' }, E = { '<cmd>Explore<cr>', '[e]xplore (netrw)' } },
+        ['d'] = {
+          name = '[d]ebug (dap)',
+          {
+            c = { '<cmd>lua require("dap").continue()<cr>', '[c]ontinue' },
+          },
+        },
+        ['f'] = {
+          name = '[f]iles',
+          d = { confirm_and_delete_buffer, 'Delete file' },
+          E = { '<cmd>Explore<cr>', '[e]xplore (netrw)' },
+        },
         ['fe'] = { name = '[f]ile [e]xplorer', _ = 'which_key_ignore' },
-        ['r'] = { name = '[r]eload', b = { '<cmd>bufdo e<cr>', '[r]eload all [b]uffers' }, f = { '<cmd>e<cr>', '[r]eload [f]ile' } },
+        ['r'] = {
+          name = '[r]eload',
+          b = { '<cmd>bufdo e<cr>', '[r]eload all [b]uffers' },
+          f = { '<cmd>e<cr>', '[r]eload [f]ile' },
+        },
         ['s'] = {
           name = '[s]plits/[s]earch',
           ['l'] = {
             {
               function()
-                split_and_switch_buffer 'v'
+                split_and_switch_buffer('v')
               end,
               '[s]plit (vertical/to right)',
             },
           },
           ['j'] = {
             function()
-              split_and_switch_buffer 'h'
+              split_and_switch_buffer('h')
             end,
             '[s]plit (horizontal/down)',
           },
@@ -115,8 +126,8 @@ return {
         ['g'] = { name = '[g]it', _ = 'which_key_ignore' },
         ['q'] = {
           name = '[q]uit/session',
-          q = { '<cmd>qa<cr>', '[q]uit all' },
-          w = { '<cmd>wa<cr><cmd>qa<cr>', '[w]rite and [q]uit all' },
+          q = { '<cmd>wa<cr><cmd>qa<cr>', '[q]uit and write all' },
+          ['!'] = { '<cmd>qa<cr>', '[q]uit and abandon all' },
         },
       }, { prefix = '<leader>' })
       -- visual mode
