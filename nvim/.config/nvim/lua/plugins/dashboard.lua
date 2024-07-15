@@ -2,7 +2,7 @@ return {
   'nvimdev/dashboard-nvim',
   event = 'VimEnter',
   config = function()
-    require('dashboard').setup {
+    require('dashboard').setup({
       theme = 'hyper',
       config = {
         week_header = {
@@ -36,12 +36,12 @@ return {
           {
             desc = ' Config',
             group = 'Number',
-            action = 'Telescope find_files cwd=' .. vim.fn.stdpath 'config',
+            action = 'Telescope find_files cwd=' .. vim.fn.stdpath('config'),
             key = 'c',
           },
         },
       },
-    }
+    })
   end,
   dependencies = { { 'nvim-tree/nvim-web-devicons' } },
 }

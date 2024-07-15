@@ -20,15 +20,3 @@ vim.api.nvim_create_autocmd('BufRead', {
     end
   end,
 })
-
--- vim.api.nvim_create_autocmd("VimEnter", {
---   callback = function()
---     vim.defer_fn(function()
---       print("Loaded buffers:")
---       for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
---         local name = vim.api.nvim_buf_get_name(bufnr)
---         print(string.format("Buffer %d: %s", bufnr, name))
---       end
---     end, 100)  -- 100ms delay to allow for session restoration
---   end,
--- })

@@ -1,39 +1,3 @@
-local log_file = vim.fn.stdpath('config') .. '/lsp_debug.log'
-
-local function log_message(msg)
-  local file = io.open(log_file, 'a')
-  if file then
-    file:write(os.date('%Y-%m-%d %H:%M:%S') .. ' ' .. msg .. '\n')
-    file:close()
-  end
-end
-
-vim.api.nvim_create_autocmd({ 'BufAdd', 'BufDelete', 'BufWipeout' }, {
-  callback = function(ev)
-    log_message(
-      string.format('Buffer event: %s, Buffer: %d, Name: %s', ev.event, ev.buf, vim.api.nvim_buf_get_name(ev.buf))
-    )
-  end,
-})
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('lsp-attach-logger', { clear = true }),
-  callback = function(ev)
-    local valid = vim.api.nvim_buf_is_valid(ev.buf)
-    log_message(
-      string.format(
-        'LSP attach attempt - Buffer: %d, Valid: %s, Name: %s',
-        ev.buf,
-        tostring(valid),
-        vim.api.nvim_buf_get_name(ev.buf)
-      )
-    )
-    if not valid then
-      return
-    end
-    -- Rest of your LspAttach code
-  end,
-})
 return {
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -55,9 +19,6 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          -- if not vim.api.nvim_buf_is_valid(event.buf) then
-          --   return
-          -- end
           local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end

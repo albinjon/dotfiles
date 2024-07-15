@@ -1,7 +1,4 @@
 require('lazy').setup({
-  -- 'tpope/vim-sleuth',
-  -- "gc" to comment visual regions/lines
-
   { import = 'plugins' },
 })
 
