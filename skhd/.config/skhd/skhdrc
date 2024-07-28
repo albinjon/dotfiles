@@ -2,6 +2,8 @@
 # open terminal
 ctrl + shift + alt + cmd - g : open -a kitty -n
 
+# open Spotify 
+ctrl + shift + alt + cmd - s : open -a spotify
 #################################################################### WINDOWS ####################################################################
 # focus window
 ctrl + cmd - h : yabai -m window --focus west
