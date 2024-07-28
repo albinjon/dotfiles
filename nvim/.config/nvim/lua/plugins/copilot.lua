@@ -7,15 +7,17 @@ return {
       filetypes = {
         dashboard = false,
       },
-
       suggestion = {
         auto_trigger = true,
+      },
+      panel = {
         keymap = {
-          accept = '<Tab>',
+          jump_prev = '<c-k>',
+          jump_next = '<c-j>',
+          accept = '<CR>',
+          refresh = 'gr',
         },
       },
     })
   end,
 }
--- i should
--- vim.keymap.set({ 'n' }, '<leader>cpp', '<cmd>Copilot panel<cr>', { desc = 'copilot [p]anel', noremap = true, silent = true }),

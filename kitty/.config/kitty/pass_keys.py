@@ -8,6 +8,11 @@ def is_window_vim(window, vim_id):
     fp = window.child.foreground_processes
     return(any(re.search(vim_id, p['cmdline'][0] if len(p['cmdline']) else '', re.I) for p in fp))
 
+def is_window_posting(window, posting_id):
+    fp = window.child.foreground_processes
+    return(any(re.search(posting_id, p['cmdline'][1] if len(p['cmdline']) >= 2 else '', re.I) for p in fp))
+
+
 
 
 def encode_key_mapping(window, key_mapping):
@@ -44,5 +49,13 @@ def handle_result(args, result, target_window_id, boss):
         for keymap in key_mapping.split(">"):
             encoded = encode_key_mapping(window, keymap)
             window.write_to_child(encoded)
+        return
+
+    if is_window_posting(window, "posting"):
+        for keymap in key_mapping.split(">"):
+            encoded = encode_key_mapping(window, keymap)
+            window.write_to_child(encoded)
+        return
+
     else:
         boss.active_tab.neighboring_window(direction)

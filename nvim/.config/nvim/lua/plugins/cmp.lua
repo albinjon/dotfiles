@@ -61,6 +61,7 @@ return {
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       luasnip.config.setup({})
 
+      local cp_suggestions = require('copilot.suggestion')
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -75,16 +76,27 @@ return {
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cp_suggestions.is_visible() then
+              cp_suggestions.accept()
+            else
+              if cmp.visible() then
+                cmp.confirm()
+              else
+                fallback()
+              end
+            end
+          end, { 'i' }),
           ['<CR>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace })
+              cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert })
             else
               fallback()
             end
           end, { 'i' }),
           ['<c-CR>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace })
+              cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert })
             else
               fallback()
             end
@@ -93,6 +105,8 @@ return {
           ['<C-l>'] = cmp.mapping(function(fallback)
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
+            elseif cp_suggestions.is_visible() then
+              cp_suggestions.next()
             else
               fallback()
             end
@@ -100,6 +114,8 @@ return {
           ['<C-h>'] = cmp.mapping(function(fallback)
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
+            elseif cp_suggestions.is_visible() then
+              cp_suggestions.prev()
             else
               fallback()
             end

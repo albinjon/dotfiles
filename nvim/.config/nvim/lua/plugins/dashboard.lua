@@ -20,9 +20,16 @@ return {
             key = 'f',
           },
           {
-            desc = ' Neotree',
+            desc = ' File Browser',
             group = 'DiagnosticHint',
-            action = 'Neotree toggle float reveal',
+            action = function()
+              require('telescope').extensions.file_browser.file_browser({
+                select_buffer = true,
+                cwd = vim.fn.expand('%:p:h'),
+                respect_gitignore = false,
+                hidden = true,
+              })
+            end,
             key = 'e',
           },
           {

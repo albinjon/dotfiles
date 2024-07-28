@@ -7,7 +7,7 @@ return {
       stages = 'slide',
       fps = 60,
       timeout = 1800,
-      max_width = 40,
+      max_width = 80,
     })
   end,
 }

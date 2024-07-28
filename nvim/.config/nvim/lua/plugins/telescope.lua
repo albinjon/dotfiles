@@ -53,6 +53,7 @@ return {
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
+      local fb_actions = require('telescope').extensions.file_browser.actions
       require('telescope').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
@@ -64,7 +65,8 @@ return {
               ['<c-i>'] = 'which_key',
               ['<c-j>'] = 'move_selection_next',
               ['<c-k>'] = 'move_selection_previous',
-              -- ['<Tab>'] = 'toggle_selection',
+              ['<M-BS>'] = { '<C-W>', type = 'command' },
+              ['<Tab>'] = 'toggle_selection',
             },
             n = {
               ['<c-i>'] = 'which_key',
@@ -72,6 +74,8 @@ return {
               ['<c-k>'] = 'move_selection_previous',
               ['<leader>sj'] = 'file_split',
               ['<leader>sl'] = 'file_vsplit',
+              ['<Tab>'] = 'toggle_selection',
+              ['<bs>'] = fb_actions.goto_parent_dir,
             },
           },
         },
@@ -81,7 +85,7 @@ return {
           },
 
           file_browser = {
-            git_status = false,
+            -- hijack_netrw = true,
           },
         },
       })
@@ -101,7 +105,6 @@ return {
       -- See `:help telescope.builtin`
       local builtin = require('telescope.builtin')
       local telescope = require('telescope')
-      local file_browser = require('telescope').extensions.file_browser
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
       vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
@@ -114,13 +117,10 @@ return {
       vim.keymap.set('n', '<leader>s.', builtin.resume, { desc = '[s]earch resume (.)' })
       vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[f]ind [r]ecent Files' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]ind [f]iles' })
+      vim.keymap.set('v', '<leader>ff', function()
+        builtin.find_files({ search_file = get_selected(), prompt_title = 'Find files (visual selection)' })
+      end, { desc = '[f]ind [f]iles' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-
-      -- local finder = require('telescope').extensions.file_browser.finder
-      vim.keymap.set('n', '<space>fe', function()
-        file_browser.file_browser({ cwd = vim.fn.expand('%:p:h') })
-      end, { desc = '[f]ile [b]rowser' })
-
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
@@ -143,9 +143,27 @@ return {
       vim.keymap.set('n', '<leader>fc', function()
         builtin.find_files({ cwd = vim.fn.stdpath('config') })
       end, { desc = '[f]ind [c]onfig files' })
+
       vim.keymap.set('n', '<leader>sc', function()
         builtin.live_grep({ cwd = vim.fn.stdpath('config') })
       end, { desc = '[s]earch [c]onfig files' })
+
+      vim.keymap.set('n', '<leader>fp', function()
+        require('telescope.builtin').find_files({ cwd = require('lazy.core.config').options.root })
+      end, { desc = '[f]ind [p]lugin files' })
+
+      vim.keymap.set('n', '<leader>sp', function()
+        require('telescope.builtin').live_grep({
+          cwd = require('lazy.core.config').options.root,
+        })
+      end, { desc = '[s]earch [p]lugin files' })
+
+      vim.keymap.set('v', '<leader>sp', function()
+        require('telescope.builtin').grep_string({
+          cwd = require('lazy.core.config').options.root,
+          search = get_selected(),
+        })
+      end, { desc = '[s]earch [p]lugin files' })
     end,
   },
 }
