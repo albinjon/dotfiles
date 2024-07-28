@@ -1,5 +1,6 @@
 return {
   'pogyomo/winresize.nvim',
+  enabled = false,
   config = function()
     local resize = require('winresize').resize
     vim.keymap.set('n', '<C-M-h>', function()

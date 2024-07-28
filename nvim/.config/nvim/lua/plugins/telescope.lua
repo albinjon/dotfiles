@@ -62,18 +62,18 @@ return {
           mappings = {
             i = {
               ['<c-enter>'] = 'to_fuzzy_refine',
-              ['<c-i>'] = 'which_key',
-              ['<c-j>'] = 'move_selection_next',
-              ['<c-k>'] = 'move_selection_previous',
+              ['<c-l>'] = 'which_key',
+              ['<c-n>'] = 'move_selection_next',
+              ['<c-e>'] = 'move_selection_previous',
               ['<M-BS>'] = { '<C-W>', type = 'command' },
               ['<Tab>'] = 'toggle_selection',
             },
             n = {
-              ['<c-i>'] = 'which_key',
-              ['<c-j>'] = 'move_selection_next',
-              ['<c-k>'] = 'move_selection_previous',
-              ['<leader>sj'] = 'file_split',
-              ['<leader>sl'] = 'file_vsplit',
+              ['<l>'] = 'which_key',
+              ['n'] = 'move_selection_next',
+              ['e'] = 'move_selection_previous',
+              ['<leader>sn'] = 'file_split',
+              ['<leader>si'] = 'file_vsplit',
               ['<Tab>'] = 'toggle_selection',
               ['<bs>'] = fb_actions.goto_parent_dir,
             },
@@ -140,11 +140,11 @@ return {
       end, { desc = '[s]earch [/] in Open Files' })
 
       -- Shortcut for searching your Neovim configuration files
-      vim.keymap.set('n', '<leader>fc', function()
+      vim.keymap.set('n', '<leader>fv', function()
         builtin.find_files({ cwd = vim.fn.stdpath('config') })
       end, { desc = '[f]ind [c]onfig files' })
 
-      vim.keymap.set('n', '<leader>sc', function()
+      vim.keymap.set('n', '<leader>sv', function()
         builtin.live_grep({ cwd = vim.fn.stdpath('config') })
       end, { desc = '[s]earch [c]onfig files' })
 

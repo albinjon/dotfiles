@@ -12,8 +12,8 @@ return {
       },
       panel = {
         keymap = {
-          jump_prev = '<c-k>',
-          jump_next = '<c-j>',
+          jump_prev = '<c-e>',
+          jump_next = '<c-n>',
           accept = '<CR>',
           refresh = 'gr',
         },
