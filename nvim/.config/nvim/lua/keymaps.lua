@@ -5,12 +5,14 @@
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+vim.keymap.set({ 'n', 'x', 'o' }, 'n', 'j')
+vim.keymap.set({ 'n', 'x', 'o' }, 'e', 'k')
+vim.keymap.set({ 'n', 'x', 'o' }, 'i', 'l')
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
 -- Movement keymaps
 vim.keymap.set({ 'i', 'c' }, '<M-BS>', '<C-W>', { desc = 'Delete word backwards' })
 vim.keymap.set({ 'i', 'c' }, '<M-Left>', '<S-Left>', { desc = 'Move cursor word backwards' })
@@ -51,13 +53,6 @@ vim.api.nvim_set_keymap(
   '<leader>ql',
   [[<cmd>lua require("persistence").load({ last = true })<cr>]],
   { desc = 'Restore [l]ast session' }
-)
--- stop Persistence => session won't be saved on exit
-vim.api.nvim_set_keymap(
-  'n',
-  '<leader>qd',
-  [[<cmd>lua require("persistence").stop()<cr>]],
-  { desc = '[D]isable session saving' }
 )
 
 -- Copilot, can't have the keymaps in the plugin file since it's lazy loaded.
