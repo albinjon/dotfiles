@@ -2,12 +2,6 @@
 # open terminal
 ctrl + shift + alt + cmd - t : open -a kitty -n
 
-# open firefox 
-ctrl + shift + alt + cmd - f : open -a firefox -n -F
-# open Google Chrome 
-ctrl + shift + alt + cmd - g : open -a google-chrome
-# open Slack 
-ctrl + shift + alt + cmd - w : open -a slack
 # open Spotify 
 ctrl + shift + alt + cmd - s : open -a spotify
 #################################################################### WINDOWS ####################################################################
@@ -97,8 +91,6 @@ ctrl + cmd - n [
 cmd - w [
 "kitty": skhd -k "ctrl - w" 
 ]
-
-ctrl - 0x38 : skhd -t "testing"
 
 # Close application
 ctrl + cmd - q : skhd -k "cmd - q"
