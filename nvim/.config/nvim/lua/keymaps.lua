@@ -52,13 +52,6 @@ vim.api.nvim_set_keymap(
   [[<cmd>lua require("persistence").load({ last = true })<cr>]],
   { desc = 'Restore [l]ast session' }
 )
--- stop Persistence => session won't be saved on exit
-vim.api.nvim_set_keymap(
-  'n',
-  '<leader>qd',
-  [[<cmd>lua require("persistence").stop()<cr>]],
-  { desc = '[D]isable session saving' }
-)
 
 -- Copilot, can't have the keymaps in the plugin file since it's lazy loaded.
 vim.keymap.set(
