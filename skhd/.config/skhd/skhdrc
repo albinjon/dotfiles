@@ -29,22 +29,21 @@ shift + alt - 0 : yabai -m space --balance
 #################################################################### DESKTOPS ####################################################################
 
 # fast focus desktop
-ctrl + cmd - f : yabai -m space --focus recent 
-ctrl + cmd - s : yabai -m space --focus prev 
-ctrl + cmd - g : yabai -m space --focus next 
-ctrl + cmd - 1 : yabai -m space --focus 1
-ctrl + cmd - 2 : yabai -m space --focus 2
-ctrl + cmd - 3 : yabai -m space --focus 3
-ctrl + cmd - 4 : yabai -m space --focus 4
-ctrl + cmd - 5 : yabai -m space --focus 5
-ctrl + cmd - 6 : yabai -m space --focus 6
-ctrl + cmd - 7 : yabai -m space --focus 7
-ctrl + cmd - 8 : yabai -m space --focus 8
-ctrl + cmd - 9 : yabai -m space --focus 9
-ctrl + cmd - 0 : yabai -m space --focus 10
-ctrl + cmd - p : yabai -m space --focus 11
-ctrl + cmd - 0x29 : yabai -m space --focus 12
-
+# ctrl + cmd - f : yabai -m space --focus recent 
+# ctrl + cmd - s : yabai -m space --focus prev 
+# ctrl + cmd - g : yabai -m space --focus next 
+# ctrl + cmd - 1 : yabai -m space --focus 1
+# ctrl + cmd - 2 : yabai -m space --focus 2
+# ctrl + cmd - 3 : yabai -m space --focus 3
+# ctrl + cmd - 4 : yabai -m space --focus 4
+# ctrl + cmd - 5 : yabai -m space --focus 5
+# ctrl + cmd - 6 : yabai -m space --focus 6
+# ctrl + cmd - 7 : yabai -m space --focus 7
+# ctrl + cmd - 8 : yabai -m space --focus 8
+# ctrl + cmd - 9 : yabai -m space --focus 9
+# ctrl + cmd - 0 : yabai -m space --focus 10
+# ctrl + cmd - p : yabai -m space --focus 11
+# ctrl + cmd - 0x29 : yabai -m space --focus 12
 
 # send window to desktop and follow focus
 ctrl + cmd + shift - f : yabai -m window --space recent ; yabai -m space --focus recent 
@@ -59,9 +58,8 @@ ctrl + cmd + shift - 6 : yabai -m window --space  6; yabai -m space --focus 6
 ctrl + cmd + shift - 7 : yabai -m window --space  7; yabai -m space --focus 7
 ctrl + cmd + shift - 8 : yabai -m window --space  8; yabai -m space --focus 8
 ctrl + cmd + shift - 9 : yabai -m window --space  9; yabai -m space --focus 9
-ctrl + cmd + shift - 0 : yabai -m window --space 10; yabai -m space --focus 10
-ctrl + cmd + shift - p : yabai -m window --space 11; yabai -m space --focus 11
-ctrl + cmd + shift - 0x29 : yabai -m window --space 11; yabai -m space --focus 12
+ctrl + cmd + shift - p : yabai -m window --space 10; yabai -m space --focus 10
+ctrl + cmd + shift - 0x21 : yabai -m window --space 11; yabai -m space --focus 11
 
 #################################################################### MONITORS ####################################################################
 # focus monitor

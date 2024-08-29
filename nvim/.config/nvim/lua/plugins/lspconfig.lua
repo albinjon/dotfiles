@@ -119,7 +119,7 @@ return {
               },
             },
           },
-          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'typescript.tsx', 'vue' },
         },
         lua_ls = {
           settings = {

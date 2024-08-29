@@ -12,7 +12,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Movement keymaps
-vim.keymap.set({ 'i', 'c' }, '<M-BS>', '<C-W>', { desc = 'Delete word backwards' })
+vim.keymap.set({ 'i', 'c', 'x' }, '<M-BS>', '<C-W>', { desc = 'Delete word backwards' })
 vim.keymap.set({ 'i', 'c' }, '<M-Left>', '<S-Left>', { desc = 'Move cursor word backwards' })
 vim.keymap.set({ 'i', 'c' }, '<M-Right>', '<S-Right>', { desc = 'Move cursor word forwards' })
 vim.keymap.set('n', '<C-å>', '<C-]>', { desc = 'Follow link' })

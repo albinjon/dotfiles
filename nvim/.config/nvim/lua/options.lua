@@ -4,6 +4,11 @@
 --  For more options, you can see `:help option-list`
 
 vim.opt.relativenumber = true
+vim.g.loaded_matchparen = 1
+
+vim.opt.ttyfast = true
+--vim.opt.ttyscroll = 3
+-- vim.opt.lazyredraw = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 2

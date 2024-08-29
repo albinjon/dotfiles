@@ -184,7 +184,7 @@ return {
         },
         ['s'] = {
           name = '[s]plits/[s]earch',
-          ['i'] = {
+          ['l'] = {
             {
               function()
                 split_and_switch_buffer('v')
@@ -192,7 +192,7 @@ return {
               '[s]plit (vertical/to right)',
             },
           },
-          ['n'] = {
+          ['j'] = {
             function()
               split_and_switch_buffer('h')
             end,
@@ -223,6 +223,10 @@ return {
           },
           ['s'] = {
             '<cmd>ObsidianSearch<cr>',
+            '[s]earch',
+          },
+          ['w'] = {
+            '<cmd>ObsidianWorkspace<cr>',
             '[s]earch',
           },
         },
