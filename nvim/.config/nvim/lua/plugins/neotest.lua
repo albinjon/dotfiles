@@ -16,8 +16,13 @@ local function find_git_root()
 end
 
 return {
-  event = 'VeryLazy',
   'nvim-neotest/neotest',
+  cmd = { 'NeotestRunDAP', 'NeotestRunFile', 'NeotestRunNearest' },
+  keys = {
+    { '<leader>trd', '<cmd>NeotestRunDAP<cr>', desc = 'Run test with DAP' },
+    { '<leader>trr', '<cmd>NeotestRunFile<cr>', desc = 'Run all tests in file' },
+    { '<leader>tra', '<cmd>NeotestRunNearest<cr>', desc = 'Run nearest test' },
+  },
   dependencies = {
     'nvim-neotest/nvim-nio',
     'nvim-lua/plenary.nvim',
@@ -27,15 +32,19 @@ return {
   },
   config = function()
     local nt = require('neotest')
-    vim.keymap.set('n', '<leader>trd', function()
+
+    -- Create user commands
+    vim.api.nvim_create_user_command('NeotestRunDAP', function()
       nt.run.run({ strategy = 'dap' })
-    end, { desc = 'run test with DAP' })
-    vim.keymap.set('n', '<leader>trr', function()
+    end, { desc = 'Run test with DAP' })
+
+    vim.api.nvim_create_user_command('NeotestRunFile', function()
+      nt.run.run(vim.fn.expand('%'))
+    end, { desc = 'Run all tests in file' })
+
+    vim.api.nvim_create_user_command('NeotestRunNearest', function()
       nt.run.run()
-    end, { desc = 'run all tests in file' })
-    vim.keymap.set('n', '<leader>tra', function()
-      nt.run.run()
-    end, { desc = 'run nearest test' })
+    end, { desc = 'Run nearest test' })
     require('neotest').setup({
       adapters = {
         require('neotest-playwright').adapter({

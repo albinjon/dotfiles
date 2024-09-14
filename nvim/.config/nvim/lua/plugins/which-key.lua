@@ -1,101 +1,3 @@
--- NOTE: Plugins can also be configured to run Lua code when they are loaded.
---
--- This is often very useful to both group configuration, as well as handle
--- lazy loading plugins that don't need to be loaded immediately at startup.
---
--- For example, in the following configuration, we use:
---  event = 'VimEnter'
---
--- which loads which-key before all the UI elements are loaded. Events can be
--- normal autocommands events (`:help autocmd-events`).
---
--- Then, because we use the `config` key, the configuration only runs
--- after the plugin has been loaded:
---  config = function() ... end
-
-local api = vim.api
-local function open_floating_window()
-  local floating_window_scaling_factor = 0.7
-
-  -- Why is this required?
-  -- vim.g.lazygit_floating_window_scaling_factor returns different types if the value is an integer or float
-  if type(floating_window_scaling_factor) == 'table' then
-    floating_window_scaling_factor = floating_window_scaling_factor[false]
-  end
-
-  local status, plenary = pcall(require, 'plenary.window.float')
-  if status and vim.g.lazygit_floating_window_use_plenary and vim.g.lazygit_floating_window_use_plenary ~= 0 then
-    local ret = plenary.percentage_range_window(floating_window_scaling_factor, floating_window_scaling_factor)
-    return ret.win_id, ret.bufnr
-  end
-
-  local height = math.ceil(vim.o.lines * floating_window_scaling_factor) - 1
-  local width = math.ceil(vim.o.columns * floating_window_scaling_factor)
-
-  local row = math.ceil(vim.o.lines - height) / 2
-  local col = math.ceil(vim.o.columns - width) / 2
-
-  local border_opts = {
-    style = 'minimal',
-    relative = 'editor',
-    row = row - 1,
-    col = col - 1,
-    width = width + 2,
-    height = height + 2,
-  }
-
-  local opts = { style = 'minimal', relative = 'editor', row = row, col = col, width = width, height = height }
-
-  local topleft, top, topright, right, botright, bot, botleft, left
-  local window_chars = vim.g.lazygit_floating_window_border_chars
-  if type(window_chars) == 'table' and #window_chars == 8 then
-    topleft, top, topright, right, botright, bot, botleft, left = unpack(window_chars)
-  else
-    topleft, top, topright, right, botright, bot, botleft, left = '╭', '─', '╮', '│', '╯', '─', '╰', '│'
-  end
-
-  local border_lines = { topleft .. string.rep(top, width) .. topright }
-  local middle_line = left .. string.rep(' ', width) .. right
-  for _ = 1, height do
-    table.insert(border_lines, middle_line)
-  end
-  table.insert(border_lines, botleft .. string.rep(bot, width) .. botright)
-
-  -- create a unlisted scratch buffer for the border
-  local border_buffer = api.nvim_create_buf(false, true)
-
-  -- set border_lines in the border buffer from start 0 to end -1 and strict_indexing false
-  api.nvim_buf_set_lines(border_buffer, 0, -1, true, border_lines)
-  -- create border window
-  local border_window = api.nvim_open_win(border_buffer, true, border_opts)
-  vim.api.nvim_set_hl(0, 'LazyGitBorder', { link = 'Normal', default = true })
-  vim.cmd('set winhl=NormalFloat:LazyGitBorder')
-
-  -- create a unlisted scratch buffer
-  if LAZYGIT_BUFFER == nil or vim.fn.bufwinnr(LAZYGIT_BUFFER) == -1 then
-    LAZYGIT_BUFFER = api.nvim_create_buf(false, true)
-  else
-    LAZYGIT_LOADED = true
-  end
-  -- create file window, enter the window, and use the options defined in opts
-  local win = api.nvim_open_win(LAZYGIT_BUFFER, true, opts)
-
-  vim.bo[LAZYGIT_BUFFER].filetype = 'posting'
-
-  vim.cmd('setlocal bufhidden=hide')
-  vim.cmd('setlocal nocursorcolumn')
-  vim.api.nvim_set_hl(0, 'LazyGitFloat', { link = 'Normal', default = true })
-  vim.cmd('setlocal winhl=NormalFloat:LazyGitFloat')
-  vim.cmd('set winblend=0')
-
-  -- use autocommand to ensure that the border_buffer closes at the same time as the main buffer
-  local cmd = [[autocmd WinLeave <buffer> silent! execute 'hide']]
-  vim.cmd(cmd)
-  cmd = [[autocmd WinLeave <buffer> silent! execute 'silent bdelete! %s']]
-  vim.cmd(cmd:format(border_buffer))
-
-  return win, LAZYGIT_BUFFER
-end
 local function confirm_and_delete_buffer()
   local confirm = vim.fn.confirm('Delete buffer and file?', '&Yes\n&No', 2)
 
@@ -135,128 +37,139 @@ local function split_and_switch_buffer(split_type)
   vim.api.nvim_set_current_win(new_win)
 end
 
-local function search_help()
+local function get_visual_selection()
   local original_register = vim.fn.getreg('"')
   vim.cmd('normal! "vy')
   local selected_text = vim.fn.getreg('"')
   vim.fn.setreg('"', original_register)
-  vim.cmd('help ' .. selected_text)
+  return selected_text
+end
+
+local function search_help()
+  vim.cmd('help ' .. get_visual_selection())
+end
+
+local function replace_selection()
+  local selected_text = get_visual_selection()
+  local replacement = vim.fn.input('Enter replacement text: ', selected_text)
+  vim.cmd(string.format('%%s/%s/%s/gc', selected_text:gsub('/', '\\/'), replacement:gsub('/', '\\/')))
 end
 
 return {
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
+  'folke/which-key.nvim',
+  event = 'VeryLazy',
+  opts = {
+    -- You can add any Which-Key specific options here
+    -- or leave it empty to use the default settings
+    spec = {
+      {
+        -- Normal mode mappings
+        { mode = 'n', '<leader>c', group = '[c]ode' },
+        { mode = 'n', '<leader>cp', group = '[c]opilot' },
+        { mode = 'n', '<leader>cn', group = '[c(s)]nippets' },
+        { mode = 'n', '<leader>m', group = '[m]arkdown' },
+        { mode = 'n', '<leader>p', group = '[p]ostgres' },
+        { mode = 'n', '<leader>d', group = '[d]ebug (dap)' },
+        { mode = 'n', '<leader>dc', "<cmd>lua require('dap').continue()<cr>", desc = 'DAP [c]ontinue' },
+        { mode = 'n', '<leader>f', group = '[f]iles' },
+        { mode = 'n', '<leader>fE', '<cmd>Explore<cr>', desc = '[e]xplore (netrw)' },
+        {
+          mode = 'n',
+          '<leader>fd',
+          function()
+            confirm_and_delete_buffer()
+          end,
+          desc = 'Delete file',
+        },
+        {
+          mode = 'n',
+          '<leader>fe',
+          function()
+            require('telescope').extensions.file_browser.file_browser({
+              cwd = vim.fn.expand('%:p:h'),
+              select_buffer = true,
+              respect_gitignore = false,
+              hidden = true,
+            })
+          end,
+          desc = '[f]ile [e]xplorer',
+        },
+        { mode = 'n', '<leader>g', group = '[g]it' },
+        { mode = 'n', '<leader>o', group = '[o]bsidian' },
+        { mode = 'n', '<leader>on', '<cmd>ObsidianNew<cr>', desc = 'open [n]ew' },
+        { mode = 'n', '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = '[o]pen obsidian' },
+        { mode = 'n', '<leader>os', '<cmd>ObsidianSearch<cr>', desc = '[s]earch' },
+        { mode = 'n', '<leader>ow', '<cmd>ObsidianWorkspace<cr>', desc = 'open [w]orkspace' },
+        { mode = 'n', '<leader>po', '<cmd>DbeeToggle<cr>', desc = '[p]ostgres [o]pen' },
+        { mode = 'n', '<leader>q', group = '[q]uit/session' },
+        { mode = 'n', '<leader>qF', '<cmd>Bdelete!<cr>', desc = '[a]bandon file' },
+        { mode = 'n', '<leader>qQ', '<cmd>qa!<cr>', desc = '[q]uit and abandon all' },
+        { mode = 'n', '<leader>qd', '<cmd>wa<cr><cmd>Dashboard<cr>', desc = '[q]uit and go to [d]ashboard' },
+        { mode = 'n', '<leader>qf', '<cmd>up<cr><cmd>Bdelete<cr>', desc = '[q]uit and write file' },
+        { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
+        { mode = 'n', '<leader>r', group = '[r]eload' },
+        { mode = 'n', '<leader>rb', '<cmd>bufdo e<cr>', desc = '[r]eload all [b]uffers' },
+        { mode = 'n', '<leader>rf', '<cmd>e<cr>', desc = '[r]eload [f]ile' },
+        { mode = 'n', '<leader>s', group = '[s]plits/[s]earch' },
+        {
+          mode = 'n',
+          '<leader>sj',
+          function()
+            split_and_switch_buffer('h')
+          end,
+          desc = '[s]plit (horizontal/down)',
+        },
+        {
+          mode = 'n',
+          '<leader>sl',
+          function()
+            split_and_switch_buffer('v')
+          end,
+          desc = '[s]plit (vertical/to right)',
+        },
+        { mode = 'n', '<leader>ss', '<cmd>q<cr>', desc = '[s]plit delete' },
+        { mode = 'n', '<leader>t', group = '[t]rouble' },
+        { mode = 'n', '<leader>w', group = '[w]rite' },
+        { mode = 'n', '<leader>wa', '<cmd>wa<cr>', desc = 'write [a]ll' },
+        { mode = 'n', '<leader>ww', '<cmd>update<cr>', desc = '[w]rite' },
 
-      -- Document existing key chains
-      local fb = require('telescope').extensions.file_browser
-      local wk = require('which-key')
-      wk.register({
-        ['c'] = { name = '[c]ode', _ = 'which_key_ignore' },
-        ['d'] = {
-          name = '[d]ebug (dap)',
-          {
-            c = { '<cmd>lua require("dap").continue()<cr>', '[c]ontinue' },
-          },
+        -- Visual mode mappings
+        { mode = 'v', '<leader>g', group = '[g]it' },
+        { mode = 'v', '<leader>s', group = '[s]earch' },
+        {
+          mode = 'v',
+          '<leader>sh',
+          function()
+            search_help()
+          end,
+          desc = 'search [h]elp (visual selection)',
         },
-        ['f'] = {
-          name = '[f]iles',
-          e = {
-            function()
-              fb.file_browser({
-                select_buffer = true,
-                cwd = vim.fn.expand('%:p:h'),
-                respect_gitignore = false,
-                hidden = true,
-              })
-            end,
-            '[f]ile [e]xplorer',
-          },
-          d = { confirm_and_delete_buffer, 'Delete file' },
-          E = { '<cmd>Explore<cr>', '[e]xplore (netrw)' },
+        {
+          mode = 'v',
+          '<leader>sr',
+          function()
+            replace_selection()
+          end,
+          desc = '[r]eplace (visual selection)',
         },
-        ['r'] = {
-          name = '[r]eload',
-          b = { '<cmd>bufdo e<cr>', '[r]eload all [b]uffers' },
-          f = { '<cmd>e<cr>', '[r]eload [f]ile' },
-        },
-        ['s'] = {
-          name = '[s]plits/[s]earch',
-          ['l'] = {
-            {
-              function()
-                split_and_switch_buffer('v')
-              end,
-              '[s]plit (vertical/to right)',
-            },
-          },
-          ['j'] = {
-            function()
-              split_and_switch_buffer('h')
-            end,
-            '[s]plit (horizontal/down)',
-          },
-          ['s'] = {
-            '<cmd>q<cr>',
-            '[s]plit delete',
-          },
-        },
-        ['t'] = { name = '[t]rouble', _ = 'which_key_ignore' },
-        ['w'] = {
-          name = '[w]rite',
-          w = { '<cmd>update<cr>', '[w]rite' },
-          a = { '<cmd>wa<cr>', 'write [a]ll' },
-          o = { open_floating_window, '[o]pen' },
-        },
-        ['g'] = { name = '[g]it', _ = 'which_key_ignore' },
-        ['o'] = {
-          name = '[o]bsidian',
-          ['o'] = {
-            '<cmd>ObsidianOpen<cr>',
-            '[o]pen obsidian',
-          },
-          ['n'] = {
-            '<cmd>ObsidianNew<cr>',
-            'open [n]ew',
-          },
-          ['s'] = {
-            '<cmd>ObsidianSearch<cr>',
-            '[s]earch',
-          },
-          ['w'] = {
-            '<cmd>ObsidianWorkspace<cr>',
-            '[s]earch',
-          },
-        },
-        ['q'] = {
-          name = '[q]uit/session',
-          q = { '<cmd>wa<cr><cmd>qa<cr>', '[q]uit and write all' },
-          d = { '<cmd>wa<cr><cmd>Dashboard<cr>', '[q]uit and go to [d]ashboard' },
-          ['Q'] = { '<cmd>qa!<cr>', '[q]uit and abandon all' },
-          ['F'] = {
-            '<cmd>Bdelete!<cr>',
-            '[a]bandon file',
-          },
-          f = {
-            '<cmd>up<cr><cmd>Bdelete<cr>',
-            '[q]uit and write file',
-          },
-        },
-      }, { prefix = '<leader>' })
-      -- visual mode
-      wk.register({
-        ['<leader>g'] = { '[g]it' },
-        ['<leader>s'] = {
-          name = '[s]earch',
-          h = {
-            search_help,
-            'search [h]elp (visual selection)',
-          },
-        },
-      }, { mode = 'v' })
-    end,
+      },
+    },
+    preset = 'modern',
+    icons = {
+      breadcrumb = '»',
+      separator = '➜',
+      group = '+',
+      mappings = false,
+    },
+  },
+  keys = {
+    {
+      '<leader>?',
+      function()
+        require('which-key').show({ global = false })
+      end,
+      desc = 'Buffer Local Keymaps (which-key)',
+    },
   },
 }
 -- vim: ts=2 sts=2 sw=2 et

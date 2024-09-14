@@ -1,11 +1,20 @@
 return {
   'folke/zen-mode.nvim',
-  config = function()
-    require('zen-mode').setup({
-      plugins = {
-        twilight = { enabled = true },
+  dependencies = {
+    {
+      'folke/twilight.nvim',
+      opts = {
+        context = 10,
       },
-    })
-    vim.keymap.set('n', '<leader>z', ':ZenMode<CR>', { noremap = true, silent = true, desc = 'Zen Mode' })
-  end,
+    },
+  },
+  cmd = 'ZenMode',
+  keys = {
+    { '<leader>z', '<cmd>ZenMode<cr>', desc = 'Zen Mode' },
+  },
+  opts = {
+    plugins = {
+      twilight = { enabled = true },
+    },
+  },
 }

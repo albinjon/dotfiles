@@ -1,6 +1,11 @@
 ---@diagnostic disable: missing-fields
+
 return {
   'kndndrj/nvim-dbee',
+  cmd = 'DbeeToggle',
+  keys = {
+    { '<leader>po', ':DbeeToggle<CR>', desc = '[p]ostgres [o]pen' },
+  },
   dependencies = {
     'MunifTanjim/nui.nvim',
   },
@@ -12,6 +17,9 @@ return {
   end,
 
   config = function()
+    vim.api.nvim_create_user_command('DbeeToggle', function()
+      require('dbee').toggle()
+    end, { desc = 'Toggle Dbee' })
     require('dbee').setup({
       call_log = {
         buffer_options = {},
@@ -297,11 +305,5 @@ return {
         window_options = {},
       },
     })
-    vim.keymap.set(
-      'n',
-      '<leader>po',
-      "<cmd>lua require('dbee').toggle()<CR>",
-      { noremap = true, silent = true }
-    )
   end,
 }

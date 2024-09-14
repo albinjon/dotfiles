@@ -147,7 +147,6 @@ return {
         'prettierd',
         'pyright',
         'stylua',
-        'typescript-language-server',
         'vale',
         'sqlls',
         'vue-language-server',
@@ -161,6 +160,7 @@ return {
             require('lspconfig')[server_name].setup(server)
           end,
         },
+        automatic_installation = true,
       })
     end,
   },

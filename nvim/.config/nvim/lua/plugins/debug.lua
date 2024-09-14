@@ -7,52 +7,60 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
   event = 'BufRead',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
-    -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
-
-    -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
-
-    -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
-
-    -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+  },
+  cmd = {
+    'DapContinue',
+    'DapStepInto',
+    'DapStepOver',
+    'DapStepOut',
+    'DapToggleBreakpoint',
+    'DapSetConditionalBreakpoint',
+  },
+  keys = {
+    { '<F5>', '<cmd>DapContinue<cr>', desc = 'Debug: Start/Continue' },
+    { '<F1>', '<cmd>DapStepInto<cr>', desc = 'Debug: Step Into' },
+    { '<F2>', '<cmd>DapStepOver<cr>', desc = 'Debug: Step Over' },
+    { '<F3>', '<cmd>DapStepOut<cr>', desc = 'Debug: Step Out' },
+    { '<leader>db', '<cmd>DapToggleBreakpoint<cr>', desc = 'Debug: Toggle Breakpoint' },
+    { '<leader>dB', '<cmd>DapSetConditionalBreakpoint<cr>', desc = 'Debug: Set Conditional Breakpoint' },
   },
   config = function()
     local dap = require('dap')
     local dapui = require('dapui')
 
     require('mason-nvim-dap').setup({
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
       automatic_installation = true,
-
-      -- You can provide additional configuration to the handlers,
-      -- see mason-nvim-dap README for more information
       handlers = {},
-
-      -- You'll need to check that you have the required things installed
-      -- online, please don't ask me how to install them :)
       ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
       },
     })
 
-    -- Basic debugging keymaps, feel free to change to your liking!
-    vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
-    vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
-    vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
-    vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
-    vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
-    vim.keymap.set('n', '<leader>dB', function()
+    -- Create user commands
+    vim.api.nvim_create_user_command('DapContinue', function()
+      dap.continue()
+    end, { desc = 'Debug: Start/Continue' })
+    vim.api.nvim_create_user_command('DapStepInto', function()
+      dap.step_into()
+    end, { desc = 'Debug: Step Into' })
+    vim.api.nvim_create_user_command('DapStepOver', function()
+      dap.step_over()
+    end, { desc = 'Debug: Step Over' })
+    vim.api.nvim_create_user_command('DapStepOut', function()
+      dap.step_out()
+    end, { desc = 'Debug: Step Out' })
+    vim.api.nvim_create_user_command('DapToggleBreakpoint', function()
+      dap.toggle_breakpoint()
+    end, { desc = 'Debug: Toggle Breakpoint' })
+    vim.api.nvim_create_user_command('DapSetConditionalBreakpoint', function()
       dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
     end, { desc = 'Debug: Set Conditional Breakpoint' })
     ---@diagnostic disable-next-line: missing-fields

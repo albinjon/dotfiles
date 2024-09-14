@@ -1,7 +1,7 @@
 return {
   {
     'chrisgrieser/nvim-scissors',
-    event = 'VeryLazy',
+    cmd = { 'ScissorsAddNewSnippet', 'ScissorsEditSnippet' },
     dependencies = { 'nvim-telescope/telescope.nvim', 'garymjr/nvim-snippets' },
     opts = {
       snippetDir = vim.fn.stdpath('config') .. '/snippets',
@@ -14,7 +14,7 @@ return {
   },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
+    event = 'BufReadPre',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       {
@@ -30,9 +30,9 @@ return {
         end)(),
         config = function()
           require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snippets' } })
-          vim.keymap.set('n', '<leader>csa', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' })
-          vim.keymap.set('v', '<leader>csa', "<cmd>'<,'>ScissorsAddNewSnippet<CR>", { desc = '[a]dd new snippet' })
-          vim.keymap.set('n', '<leader>css', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' })
+          vim.keymap.set('n', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' })
+          vim.keymap.set('v', '<leader>cna', "<cmd>'<,'>ScissorsAddNewSnippet<CR>", { desc = '[a]dd new snippet' })
+          vim.keymap.set('n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' })
         end,
         dependencies = {
           -- `friendly-snippets` contains a variety of premade snippets.
