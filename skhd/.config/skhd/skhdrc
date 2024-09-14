@@ -1,6 +1,6 @@
 #################################################################### APPLICATIONS ####################################################################
 # open terminal
-ctrl + shift + alt + cmd - t : open -a kitty -n
+ctrl + shift + alt + cmd - t : open -a kitty -1 -n
 
 # open Spotify 
 ctrl + shift + alt + cmd - s : open -a spotify
