@@ -1,6 +1,7 @@
 return {
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    cmd = { 'LspInfo', 'Mason', 'MasonToolsInstall', 'MasonToolsClean' },
     event = 'BufReadPre',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
@@ -110,7 +111,7 @@ return {
       local servers = {
         pyright = {},
         volar = {},
-        tsserver = {
+        ts_ls = {
           init_options = {
             plugins = {
               {
@@ -143,6 +144,7 @@ return {
         'delve',
         'jsonlint',
         'lua-language-server',
+        'prismals',
         'markdownlint',
         'prettierd',
         'pyright',

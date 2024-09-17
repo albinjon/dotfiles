@@ -62,7 +62,7 @@ return {
           mappings = {
             i = {
               ['<c-enter>'] = 'to_fuzzy_refine',
-              ['<c-i>'] = 'which_key',
+              ['<c-?>'] = 'which_key',
               ['<c-j>'] = 'move_selection_next',
               ['<c-k>'] = 'move_selection_previous',
               ['<m-bs>'] = function()
@@ -71,7 +71,7 @@ return {
               ['<Tab>'] = 'toggle_selection',
             },
             n = {
-              ['<c-i>'] = 'which_key',
+              ['?'] = 'which_key',
               ['<c-j>'] = 'move_selection_next',
               ['<c-k>'] = 'move_selection_previous',
               ['<leader>sj'] = 'file_split',
@@ -117,7 +117,7 @@ return {
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
       vim.keymap.set('v', '<leader>sg', function()
         builtin.grep_string({ search = get_selected() })
-      end, { desc = '[g]rep visually selected string' })
+      end, { desc = '[g]rep selected string' })
       vim.keymap.set('n', '<leader>sn', telescope.extensions.notify.notify, { desc = '[s]earch [n]otifications' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[s]earch live [g]rep' })
       vim.keymap.set('n', '<leader>s.', builtin.resume, { desc = '[s]earch resume (.)' })
@@ -152,6 +152,10 @@ return {
 
       vim.keymap.set('n', '<leader>sc', function()
         builtin.live_grep({ cwd = vim.fn.stdpath('config') })
+      end, { desc = '[s]earch [c]onfig files' })
+
+      vim.keymap.set('v', '<leader>sc', function()
+        builtin.grep_string({ cwd = vim.fn.stdpath('config'), search = get_selected() })
       end, { desc = '[s]earch [c]onfig files' })
 
       vim.keymap.set('n', '<leader>fp', function()

@@ -21,6 +21,8 @@ alias gd="git diff"
 alias pip="pip3"
 alias chx="chmod +x"
 alias py="python3"
+alias run_doa='npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*"'
+alias run_e2e='npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*mro*" --filter="*collection*" --filter="*gates*" --filter="*workplace*" --filter="*finalizer*" --filter="*cgm*" --filter="*event-dump*" --filter="*maestro*" --concurrency=20'
 
 export ZSH="$HOME/.oh-my-zsh"
 

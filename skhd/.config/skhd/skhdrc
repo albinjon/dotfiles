@@ -1,6 +1,6 @@
 #################################################################### APPLICATIONS ####################################################################
 # open terminal
-ctrl + shift + alt + cmd - t : open -a kitty -1 -n
+ctrl + shift + alt + cmd - t : open -a kitty -n
 
 # open Spotify 
 ctrl + shift + alt + cmd - s : open -a spotify
@@ -78,16 +78,16 @@ ctrl + cmd + shift - x  : yabai -m window --display prev; yabai -m display --foc
 
 # Close window
 ctrl + cmd - w [
-"kitty": skhd -k "cmd - q"
-"arc": skhd -k "cmd + shift - w"
-"finder": skhd -k "cmd - q"
-"*": yabai -m window --close
+  "kitty": skhd -k "cmd - q"
+  "arc": skhd -k "cmd + shift - w"
+  "finder": skhd -k "cmd - q"
+  "*": yabai -m window --close
 ]
 ctrl + cmd - n [
-"arc": skhd -k "cmd + shift - n"
+  "arc": skhd -k "cmd + shift - n"
 ]
 cmd - w [
-"kitty": skhd -k "ctrl - w" 
+  "kitty": skhd -k "ctrl - w" 
 ]
 
 # Close application
