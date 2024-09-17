@@ -12,7 +12,6 @@ return {
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-file-browser.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -53,7 +52,6 @@ return {
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
-      local fb_actions = require('telescope').extensions.file_browser.actions
       require('telescope').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
@@ -77,17 +75,12 @@ return {
               ['<leader>sj'] = 'file_split',
               ['<leader>sl'] = 'file_vsplit',
               ['<Tab>'] = 'toggle_selection',
-              ['<bs>'] = fb_actions.goto_parent_dir,
             },
           },
         },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
-          },
-
-          file_browser = {
-            -- hijack_netrw = true,
           },
         },
       })

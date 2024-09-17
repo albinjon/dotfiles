@@ -31,6 +31,97 @@ return {
         },
       })
 
+      local files = require('mini.files')
+      files.setup({
+        options = {
+          permanent_delete = false,
+        },
+        mappings = {
+          close = 'q',
+          go_in_plus = '<cr>',
+          go_in = '',
+          go_out_plus = '<bs>',
+          go_out = '',
+          mark_goto = "'",
+          mark_set = 'm',
+          reset = '',
+          reveal_cwd = '@',
+          show_help = 'g?',
+          synchronize = '=',
+          trim_left = '<',
+          trim_right = '>',
+        },
+        windows = {
+          preview = true,
+          width_preview = 120,
+        },
+      })
+
+      local set_window_options = function(win_id)
+        vim.wo[win_id].winblend = 8
+        local config = vim.api.nvim_win_get_config(win_id)
+        config.border, config.title_pos = 'rounded', 'center'
+        vim.api.nvim_win_set_config(win_id, config)
+      end
+
+      -- det som behövs:
+      -- när man stänger, eller när man kopierat eller deletat så vill jag att det ska skrivas till samma mapp
+      -- när man sedan öppnar, eller kanske rättare när man försöker klistra in något, så ska man titta i den
+      -- mappen efter saker att klistra in. Mappen behöver rensas, en fråga är när det bästa tillfället för det är.
+      -- Man kommer få full file path i antingen from / to. Eftersom det inte kommer genomföras en faktiskt kopiering
+      -- kommer jag behöva spara alla kopieringar till samma mapp som alla deletions hamnar på, om jag vill kunna kopiera överallt. Det jag kanske letar efter är egentligen bara smidigare navigation i repot.
+
+      -- fortsätt här:
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesActionDelete',
+        callback = function(args)
+          vim.notify(args.data.to)
+        end,
+      })
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesWindowOpen',
+        callback = function(args)
+          local win_id = args.data.win_id
+          set_window_options(win_id)
+        end,
+      })
+
+      local function split_win(direction)
+        local cur_target = files.get_explorer_state().target_window
+        local new_target = vim.api.nvim_win_call(cur_target, function()
+          vim.cmd(direction .. 'split')
+          return vim.api.nvim_get_current_win()
+        end)
+        files.set_target_window(new_target)
+        files.go_in()
+        files.close()
+      end
+
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesBufferCreate',
+        callback = function(args)
+          local buf_id = args.data.buf_id
+          -- Tweak left-hand side of mapping to your liking
+          vim.keymap.set('n', '<leader>sl', function()
+            split_win('v')
+          end, { desc = 'Open selected file in a new vertical split window', buffer = buf_id })
+          vim.keymap.set('n', '<leader>sj', function()
+            split_win('')
+          end, { desc = 'Open selected file in a new horizontal split window', buffer = buf_id })
+          vim.keymap.set('n', '<esc>', function()
+            files.close()
+          end, { desc = 'close', buffer = buf_id })
+          vim.keymap.set('n', '<leader>ww', files.synchronize, { desc = 'sync', buffer = buf_id })
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesWindowUpdate',
+        callback = function(args)
+          vim.wo[args.data.win_id].relativenumber = true
+        end,
+      })
+
       require('mini.animate').setup({
         cursor = {
           enable = false,

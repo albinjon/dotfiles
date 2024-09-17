@@ -85,22 +85,8 @@ return {
           mode = 'n',
           '<leader>fe',
           function()
-            local o = require('oil')
-            o.open_float()
-            -- add delay
-            vim.defer_fn(function()
-              o.open_preview()
-            end, 200)
+            require('mini.files').open(vim.api.nvim_buf_get_name(0))
           end,
-          -- '<cmd>Oil --float<cr>',
-          -- function()
-          --   require('telescope').extensions.file_browser.file_browser({
-          --     cwd = vim.fn.expand('%:p:h'),
-          --     select_buffer = true,
-          --     respect_gitignore = false,
-          --     hidden = true,
-          --   })
-          -- end,
           desc = '[f]ile [e]xplorer',
         },
         { mode = 'n', '<leader>g', group = '[g]it' },
