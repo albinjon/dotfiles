@@ -85,7 +85,13 @@ return {
           mode = 'n',
           '<leader>fe',
           function()
-            require('mini.files').open(vim.api.nvim_buf_get_name(0))
+            require('mini.files').open(
+              vim.api.nvim_buf_get_name(0)
+              -- , false, {
+              -- filter = function(fs_entry)
+              --   return vim.startswith(fs_entry.name, '.DS_Store')
+              -- end,
+            )
           end,
           desc = '[f]ile [e]xplorer',
         },

@@ -112,6 +112,7 @@ return {
             files.close()
           end, { desc = 'close', buffer = buf_id })
           vim.keymap.set('n', '<leader>ww', files.synchronize, { desc = 'sync', buffer = buf_id })
+          -- files.refresh({ filter = filter_hide })
         end,
       })
 

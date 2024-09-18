@@ -14,7 +14,7 @@ return {
   },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    event = 'BufReadPre',
+    event = 'BufReadPost',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       {
