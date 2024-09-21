@@ -1,0 +1,2 @@
+aerospace list-workspaces --focused
+

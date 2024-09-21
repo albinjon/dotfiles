@@ -16,7 +16,7 @@ return {
             icon_hl = '@variable',
             desc = 'Find Files',
             group = 'Label',
-            action = 'Telescope find_files',
+            action = 'TelescopeFindFiles',
             key = 'f',
           },
           {
@@ -38,7 +38,7 @@ return {
           {
             desc = ' Config',
             group = 'Number',
-            action = 'Telescope find_files cwd=' .. vim.fn.stdpath('config'),
+            action = 'TelescopeFindConfigFiles',
             key = 'c',
           },
         },
