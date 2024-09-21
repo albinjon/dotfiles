@@ -102,10 +102,10 @@ return {
         callback = function(args)
           local buf_id = args.data.buf_id
           -- Tweak left-hand side of mapping to your liking
-          vim.keymap.set('n', '<leader>sl', function()
+          vim.keymap.set('n', '<c-s>l', function()
             split_win('v')
           end, { desc = 'Open selected file in a new vertical split window', buffer = buf_id })
-          vim.keymap.set('n', '<leader>sj', function()
+          vim.keymap.set('n', '<c-s>j', function()
             split_win('')
           end, { desc = 'Open selected file in a new horizontal split window', buffer = buf_id })
           vim.keymap.set('n', '<esc>', function()

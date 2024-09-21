@@ -112,9 +112,11 @@ return {
         { mode = 'n', '<leader>rb', '<cmd>bufdo e<cr>', desc = '[r]eload all [b]uffers' },
         { mode = 'n', '<leader>rf', '<cmd>e<cr>', desc = '[r]eload [f]ile' },
         { mode = 'n', '<leader>s', group = '[s]plits/[s]earch' },
+        { mode = 'n', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
+        { mode = 'n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' } },
         {
           mode = 'n',
-          '<leader>sj',
+          '<c-s>j',
           function()
             split_and_switch_buffer('h')
           end,
@@ -122,13 +124,13 @@ return {
         },
         {
           mode = 'n',
-          '<leader>sl',
+          '<c-s>l',
           function()
             split_and_switch_buffer('v')
           end,
           desc = '[s]plit (vertical/to right)',
         },
-        { mode = 'n', '<leader>ss', '<cmd>q<cr>', desc = '[s]plit delete' },
+        { mode = 'n', '<c-s>s', '<cmd>q<cr>', desc = '[s]plit delete' },
         { mode = 'n', '<leader>t', group = '[t]rouble' },
         { mode = 'n', '<leader>w', group = '[w]rite' },
         { mode = 'n', '<leader>wa', '<cmd>wa<cr>', desc = 'write [a]ll' },
@@ -136,6 +138,8 @@ return {
 
         -- Visual mode mappings
         { mode = 'v', '<leader>g', group = '[g]it' },
+        { mode = 'v', '<leader>c', group = '[c]ut (snippets)' },
+        { mode = 'v', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
         { mode = 'v', '<leader>s', group = '[s]earch' },
         {
           mode = 'v',

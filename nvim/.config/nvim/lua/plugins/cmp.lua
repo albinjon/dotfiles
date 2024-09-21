@@ -8,6 +8,8 @@ return {
       editSnippetPopup = {
         keymaps = {
           insertNextPlaceholder = '<C-,>',
+          deleteSnippet = '<S-BS>',
+          saveChanges = '<leader>ww',
         },
       },
     },
@@ -30,9 +32,6 @@ return {
         end)(),
         config = function()
           require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snippets' } })
-          vim.keymap.set('n', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' })
-          vim.keymap.set('v', '<leader>cna', "<cmd>'<,'>ScissorsAddNewSnippet<CR>", { desc = '[a]dd new snippet' })
-          vim.keymap.set('n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' })
         end,
         dependencies = {
           -- `friendly-snippets` contains a variety of premade snippets.

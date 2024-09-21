@@ -11,8 +11,8 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-vim.keymap.set({ 'i', 'x', 'c' }, '<M-Left>', '<C-Left>', { desc = 'Move cursor word backwards' })
-vim.keymap.set({ 'i', 'x', 'c' }, '<M-Right>', '<C-Right>', { desc = 'Move cursor word forwards' })
+vim.keymap.set({ 'i', 'x', 'c' }, '<M-b>', '<C-Left>', { desc = 'Move cursor word backwards' })
+vim.keymap.set({ 'i', 'x', 'c' }, '<M-f>', '<C-Right>', { desc = 'Move cursor word forwards' })
 vim.keymap.set({ 'i', 'c', 'x' }, '<M-BS>', '<C-W>', { desc = 'Delete word backwards' })
 vim.keymap.set('n', '<C-å>', '<C-]>', { desc = 'Follow link' })
 
@@ -32,10 +32,10 @@ vim.keymap.set({ 'i', 'c' }, '<M-Del>', '<S-Right><C-W>', { desc = 'Delete word 
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Persistence
 vim.api.nvim_set_keymap(

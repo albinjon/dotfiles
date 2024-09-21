@@ -8,7 +8,6 @@
 
 return {
   'mfussenegger/nvim-dap',
-  event = 'BufRead',
   dependencies = {
     'rcarriga/nvim-dap-ui',
     'nvim-neotest/nvim-nio',
@@ -22,6 +21,8 @@ return {
     'DapStepOver',
     'DapStepOut',
     'DapToggleBreakpoint',
+    'DapToggleUI',
+    'DapCloseUI',
     'DapSetConditionalBreakpoint',
   },
   keys = {
@@ -31,6 +32,8 @@ return {
     { '<F3>', '<cmd>DapStepOut<cr>', desc = 'Debug: Step Out' },
     { '<leader>db', '<cmd>DapToggleBreakpoint<cr>', desc = 'Debug: Toggle Breakpoint' },
     { '<leader>dB', '<cmd>DapSetConditionalBreakpoint<cr>', desc = 'Debug: Set Conditional Breakpoint' },
+    { '<leader>du', '<cmd>DapToggleUI<cr>', desc = 'Debug: Toggle UI' },
+    { '<leader>dq', '<cmd>DapCloseUI<cr>', desc = 'Debug: Close UI' },
   },
   config = function()
     local dap = require('dap')
@@ -44,26 +47,6 @@ return {
       },
     })
 
-    -- Create user commands
-    vim.api.nvim_create_user_command('DapContinue', function()
-      dap.continue()
-    end, { desc = 'Debug: Start/Continue' })
-    vim.api.nvim_create_user_command('DapStepInto', function()
-      dap.step_into()
-    end, { desc = 'Debug: Step Into' })
-    vim.api.nvim_create_user_command('DapStepOver', function()
-      dap.step_over()
-    end, { desc = 'Debug: Step Over' })
-    vim.api.nvim_create_user_command('DapStepOut', function()
-      dap.step_out()
-    end, { desc = 'Debug: Step Out' })
-    vim.api.nvim_create_user_command('DapToggleBreakpoint', function()
-      dap.toggle_breakpoint()
-    end, { desc = 'Debug: Toggle Breakpoint' })
-    vim.api.nvim_create_user_command('DapSetConditionalBreakpoint', function()
-      dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
-    end, { desc = 'Debug: Set Conditional Breakpoint' })
-    ---@diagnostic disable-next-line: missing-fields
     dapui.setup({
       -- Set icons to characters that are more likely to work in every terminal.
       --    Feel free to remove or use ones that you like more! :)
@@ -85,10 +68,27 @@ return {
       },
     })
 
+    -- Create user commands
+    vim.api.nvim_create_user_command('DapContinue', dap.continue, { desc = 'Debug: Start/Continue' })
+    vim.api.nvim_create_user_command('DapStepInto', function()
+      dap.step_into()
+    end, { desc = 'Debug: Step Into' })
+    vim.api.nvim_create_user_command('DapStepOver', function()
+      dap.step_over()
+    end, { desc = 'Debug: Step Over' })
+    vim.api.nvim_create_user_command('DapStepOut', function()
+      dap.step_out()
+    end, { desc = 'Debug: Step Out' })
+    vim.api.nvim_create_user_command('DapToggleBreakpoint', function()
+      dap.toggle_breakpoint()
+    end, { desc = 'Debug: Toggle Breakpoint' })
+    vim.api.nvim_create_user_command('DapSetConditionalBreakpoint', function()
+      dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+    end, { desc = 'Debug: Set Conditional Breakpoint' })
+    ---@diagnostic disable-next-line: missing-fields
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<F4>', dapui.toggle, { desc = 'Debug: See last session result.' })
-    vim.keymap.set('n', '<leader>dq', dapui.close, { noremap = true, silent = true, desc = 'Quit DAP UI' })
-    vim.keymap.set('n', '<leader>du', dapui.toggle, { noremap = true, silent = true, desc = 'Toggle DAP UI' })
+    vim.api.nvim_create_user_command('DapToggleUI', dapui.toggle, { desc = 'Debug: See last session result.' })
+    vim.api.nvim_create_user_command('DapCloseUI', dapui.close, { desc = 'Quit DAP UI' })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
