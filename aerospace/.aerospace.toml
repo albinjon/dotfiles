@@ -30,7 +30,8 @@ inner.horizontal = 5
 inner.vertical =   5
 outer.left =       10
 outer.bottom =     10
-outer.top =        [ { monitor."built-in" = 5 }, 30 ]
+# INFO: monitor.built-in is just for example, both have 5 right now.
+outer.top =        [ { monitor."built-in" = 5 }, 5 ]
 outer.right =      10
 
 [workspace-to-monitor-force-assignment]
@@ -114,7 +115,7 @@ ctrl-cmd-7 = 'workspace 7'
 ctrl-cmd-8 = 'workspace 8'
 ctrl-cmd-9 = 'workspace 9'
 ctrl-cmd-p = 'workspace A'
-ctrl-cmd-slash = 'workspace B'
+ctrl-cmd-0 = 'workspace B'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 ctrl-cmd-shift-1 = [ 'move-node-to-workspace 2', 'workspace 1' ]
@@ -127,7 +128,7 @@ ctrl-cmd-shift-7 = [ 'move-node-to-workspace 7', 'workspace 7' ]
 ctrl-cmd-shift-8 = [ 'move-node-to-workspace 8', 'workspace 8' ]
 ctrl-cmd-shift-9 = [ 'move-node-to-workspace 9', 'workspace 9' ]
 ctrl-cmd-shift-p = [ 'move-node-to-workspace A', 'workspace A' ]
-ctrl-cmd-shift-slash = [ 'move-node-to-workspace B', 'workspace B' ]
+ctrl-cmd-shift-0 = [ 'move-node-to-workspace B', 'workspace B' ]
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 ctrl-cmd-tab = 'workspace-back-and-forth'
