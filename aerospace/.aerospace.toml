@@ -1,3 +1,12 @@
+# INFO: The below two lines should be used, using the default causes lots of issues
+# if you happen to have multiple windows spanning multiple monitors.
+# For example, if you focus an Arc window on the main monitor, 
+# then the focus on the secondary monitor will be moved to the Arc window 
+# on the secondary monitor, which is not what you want.
+# Commands:
+# defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
+# defaults write com.apple.dock expose-group-apps -bool true && killall Dock
+
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
