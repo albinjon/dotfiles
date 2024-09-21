@@ -1,20 +1,15 @@
-# INFO: The below two lines should be used, using the default causes lots of issues
+# INFO: The below two commands should be ran, using the default causes lots of issues
 # if you happen to have multiple windows spanning multiple monitors.
 # For example, if you focus an Arc window on the main monitor, 
 # then the focus on the secondary monitor will be moved to the Arc window 
 # on the secondary monitor, which is not what you want.
+# More info: https://nikitabobko.github.io/AeroSpace/guide.html
 # Commands:
 # defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
 # defaults write com.apple.dock expose-group-apps -bool true && killall Dock
 
-# You can use it to add commands that run after login to macOS user session.
-# 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
-
-# You can use it to add commands that run after AeroSpace startup.
-# 'after-startup-command' is run after 'after-login-command'
-# Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = []
 
 # Start AeroSpace at login
@@ -27,9 +22,6 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
 
-# Possible values: horizontal|vertical|auto
-# 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
-#               tall monitor (anything higher than wide) gets vertical orientation
 default-root-container-orientation = 'auto'
 key-mapping.preset = 'qwerty'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
@@ -150,9 +142,7 @@ cmd-alt-shift-ctrl-c = 'mode service'
 [mode.service.binding]
 c = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
-#s = ['layout sticky tiling', 'mode main'] # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
-backspace = ['close-all-windows-but-current', 'mode main']
 
 ctrl-cmd-shift-h = ['join-with left', 'mode main']
 ctrl-cmd-shift-j = ['join-with down', 'mode main']
