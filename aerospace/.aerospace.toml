@@ -33,7 +33,7 @@ inner.vertical =   5
 outer.left =       10
 outer.bottom =     10
 # INFO: monitor.built-in is just for example, both have 5 right now.
-outer.top =        [ { monitor."built-in" = 5 }, 5 ]
+outer.top =        [ { monitor."built-in" = 5 }, 40 ]
 outer.right =      10
 
 [workspace-to-monitor-force-assignment]
@@ -78,6 +78,7 @@ B = ['secondary', 'main']
 
 # User Commands
 cmd-alt-shift-ctrl-t = 'exec-and-forget open -a wezterm -n --args start'
+# cmd-alt-shift-ctrl-s = "exec-and-forget /bin/bash -c '~/.config/spacebar/spacebarrc'"
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-period = 'layout tiles horizontal vertical'
