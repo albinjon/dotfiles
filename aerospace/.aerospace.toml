@@ -78,7 +78,8 @@ B = ['secondary', 'main']
 
 # User Commands
 cmd-alt-shift-ctrl-t = 'exec-and-forget open -a wezterm -n --args start'
-# cmd-alt-shift-ctrl-s = "exec-and-forget /bin/bash -c '~/.config/spacebar/spacebarrc'"
+# cmd-alt-shift-ctrl-s = 'exec-and-forget /bin/zsh /usr/bin/nohup /Users/albin/.local/bin/sketchybar >/dev/null 2>&1 &'
+cmd-alt-shift-ctrl-s = 'exec-and-forget /bin/bash -c cat /users/albin/testzsh.sh  > ~/out.log'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-period = 'layout tiles horizontal vertical'
@@ -121,7 +122,7 @@ ctrl-cmd-p = 'workspace A'
 ctrl-cmd-0 = 'workspace B'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-ctrl-cmd-shift-1 = [ 'move-node-to-workspace 2', 'workspace 1' ]
+ctrl-cmd-shift-1 = [ 'move-node-to-workspace 1', 'workspace 1' ]
 ctrl-cmd-shift-2 = [ 'move-node-to-workspace 2', 'workspace 2' ]
 ctrl-cmd-shift-3 = [ 'move-node-to-workspace 3', 'workspace 3' ]
 ctrl-cmd-shift-4 = [ 'move-node-to-workspace 4', 'workspace 4' ]

@@ -2,7 +2,7 @@
 ctrl + cmd - w [
   "wezterm": skhd -k "cmd - w"
   "arc": skhd -k "cmd + shift - w"
-  "finder": skhd -k "cmd - q"
+  "finder": skhd -k "cmd - w"
   "*": skhd -k "cmd - w"
 ]
 
@@ -15,7 +15,4 @@ ctrl + cmd - q : skhd -k "cmd - q"
 
 cmd - h [
 "firefox": :
-]
-ctrl - m [
-"kitty": skhd -k "ctrl - t"
 ]

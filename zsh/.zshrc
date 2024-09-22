@@ -4,6 +4,8 @@ export PATH=$HOME/bin:$DENO_INSTALL/bin:/usr/local/bin:~/Programmering/apps:$PAT
 export PATH="$PATH:/Users/albin/.local/bin"
 export XDG_CONFIG_HOME="$HOME/.config"
 # Path to your oh-my-zsh installation.
+alias sketch="nohup sketchybar >/dev/null 2>&1 &"
+alias resketch="sketchybar --reload"
 alias gcam="git commit -am "
 alias gco="git checkout"
 alias gp="git push "

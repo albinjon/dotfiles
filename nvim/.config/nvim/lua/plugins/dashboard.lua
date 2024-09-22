@@ -8,6 +8,13 @@ return {
         week_header = {
           enable = true,
         },
+        project = {
+          enable = true,
+          limit = 8,
+          action = function(path)
+            require('telescope.builtin').find_files({ cwd = path })
+          end,
+        },
         shortcut = {
           { desc = '󰊳 Quit', group = 'Number', action = 'q', key = 'q' },
           { desc = '󰊳 Lazy', group = '@property', action = 'Lazy', key = 'l' },
