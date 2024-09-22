@@ -27,7 +27,7 @@ default-root-container-orientation = 'auto'
 key-mapping.preset = 'qwerty'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 exec-on-workspace-change = ['/bin/bash', '-c',
-    '~/.local/bin/sketchybar --trigger aerospace_workspace_change'
+    '~/.local/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
 [gaps]
@@ -71,7 +71,7 @@ B = ['secondary', 'main']
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-# You can uncomment the following lines to open up terminal with ctrl-cmd + enter shortcut (like in i3)
+# You can uncomment the following lines to open up terminal with ctrl-cmd + enter shortcut ()
 # ctrl-cmd-enter = '''exec-and-forget osascript -e '
 # tell application "Terminal"
 #     do script

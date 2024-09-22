@@ -35,26 +35,41 @@ sketchybar --default "${default[@]}"
 
 ##### Adding Left Items #####
 
-sketchybar --add space workspaces left
 sketchybar --add event aerospace_workspace_change
 
-for space in {1..9} A B; do
-    sketchybar --add item space.$space left \
-               --set space.$space \
-                    icon.font="Hack Nerd Font:Regular:20" \
-                    label.font="FiraCode Nerd Font:Bold:12.0" \
-                    icon.padding_left=6 \
-                    icon.padding_right=-3 \
-                    background.height=24 \
-                    background.corner_radius=5 \
-                    background.color=0xff5555ff \
-                    script="$PLUGIN_DIR/aero_spaces.sh"
+get_icon() {
+    case "$1" in
+        1) echo "";;
+        2) echo "";;
+        3) echo "󰒱";;
+        4) echo "";;
+        5) echo "";;
+        6) echo "";;
+        7) echo "";;
+        8) echo "󰶍";;
+        9) echo "󰆼";;
+        A) echo "";;
+        B) echo "";;
+        *) echo "";;
+    esac
+}
+
+for sid in $(aerospace list-workspaces --all); do
+    icon=$(get_icon "$sid")
+    sketchybar --add item space.$sid left \
+        --subscribe space.$sid aerospace_workspace_change \
+        --set space.$sid \
+        background.color=0x44ffffff \
+        background.corner_radius=5 \
+        background.height=24 \
+        background.drawing=off \
+        icon.font="Hack Nerd Font:Bold:20.0" \
+        icon.padding_left=10 \
+        icon.padding_right=0 \
+        icon="$icon" \
+        click_script="aerospace workspace $sid" \
+        script="$PLUGIN_DIR/aero_spaces.sh $sid"
 done
-sketchybar --subscribe space.1 aerospace_workspace_change
-
-# Force initial update
-sketchybar --trigger aerospace_workspace_change
-
 
 
 ##### Adding Right Items #####
