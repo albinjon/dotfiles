@@ -26,6 +26,9 @@ default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 key-mapping.preset = 'qwerty'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+exec-on-workspace-change = ['/bin/bash', '-c',
+    '~/.local/bin/sketchybar --trigger aerospace_workspace_change'
+]
 
 [gaps]
 inner.horizontal = 5
