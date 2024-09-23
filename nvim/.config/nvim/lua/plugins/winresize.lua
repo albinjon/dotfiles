@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   'pogyomo/winresize.nvim',
   config = function()
     local resize = require('winresize').resize

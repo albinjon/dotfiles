@@ -1,18 +1,16 @@
 # Close window
-ctrl + cmd - w [
+ctrl - w [
   "wezterm": skhd -k "cmd - w"
   "arc": skhd -k "cmd + shift - w"
   "finder": skhd -k "cmd - w"
   "*": skhd -k "cmd - w"
 ]
 
-ctrl + cmd - n [
-  "arc": skhd -k "cmd + shift - n"
-]
+ctrl + alt + cmd + shift - u : /Users/albin/.config/aeroscripts/focus.sh
 
-# Close application
-ctrl + cmd - q : skhd -k "cmd - q"
+ctrl - q : skhd -k "cmd - q"
 
 cmd - h [
 "firefox": :
 ]
+

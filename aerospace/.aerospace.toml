@@ -55,6 +55,10 @@ B = ['secondary', 'main']
 
 [mode.main.binding]
 
+cmd-h = [] # Disable "hide application"
+cmd-alt-h = [] # Disable "hide others"
+cmd-m = [] # Disable "hide application"
+
 # All possible keys:
 # - Letters.        a, b, c, ..., z
 # - Numbers.        0, 1, 2, ..., 9
@@ -82,36 +86,40 @@ B = ['secondary', 'main']
 # User Commands
 cmd-alt-shift-ctrl-t = 'exec-and-forget open -a wezterm -n --args start'
 # cmd-alt-shift-ctrl-s = 'exec-and-forget /bin/zsh /usr/bin/nohup /Users/albin/.local/bin/sketchybar >/dev/null 2>&1 &'
-cmd-alt-shift-ctrl-s = 'exec-and-forget /bin/bash -c cat /users/albin/testzsh.sh  > ~/out.log'
+# cmd-alt-shift-ctrl-s = "exec-and-forget /Users/albin/.config/aeroscripts/focus.sh"
+# cmd-alt-shift-ctrl-s = "exec-and-forget echo 'out' > /tmp/wezterm_layout"
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-period = 'layout tiles horizontal vertical'
 cmd-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-ctrl-cmd-h = 'focus left'
-ctrl-cmd-j = 'focus down'
-ctrl-cmd-k = 'focus up'
-ctrl-cmd-l = 'focus right'
 ctrl-cmd-c = 'focus-monitor --wrap-around next'
-cmd-alt-shift-ctrl-l  = 'split vertical'
-cmd-alt-shift-ctrl-j = 'split horizontal'
+cmd-alt-shift-ctrl-v  = 'split vertical'
+cmd-alt-shift-ctrl-x = 'split horizontal'
 
 ctrl-cmd-g = 'workspace --wrap-around next'
 ctrl-cmd-s = 'workspace --wrap-around prev'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-ctrl-cmd-shift-h = 'move left'
-ctrl-cmd-shift-j = 'move down'
-ctrl-cmd-shift-k = 'move up'
-ctrl-cmd-shift-l = 'move right'
-ctrl-cmd-shift-c = [ 'move-node-to-monitor --wrap-around next' ,  'focus-monitor --wrap-around next' ]
+ctrl-shift-h = 'move left'
+ctrl-shift-j = 'move down'
+ctrl-shift-k = 'move up'
+ctrl-shift-l = 'move right'
+ctrl-shift-c = [ 'move-node-to-monitor --wrap-around next' ,  'focus-monitor --wrap-around next' ]
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 ctrl-cmd-shift-minus = 'resize smart -50'
 ctrl-cmd-shift-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+# alt-enter = "exec-and-forget /bin/bash -c '~/.config/aeroscripts/focus.sh'"
+ctrl-h = "exec-and-forget /Users/albin/.config/aeroscripts/left.sh"
+ctrl-l = "exec-and-forget /Users/albin/.config/aeroscripts/right.sh"
+ctrl-k = "exec-and-forget /Users/albin/.config/aeroscripts/up.sh"
+ctrl-j = "exec-and-forget /Users/albin/.config/aeroscripts/down.sh"
+
+
 ctrl-cmd-1 = 'workspace 1'
 ctrl-cmd-2 = 'workspace 2'
 ctrl-cmd-3 = 'workspace 3'
