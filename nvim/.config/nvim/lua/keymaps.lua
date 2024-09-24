@@ -16,7 +16,7 @@ vim.keymap.set({ 'i', 'x', 'c' }, '<M-f>', '<C-Right>', { desc = 'Move cursor wo
 vim.keymap.set({ 'i', 'c', 'x' }, '<M-BS>', '<C-W>', { desc = 'Delete word backwards' })
 vim.keymap.set('n', '<C-å>', '<C-]>', { desc = 'Follow link' })
 
--- vim.keymap.set({ 'v' }, '/', 'y<ESC>/<c-r>"<CR>', { desc = 'Search selected text' })
+vim.keymap.set({ 'v' }, '/', 'y<ESC>/<c-r>"<CR>', { desc = 'Search selected text' })
 
 -- Deletion keymaps
 vim.keymap.set({ 'i', 'c' }, '<M-Del>', '<S-Right><C-W>', { desc = 'Delete word forwards' })
