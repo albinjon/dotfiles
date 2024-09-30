@@ -1,4 +1,9 @@
 # Close window
+fn - e : skhd -k "hyper - e"
+fn - t : skhd -k "hyper - t"
+fn - c : skhd -k "hyper - c"
+fn - s : skhd -k "hyper - s"
+
 ctrl + cmd - w [
   "wezterm": skhd -k "cmd - w"
   "arc": skhd -k "cmd + shift - w"

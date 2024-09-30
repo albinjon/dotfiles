@@ -2,6 +2,7 @@
 export DENO_INSTALL="/Users/albin/.deno"
 export PATH=$HOME/bin:$DENO_INSTALL/bin:/usr/local/bin:~/Programmering/apps:$PATH
 export PATH="$PATH:/Users/albin/.local/bin"
+export PATH="$PATH:/Users/albin/.config/emacs/bin"
 export XDG_CONFIG_HOME="$HOME/.config"
 # Path to your oh-my-zsh installation.
 alias sketch="nohup sketchybar >/dev/null 2>&1 &"
@@ -23,11 +24,15 @@ alias chx="chmod +x"
 alias py="python3"
 alias run_doa='npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*"'
 alias run_e2e='npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*mro*" --filter="*collection*" --filter="*gates*" --filter="*workplace*" --filter="*finalizer*" --filter="*cgm*" --filter="*event-dump*" --filter="*maestro*" --concurrency=20'
+alias em="/Users/albin/.scripts/emacsclient.sh"
 
 export ZSH="$HOME/.oh-my-zsh"
+# export FZF_DEFAULT_COMMAND='fd --type file'
 
 export CAREOS_LOG_FORMAT="PLAIN"
 export CAREOS_ENABLE_SHUTDOWN_HOOKS="false"
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
 
 spf() {
     os=$(uname -s)
@@ -131,8 +136,10 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export EDITOR='nvim'
-export VISUAL='nvim'
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
+export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
