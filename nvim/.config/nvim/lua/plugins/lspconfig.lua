@@ -121,7 +121,7 @@ return {
               },
             },
           },
-          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'typescript.tsx', 'vue' },
+          filetypes = { 'vue' },
         },
         lua_ls = {
           settings = {
@@ -148,6 +148,7 @@ return {
         'markdownlint',
         'prettierd',
         'pyright',
+        'ts_ls',
         'stylua',
         'vale',
         'sqlls',

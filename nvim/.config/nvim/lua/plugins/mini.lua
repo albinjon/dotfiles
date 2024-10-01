@@ -90,6 +90,7 @@ return {
         local cur_target = files.get_explorer_state().target_window
         local new_target = vim.api.nvim_win_call(cur_target, function()
           vim.cmd(direction .. 'split')
+          ---@diagnostic disable-next-line: redundant-return-value
           return vim.api.nvim_get_current_win()
         end)
         files.set_target_window(new_target)

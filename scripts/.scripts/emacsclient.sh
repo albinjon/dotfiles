@@ -8,17 +8,18 @@ run_emacs_client() {
     if [ $# -eq 0 ]; then
         nohup $EMACS_CLIENT --socket-name=$SOCKET_NAME $1 >/dev/null 2>&1 &
     else
-        nohup $EMACS_CLIENT --socket-name=$SOCKET_NAME $1 "$@" >/dev/null 2>&1 &
+        echo "Running emacs client with args: $@" >> /tmp/aerospace.log
+        nohup $EMACS_CLIENT --socket-name=$SOCKET_NAME "$@" >/dev/null 2>&1 &
     fi
 }
 
 # Check if there's a visible frame
 if $EMACS_CLIENT --socket-name=$SOCKET_NAME -e '(> (length (visible-frame-list)) 0)' 2>/dev/null | grep -q 't'; then
     # Visible frame exists, use --reuse-frame
-    run_emacs_client "--reuse-frame"
+    run_emacs_client "--reuse-frame" $@
 else
     # No visible frame, create a new one
-    run_emacs_client "--create-frame --alternate-editor="
+    run_emacs_client '--create-frame --alternate-editor=""' $@
 fi
 
 echo "Emacs client started" >> /tmp/aerospace.log
