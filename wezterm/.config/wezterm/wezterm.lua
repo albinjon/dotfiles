@@ -50,6 +50,11 @@ config.keys = {
 		mods = "CTRL",
 		action = act.SendKey({ key = "t", mods = "CTRL" }),
 	},
+	{
+		key = "Backspace",
+		mods = "OPT",
+		action = act.SendKey({ key = "w", mods = "CTRL" }),
+	},
 	{ key = "h", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-left" }) },
 	{ key = "l", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-right" }) },
 	{ key = "j", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-down" }) },

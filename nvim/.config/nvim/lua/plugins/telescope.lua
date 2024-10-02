@@ -52,7 +52,7 @@ return {
               ['<c-?>'] = 'which_key',
               ['<c-j>'] = 'move_selection_next',
               ['<c-k>'] = 'move_selection_previous',
-              ['<m-bs>'] = function()
+              ['<c-w>'] = function()
                 vim.api.nvim_input('<c-s-w>')
               end,
               ['<Tab>'] = 'toggle_selection',

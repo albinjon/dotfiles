@@ -1,1 +1,1 @@
-{"arrfunc":{"prefix":"arrfunc","body":["const ${1:fname} = (${2:param}) => {","  $0","};"]},"foriloop":{"prefix":"foriloop","body":["for (let i = 0; i < length; i++) {","  ${0}","}"]}}
+{"error":{"prefix":"error","body":["if (${1:bool}) {","  this.logger.error(","    `${2:message}`,","  );","$0","}"]},"func":{"prefix":"func","body":["private ${1:name}(${2:param}: ${3:type}) {","  $0","}"]},"arrfunc":{"prefix":"arrfunc","body":["const ${1:fname} = (${2:param}) => {","  $0","};"]},"foriloop":{"prefix":"foriloop","body":["for (let i = 0; i < length; i++) {","  ${0}","}"]}}

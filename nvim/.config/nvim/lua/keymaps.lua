@@ -13,7 +13,7 @@ vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diag
 
 vim.keymap.set({ 'i', 'x', 'c' }, '<M-b>', '<C-Left>', { desc = 'Move cursor word backwards' })
 vim.keymap.set({ 'i', 'x', 'c' }, '<M-f>', '<C-Right>', { desc = 'Move cursor word forwards' })
-vim.keymap.set({ 'i', 'c', 'x' }, '<M-BS>', '<C-W>', { desc = 'Delete word backwards' })
+-- vim.keymap.set({ 'i', 'c', 'x' }, '<M-BS>', '<C-W>', { desc = 'Delete word backwards' })
 vim.keymap.set('n', '<C-å>', '<C-]>', { desc = 'Follow link' })
 
 vim.keymap.set({ 'v' }, '/', 'y<ESC>/<c-r>"<CR>', { desc = 'Search selected text' })

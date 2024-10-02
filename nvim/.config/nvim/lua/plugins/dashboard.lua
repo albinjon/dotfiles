@@ -4,17 +4,20 @@ return {
   config = function()
     require('dashboard').setup({
       theme = 'hyper',
+      disable_move = true,
+      shortcut_type = 'number',
       config = {
         week_header = {
           enable = true,
         },
         project = {
           enable = true,
-          limit = 8,
+          limit = 4,
           action = function(path)
             require('telescope.builtin').find_files({ cwd = path })
           end,
         },
+        mru = { limit = 5, cwd_only = false },
         shortcut = {
           { desc = '󰊳 Quit', group = 'Number', action = 'q', key = 'q' },
           { desc = '󰊳 Lazy', group = '@property', action = 'Lazy', key = 'l' },
