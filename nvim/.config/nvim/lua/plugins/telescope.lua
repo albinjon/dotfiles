@@ -113,7 +113,9 @@ return {
       vim.api.nvim_create_user_command('TelescopeFindFilesSelected', function()
         builtin.find_files({ search_file = get_selected(), prompt_title = 'Find files (visual selection)' })
       end, { desc = 'Find files (selected)' })
-      vim.api.nvim_create_user_command('TelescopeBuffers', builtin.buffers, { desc = 'Find existing buffers' })
+      vim.api.nvim_create_user_command('TelescopeBuffers', function()
+        builtin.buffers({ sort_lastused = true, ignore_current_buffer = true })
+      end, { desc = 'Find existing buffers' })
       vim.api.nvim_create_user_command('TelescopeCurrentBufferFuzzyFind', function()
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
           winblend = 10,

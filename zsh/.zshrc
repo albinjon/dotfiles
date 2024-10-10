@@ -1,7 +1,5 @@
-# Enable zsh profiling
-zmodload zsh/zprof
-
-# Path configurations
+# PATH configurations
+typeset -U path
 path=(
   $HOME/bin
   $HOME/.deno/bin
@@ -11,18 +9,34 @@ path=(
   $HOME/.config/emacs/bin
   $path
 )
-export PATH
 
 # Environment variables
 export XDG_CONFIG_HOME="$HOME/.config"
 export CAREOS_LOG_FORMAT="PLAIN"
 export CAREOS_ENABLE_SHUTDOWN_HOOKS="false"
-export ALTERNATE_EDITOR="nvim" EDITOR="nvim" VISUAL="nvim"
+export ALTERNATE_EDITOR EDITOR VISUAL
+ALTERNATE_EDITOR="nvim"
+EDITOR="nvim"
+VISUAL="nvim"
 
 # Oh My Zsh configuration
+ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="daveverwer"
+
+# Load essential Oh My Zsh components for prompt
+source $ZSH/lib/git.zsh
+source $ZSH/lib/theme-and-appearance.zsh
+source $ZSH/lib/completion.zsh
+source $ZSH/lib/functions.zsh
+source $ZSH/lib/misc.zsh
+source $ZSH/lib/termsupport.zsh
+source $ZSH/lib/async_prompt.zsh
+source $ZSH/themes/$ZSH_THEME.zsh-theme
+
+# Defer loading of other Oh My Zsh components
+source $HOME/.zsh-defer/zsh-defer.plugin.zsh
+zsh-defer source $ZSH/oh-my-zsh.sh
 plugins=(zsh-autosuggestions fast-syntax-highlighting)
-source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
 # Aliases
 alias gcam="git commit -am" gco="git checkout" gp="git push" gpl="git pull" gaa="git add -A" \
@@ -37,8 +51,9 @@ run_doa() {
 }
 
 run_e2e() {
-    npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*mro*" --filter="*collection*" --filter="*gates*" --filter="*workplace*" --filter="*finalizer*" --filter="*cgm*" --filter="*event-dump*" --filter="*maestro*" --concurrency=20
+    npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*mro*" --filter="*collection*" --filter="*gates*" --filter="*workplace*" --filter="*finalizer*" --filter="*cgm*"  --filter="*maestro*" --concurrency=20
 }
+# --filter="*event-dump*"
 
 # Lazy-load NVM
 export NVM_DIR="$HOME/.nvm"
@@ -51,14 +66,11 @@ nvm() { lazy_load_nvm && nvm "$@"; }
 node() { lazy_load_nvm && node "$@"; }
 npm() { lazy_load_nvm && npm "$@"; }
 
-# FZF key bindings and completion
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+# Defer FZF loading
+zsh-defer source $HOME/.fzf.zsh
 
 # Disable untracked files dirty status
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Global aliases
-alias -g G='| grep' P='| pbcopy'
-
-# End profiling
-zprof
+# alias -g G='| grep' P='| pbcopy'

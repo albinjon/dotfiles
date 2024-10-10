@@ -133,6 +133,9 @@ return {
             },
           },
         },
+        mdx_analyzer = {
+          filetypes = { 'mdx' },
+        },
       }
 
       require('mason').setup()

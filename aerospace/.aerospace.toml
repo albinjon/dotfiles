@@ -82,7 +82,6 @@ B = ['secondary', 'main']
 # User Commands
 cmd-alt-shift-ctrl-t = 'exec-and-forget open -a wezterm -n --args start'
 cmd-alt-shift-ctrl-n = 'exec-and-forget open -a wezterm -n --args start nvim'
-# cmd-alt-shift-ctrl-s = 'exec-and-forget /bin/zsh /usr/bin/nohup /Users/albin/.local/bin/sketchybar >/dev/null 2>&1 &'
 cmd-alt-shift-ctrl-s = 'exec-and-forget /bin/bash -c cat /users/albin/testzsh.sh  > ~/out.log'
 cmd-alt-shift-ctrl-e = 'exec-and-forget /Users/albin/.scripts/emacsclient.sh'
 # cmd-alt-shift-ctrl-e = 'exec-and-forget /Users/albin/.config/aeroscripts/emacs.sh'
@@ -103,8 +102,9 @@ cmd-alt-shift-ctrl-j = 'split horizontal'
 ctrl-cmd-g = 'workspace --wrap-around next'
 ctrl-cmd-s = 'workspace --wrap-around prev'
 
-ctrl-cmd-shift-g = 'move-node-to-workspace --wrap-around next'
-ctrl-cmd-shift-s = 'move-node-to-workspace --wrap-around prev'
+ctrl-cmd-shift-g = [ 'move-node-to-workspace --wrap-around next' ,  'workspace --wrap-around next' ]
+ctrl-cmd-shift-s = [ 'move-node-to-workspace --wrap-around prev' ,  'workspace --wrap-around prev' ]
+
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 ctrl-cmd-shift-h = 'move left'

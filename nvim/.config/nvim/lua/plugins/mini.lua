@@ -61,6 +61,7 @@ return {
         vim.wo[win_id].winblend = 8
         local config = vim.api.nvim_win_get_config(win_id)
         config.border, config.title_pos = 'rounded', 'center'
+        config.style = 'minimal'
         vim.api.nvim_win_set_config(win_id, config)
       end
 

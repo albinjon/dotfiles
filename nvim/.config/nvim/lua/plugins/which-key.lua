@@ -49,6 +49,11 @@ local function search_help()
   vim.cmd('help ' .. get_visual_selection())
 end
 
+local function open_file_in_finder()
+  local file_path = vim.fn.expand('%:p')
+  vim.fn.system('open -R ' .. file_path)
+end
+
 local function replace_selection()
   local selected_text = get_visual_selection()
   local replacement = vim.fn.input('Enter replacement text: ', selected_text)
@@ -73,6 +78,14 @@ return {
         { mode = 'n', '<leader>dc', "<cmd>lua require('dap').continue()<cr>", desc = 'DAP [c]ontinue' },
         { mode = 'n', '<leader>f', group = '[f]iles' },
         { mode = 'n', '<leader>fE', '<cmd>Explore<cr>', desc = '[e]xplore (netrw)' },
+        {
+          mode = 'n',
+          '<leader>fo',
+          function()
+            open_file_in_finder()
+          end,
+          desc = '[o]pen current file (finder)',
+        },
         {
           mode = 'n',
           '<leader>fd',
@@ -107,6 +120,8 @@ return {
         { mode = 'n', '<leader>qQ', '<cmd>qa!<cr>', desc = '[q]uit and abandon all' },
         { mode = 'n', '<leader>qd', '<cmd>wa<cr><cmd>Dashboard<cr>', desc = '[q]uit and go to [d]ashboard' },
         { mode = 'n', '<leader>qf', '<cmd>up<cr><cmd>Bdelete<cr>', desc = '[q]uit and write file' },
+        { mode = 'n', '<leader>qb', '<cmd>Bdelete!<cr>', desc = '[q]uit buffer' },
+        { mode = 'n', '<leader>tn', '<cmd>terminal<cr>', desc = '[n]ew [t]erminal' },
         { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
         { mode = 'n', '<leader>r', group = '[r]eload' },
         { mode = 'n', '<leader>rb', '<cmd>bufdo e<cr>', desc = '[r]eload all [b]uffers' },
