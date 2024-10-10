@@ -6,6 +6,7 @@ path=(
   /usr/local/bin
   $HOME/Programmering/apps
   $HOME/.local/bin
+  $HOME/.local/bin/nvim/bin
   $HOME/.config/emacs/bin
   $path
 )
