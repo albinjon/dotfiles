@@ -33,7 +33,7 @@ wezterm.on("split-vertical", function(window, pane)
 		pane,
 		act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 		act.Multiple({
-			act.SendKey({ key = "s", mods = "CTRL" }),
+			act.SendKey({ key = "w", mods = "CTRL" }),
 			act.SendKey({ key = "l" }),
 		})
 	)
@@ -45,7 +45,7 @@ wezterm.on("split-horizontal", function(window, pane)
 		pane,
 		act.SplitVertical({ domain = "CurrentPaneDomain" }),
 		act.Multiple({
-			act.SendKey({ key = "s", mods = "CTRL" }),
+			act.SendKey({ key = "w", mods = "CTRL" }),
 			act.SendKey({ key = "j" }),
 		})
 	)

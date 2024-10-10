@@ -131,7 +131,7 @@ return {
         { mode = 'n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' } },
         {
           mode = 'n',
-          '<c-s>j',
+          '<c-w>j',
           function()
             split_and_switch_buffer('h')
           end,
@@ -139,13 +139,13 @@ return {
         },
         {
           mode = 'n',
-          '<c-s>l',
+          '<c-w>l',
           function()
             split_and_switch_buffer('v')
           end,
           desc = '[s]plit (vertical/to right)',
         },
-        { mode = 'n', '<c-s>s', '<cmd>q<cr>', desc = '[s]plit delete' },
+        { mode = 'n', '<c-w>q', '<cmd>q<cr>', desc = '[s]plit delete' },
         { mode = 'n', '<leader>t', group = '[t]rouble' },
         { mode = 'n', '<leader>w', group = '[w]rite' },
         { mode = 'n', '<leader>wa', '<cmd>wa<cr>', desc = 'write [a]ll' },
