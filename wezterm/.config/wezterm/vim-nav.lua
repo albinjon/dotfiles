@@ -6,6 +6,8 @@ local wez_nvim_action = function(window, pane, action_wez, forward_key_nvim)
 	local current_process = mux.get_window(window:window_id()):active_pane():get_foreground_process_name()
 	if string.match(current_process, "[^/]+$") == "nvim" then
 		window:perform_action(forward_key_nvim, pane)
+	elseif string.match(current_process, "[^/]+$") == "posting" then
+		window:perform_action(forward_key_nvim, pane)
 	else
 		window:perform_action(action_wez, pane)
 	end

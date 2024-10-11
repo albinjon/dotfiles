@@ -6,6 +6,7 @@ return {
     require('copilot').setup({
       filetypes = {
         dashboard = false,
+        sql = true,
       },
       suggestion = {
         auto_trigger = true,

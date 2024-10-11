@@ -111,6 +111,16 @@ return {
       local servers = {
         pyright = {},
         volar = {},
+        eslint = {
+          settings = {
+            workingDirectories = {
+              { pattern = 'packages/*' },
+              { pattern = 'apps/*' },
+              { pattern = 'services/*' },
+            },
+            useFlatConfig = false,
+          },
+        },
         ts_ls = {
           init_options = {
             plugins = {
@@ -142,7 +152,7 @@ return {
 
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'eslint-lsp',
+        -- 'eslint-lsp',
         'tailwindcss',
         'delve',
         'jsonlint',
@@ -155,6 +165,7 @@ return {
         'stylua',
         'vale',
         'sqlls',
+        'gopls',
         'vue-language-server',
       })
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
