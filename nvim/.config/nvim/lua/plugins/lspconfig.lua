@@ -8,6 +8,9 @@ return {
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'nvimdev/lspsaga.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -27,6 +30,14 @@ return {
           local map_v = function(keys, func, desc)
             vim.keymap.set('v', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
+          require('lspsaga').setup({
+            rename = {
+              keys = { quit = '<c-x>', testing = '<cr>' },
+            },
+            outline = {
+              layout = 'float',
+            },
+          })
 
           map('gd', require('telescope.builtin').lsp_definitions, '[g]oto [d]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
@@ -47,15 +58,16 @@ return {
           --  Similar to document symbols, except searches over your entire project.
           -- map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-          map('<leader>cr', vim.lsp.buf.rename, '[r]ename')
+          map('<leader>cr', '<cmd>Lspsaga rename<cr>', '[r]ename')
+          map('<leader>co', '<cmd>Lspsaga outline<cr>', '[o]utline')
 
           map('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
           map('<leader>cl', '<cmd>LspInfo<cr>', 'Info')
           map_v('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
 
-          map('K', function()
-            vim.lsp.buf.hover()
-          end, 'Hover Documentation')
+          map('K', '<cmd>Lspsaga hover_doc<cr>', 'Hover Documentation')
+
+          vim.keymap.set({ 'n', 't' }, '<leader>tf', '<cmd>Lspsaga term_toggle<cr>', { desc = 'Toggle Terminal' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
