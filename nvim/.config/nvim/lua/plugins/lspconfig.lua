@@ -68,6 +68,12 @@ return {
           map('K', '<cmd>Lspsaga hover_doc<cr>', 'Hover Documentation')
 
           vim.keymap.set({ 'n', 't' }, '<leader>tf', '<cmd>Lspsaga term_toggle<cr>', { desc = 'Toggle Terminal' })
+          vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(function(_nil, result, ctx, config)
+            if result then
+              return vim.lsp.handlers.hover(_nil, result, ctx, config)
+            end
+          end, { border = 'rounded' })
+          map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
