@@ -15,10 +15,10 @@ path=(
 export XDG_CONFIG_HOME="$HOME/.config"
 export CAREOS_LOG_FORMAT="PLAIN"
 export CAREOS_ENABLE_SHUTDOWN_HOOKS="false"
-export ALTERNATE_EDITOR EDITOR VISUAL
 ALTERNATE_EDITOR="nvim"
 EDITOR="nvim"
 VISUAL="nvim"
+export ALTERNATE_EDITOR EDITOR VISUAL
 
 # Oh My Zsh configuration
 ZSH="$HOME/.oh-my-zsh"
