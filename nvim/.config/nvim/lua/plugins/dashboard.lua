@@ -17,7 +17,7 @@ return {
             require('telescope.builtin').find_files({ cwd = path })
           end,
         },
-        mru = { limit = 5, cwd_only = false },
+        mru = { limit = 5, cwd_only = true },
         shortcut = {
           { desc = '󰊳 Quit', group = 'Number', action = 'q', key = 'q' },
           { desc = '󰊳 Lazy', group = '@property', action = 'Lazy', key = 'l' },

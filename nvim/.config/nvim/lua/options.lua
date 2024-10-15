@@ -8,13 +8,11 @@ vim.opt.relativenumber = true
 vim.g.loaded_matchparen = 1
 
 vim.opt.ttyfast = true
---vim.opt.ttyscroll = 3
--- vim.opt.lazyredraw = true
 
-vim.opt.tabstop = 4
+vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 4
-vim.opt.smartindent = true
+vim.opt.shiftwidth = 2
+vim.opt.smarttab = true
 vim.opt.autoindent = true
 
 vim.opt.conceallevel = 2
@@ -64,8 +62,7 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 15
 
 vim.filetype.add({
-  extension = {
-    mdx = 'jsx',
-  },
+    extension = {
+        mdx = 'jsx',
+    },
 })
--- vim: ts=2 sts=2 sw=2 et
