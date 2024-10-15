@@ -1,5 +1,5 @@
 return {
-  enabled = false,
+  enabled = true,
   'numToStr/FTerm.nvim',
   cmd = { 'FTermToggle', 'FTermBtop', 'FTermPosting' },
   config = function()
