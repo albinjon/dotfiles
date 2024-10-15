@@ -8,7 +8,6 @@ return {
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'nvimdev/lspsaga.nvim',
       'nvim-treesitter/nvim-treesitter',
       'nvim-tree/nvim-web-devicons',
 
@@ -30,15 +29,6 @@ return {
           local map_v = function(keys, func, desc)
             vim.keymap.set('v', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
-          require('lspsaga').setup({
-            rename = {
-              keys = { quit = '<c-x>', testing = '<cr>' },
-            },
-            outline = {
-              layout = 'float',
-            },
-          })
-
           map('gd', require('telescope.builtin').lsp_definitions, '[g]oto [d]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
 
@@ -58,21 +48,12 @@ return {
           --  Similar to document symbols, except searches over your entire project.
           -- map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-          map('<leader>cr', '<cmd>Lspsaga rename<cr>', '[r]ename')
-          map('<leader>co', '<cmd>Lspsaga outline<cr>', '[o]utline')
+          map('<leader>cr', vim.lsp.buf.rename, '[r]ename')
 
           map('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
           map('<leader>cl', '<cmd>LspInfo<cr>', 'Info')
           map_v('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
 
-          map('K', '<cmd>Lspsaga hover_doc<cr>', 'Hover Documentation')
-
-          vim.keymap.set({ 'n', 't' }, '<leader>tf', '<cmd>Lspsaga term_toggle<cr>', { desc = 'Toggle Terminal' })
-          vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(function(_nil, result, ctx, config)
-            if result then
-              return vim.lsp.handlers.hover(_nil, result, ctx, config)
-            end
-          end, { border = 'rounded' })
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
@@ -161,6 +142,7 @@ return {
             },
           },
         },
+        gopls = {},
         mdx_analyzer = {
           filetypes = { 'mdx' },
         },
@@ -183,7 +165,8 @@ return {
         'stylua',
         'vale',
         'sqlls',
-        'gopls',
+        'crlfmt',
+        -- 'gopls',
         'vue-language-server',
       })
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })

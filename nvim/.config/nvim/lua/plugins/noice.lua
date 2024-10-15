@@ -4,6 +4,11 @@ return {
     opts = {
       lsp = {
         hover = {
+          border = 'rounded',
+          silent = true,
+        },
+        signature = {
+          border = 'rounded',
           silent = true,
         },
       },
