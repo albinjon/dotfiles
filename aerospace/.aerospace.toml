@@ -149,6 +149,9 @@ ctrl-cmd-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 cmd-alt-shift-ctrl-c = 'mode service'
 
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes

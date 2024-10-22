@@ -4,7 +4,7 @@ return {
   'kndndrj/nvim-dbee',
   cmd = 'DbeeToggle',
   keys = {
-    { '<leader>po', ':DbeeToggle<CR>', desc = '[p]ostgres [o]pen' },
+    { '<leader>po', ':DbeeToggle<CR>', desc = '[p]ostgres [o]pen', silent = true },
   },
   dependencies = {
     'MunifTanjim/nui.nvim',

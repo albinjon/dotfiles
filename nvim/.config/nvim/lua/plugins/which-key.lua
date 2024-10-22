@@ -108,6 +108,12 @@ return {
           end,
           desc = '[f]ile [e]xplorer',
         },
+        { mode = 't', '<A-f>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
+        { mode = 'n', '<A-f>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
+        { mode = 'n', '<A-b>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
+        { mode = 't', '<A-b>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
+        { mode = 'n', '<A-r>', '<cmd>FTermPosting<cr>', desc = 'toggle posting ([r]equests)' },
+        { mode = 't', '<A-r>', '<cmd>FTermPosting<cr>', desc = 'toggle posting ([r]equests)' },
         { mode = 'n', '<leader>g', group = '[g]it' },
         { mode = 'n', '<leader>o', group = '[o]bsidian' },
         { mode = 'n', '<leader>on', '<cmd>ObsidianNew<cr>', desc = 'open [n]ew' },
@@ -208,4 +214,3 @@ return {
     },
   },
 }
--- vim: ts=2 sts=2 sw=2 et

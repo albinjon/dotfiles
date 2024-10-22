@@ -22,10 +22,20 @@ return {
       { '<leader>s/', '<cmd>TelescopeLiveGrepOpenFiles<cr>', desc = '[s]earch [/] in Open Files' },
       { '<leader>fc', '<cmd>TelescopeFindConfigFiles<cr>', desc = '[f]ind [c]onfig files' },
       { '<leader>sc', '<cmd>TelescopeSearchConfigFiles<cr>', desc = '[s]earch [c]onfig files' },
-      { '<leader>sc', '<cmd>TelescopeSearchConfigFilesSelected<cr>', mode = 'v', desc = '[s]earch [c]onfig files' },
+      {
+        '<leader>sc',
+        '<cmd>TelescopeSearchConfigFilesSelected<cr>',
+        mode = 'v',
+        desc = '[s]earch [c]onfig files',
+      },
       { '<leader>fp', '<cmd>TelescopeFindPluginFiles<cr>', desc = '[f]ind [p]lugin files' },
       { '<leader>sp', '<cmd>TelescopeSearchPluginFiles<cr>', desc = '[s]earch [p]lugin files' },
-      { '<leader>sp', '<cmd>TelescopeSearchPluginFilesSelected<cr>', mode = 'v', desc = '[s]earch [p]lugin files' },
+      {
+        '<leader>sp',
+        '<cmd>TelescopeSearchPluginFilesSelected<cr>',
+        mode = 'v',
+        desc = '[s]earch [p]lugin files',
+      },
     },
     branch = '0.1.x',
     dependencies = {
@@ -154,4 +164,3 @@ return {
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

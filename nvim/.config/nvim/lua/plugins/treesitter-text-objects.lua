@@ -14,8 +14,9 @@ return {
             -- You can use the capture groups defined in textobjects.scm
             ['af'] = '@function.outer',
             ['if'] = '@function.inner',
-            ['=l'] = '@assignment.rhs',
-            ['=h'] = '@assignment.lhs',
+            -- Interfering with equals to indent.
+            -- ['=l'] = '@assignment.rhs',
+            -- ['=h'] = '@assignment.lhs',
             -- You can also use captures from other query groups like `locals.scm`
             ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
           },

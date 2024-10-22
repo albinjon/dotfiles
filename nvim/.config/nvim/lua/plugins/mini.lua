@@ -34,7 +34,7 @@ return {
       local files = require('mini.files')
       files.setup({
         options = {
-          permanent_delete = false,
+          permanent_delete = true,
         },
         mappings = {
           close = 'q',
@@ -99,6 +99,26 @@ return {
         files.close()
       end
 
+      local files_set_cwd = function()
+        -- Works only if cursor is on the valid file system entry
+        local cur_entry_path = MiniFiles.get_fs_entry().path
+        local cur_directory = vim.fs.dirname(cur_entry_path)
+        vim.fn.chdir(cur_directory)
+        vim.notify('Changed directory to ' .. cur_directory)
+      end
+
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesBufferCreate',
+        callback = function(args)
+          vim.keymap.set(
+            'n',
+            '<leader>cd',
+            files_set_cwd,
+            { buffer = args.data.buf_id, desc = 'cd to current directory' }
+          )
+        end,
+      })
+
       vim.api.nvim_create_autocmd('User', {
         pattern = 'MiniFilesBufferCreate',
         callback = function(args)
@@ -106,10 +126,16 @@ return {
           -- Tweak left-hand side of mapping to your liking
           vim.keymap.set('n', '<c-w>l', function()
             split_win('v')
-          end, { desc = 'Open selected file in a new vertical split window', buffer = buf_id })
+          end, {
+            desc = 'Open selected file in a new vertical split window',
+            buffer = buf_id,
+          })
           vim.keymap.set('n', '<c-w>j', function()
             split_win('')
-          end, { desc = 'Open selected file in a new horizontal split window', buffer = buf_id })
+          end, {
+            desc = 'Open selected file in a new horizontal split window',
+            buffer = buf_id,
+          })
           vim.keymap.set('n', '<esc>', function()
             files.close()
           end, { desc = 'close', buffer = buf_id })
@@ -148,4 +174,3 @@ return {
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

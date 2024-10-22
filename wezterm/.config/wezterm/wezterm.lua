@@ -46,16 +46,6 @@ config.keys = {
 		action = act.EmitEvent("trigger-vim-with-scrollback"),
 	},
 	{
-		key = "g",
-		mods = "CTRL",
-		action = act.SendKey({ key = "c", mods = "ALT" }),
-	},
-	{
-		key = "f",
-		mods = "CTRL",
-		action = act.SendKey({ key = "t", mods = "CTRL" }),
-	},
-	{
 		key = "Backspace",
 		mods = "OPT",
 		action = act.SendKey({ key = "w", mods = "CTRL" }),
