@@ -9,8 +9,6 @@ require("vim-scrollback")
 config.color_scheme = "Catppuccin Macchiato"
 config.font = wezterm.font("JetBrains Mono SemiBold")
 config.font_size = 16.0
-config.window_background_opacity = 0.8
-config.macos_window_background_blur = 20
 config.enable_tab_bar = false
 config.window_padding = {
 	left = 5,
@@ -18,7 +16,14 @@ config.window_padding = {
 	top = 5,
 	bottom = 2,
 }
-config.window_decorations = "RESIZE"
+-- Platform specific configuration
+-- x86_64-unknown-linux-gnu is for linux
+if wezterm.target_triple == "aarch64-apple-darwin" then
+	config.window_decorations = "RESIZE"
+	config.window_background_opacity = 0.8
+	config.macos_window_background_blur = 20
+end
+
 config.leader = { key = "w", mods = "CTRL", timeout_milliseconds = 2000 }
 
 config.keys = {

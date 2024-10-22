@@ -117,15 +117,31 @@ return {
         { mode = 'n', '<leader>po', '<cmd>DbeeToggle<cr>', desc = '[p]ostgres [o]pen' },
         { mode = 'n', '<leader>q', group = '[q]uit/session' },
         { mode = 'n', '<leader>qF', '<cmd>Bdelete!<cr>', desc = '[a]bandon file' },
-        { mode = 'n', '<leader>qQ', '<cmd>qa!<cr>', desc = '[q]uit and abandon all' },
         { mode = 'n', '<leader>qd', '<cmd>wa<cr><cmd>Dashboard<cr>', desc = '[q]uit and go to [d]ashboard' },
         { mode = 'n', '<leader>qf', '<cmd>up<cr><cmd>Bdelete<cr>', desc = '[q]uit and write file' },
         { mode = 'n', '<leader>qb', '<cmd>Bdelete!<cr>', desc = '[q]uit buffer' },
         { mode = 'n', '<leader>tn', '<cmd>terminal<cr>', desc = '[n]ew [t]erminal' },
         { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
+        { mode = 'n', '<leader>qQ', '<cmd>qa!<cr>', desc = '[q]uit and abandon all' },
         { mode = 'n', '<leader>r', group = '[r]eload' },
-        { mode = 'n', '<leader>rb', '<cmd>bufdo e<cr>', desc = '[r]eload all [b]uffers' },
-        { mode = 'n', '<leader>rf', '<cmd>e<cr>', desc = '[r]eload [f]ile' },
+        {
+          mode = 'n',
+          '<leader>rb',
+          function()
+            vim.cmd('bufdo e')
+            vim.lsp.codelens.refresh()
+          end,
+          desc = '[r]eload all [b]uffers',
+        },
+        {
+          mode = 'n',
+          '<leader>rf',
+          function()
+            vim.cmd('e')
+            vim.lsp.codelens.refresh({ bufnr = 0 })
+          end,
+          desc = '[r]eload [f]ile',
+        },
         { mode = 'n', '<leader>s', group = '[s]plits/[s]earch' },
         { mode = 'n', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
         { mode = 'n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' } },
