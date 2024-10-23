@@ -23,6 +23,11 @@ config.leader = { key = "w", mods = "CTRL", timeout_milliseconds = 2000 }
 
 config.keys = {
 	{
+		key = "m",
+		mods = "CMD",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
+	{
 		key = "LeftArrow",
 		mods = "OPT",
 		action = act.SendKey({

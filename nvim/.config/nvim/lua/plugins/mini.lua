@@ -73,12 +73,13 @@ return {
       -- kommer jag behöva spara alla kopieringar till samma mapp som alla deletions hamnar på, om jag vill kunna kopiera överallt. Det jag kanske letar efter är egentligen bara smidigare navigation i repot.
 
       -- fortsätt här:
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'MiniFilesActionDelete',
-        callback = function(args)
-          vim.notify(args.data.to)
-        end,
-      })
+      -- vim.api.nvim_create_autocmd('User', {
+      --   pattern = 'MiniFilesActionDelete',
+      --   callback = function(args)
+      --     vim.notify(args.data.to)
+      --   end,
+      -- })
+
       vim.api.nvim_create_autocmd('User', {
         pattern = 'MiniFilesWindowOpen',
         callback = function(args)

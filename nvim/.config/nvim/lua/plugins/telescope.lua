@@ -51,11 +51,51 @@ return {
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
+      local rg_exclude_patterns = {
+        '--glob=!.git',
+        '--glob=!node_modules',
+        '--glob=!.venv',
+        '--glob=!venv/',
+        '--glob=!.cache',
+        '--glob=!.DS_Store',
+        '--glob=!Music/',
+        '--glob=!Library/',
+        '--glob=!Applications/',
+        '--glob=!.npm/',
+        '--glob=!.docker/',
+        '--glob=!.cursor/',
+        '--glob=!.local/',
+        '--glob=!Movies/',
+        '--glob=!.vscode/',
+        '--glob=!go/pkg',
+        '--glob=!.pyenv/',
+        '--glob=!Pictures/',
+        '--glob=!.prettierd/',
+        '--glob=!.pgadmin/',
+        '--glob=!.runelite/',
+      }
+      local find_command = {
+        'rg',
+        '--files',
+        '--hidden',
+        '--follow',
+        unpack(rg_exclude_patterns),
+      }
+      local vimgrep_arguments = {
+        'rg',
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+        '--hidden',
+        '--follow',
+        unpack(rg_exclude_patterns),
+      }
       require('telescope').setup({
-        -- You can put your default mappings / updates / etc. in here
-        --  All the info you're looking for is in `:help telescope.setup()`
-        --
         defaults = {
+          vimgrep_arguments = vimgrep_arguments,
           mappings = {
             i = {
               ['<c-enter>'] = 'to_fuzzy_refine',
@@ -119,7 +159,11 @@ return {
       vim.api.nvim_create_user_command('TelescopeLiveGrep', builtin.live_grep, { desc = 'Search live grep' })
       vim.api.nvim_create_user_command('TelescopeResume', builtin.resume, { desc = 'Search resume' })
       vim.api.nvim_create_user_command('TelescopeOldfiles', builtin.oldfiles, { desc = 'Find recent Files' })
-      vim.api.nvim_create_user_command('TelescopeFindFiles', builtin.find_files, { desc = 'Find files' })
+      vim.api.nvim_create_user_command('TelescopeFindFiles', function()
+        builtin.find_files({
+          find_command = find_command,
+        })
+      end, { desc = 'Find files' })
       vim.api.nvim_create_user_command('TelescopeFindFilesSelected', function()
         builtin.find_files({ search_file = get_selected(), prompt_title = 'Find files (visual selection)' })
       end, { desc = 'Find files (selected)' })

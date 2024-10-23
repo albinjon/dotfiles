@@ -1,4 +1,5 @@
 return {
+  enabled = true,
   'pmizio/typescript-tools.nvim',
   event = 'BufReadPost',
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },

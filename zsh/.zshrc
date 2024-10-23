@@ -48,7 +48,7 @@ alias gcam="git commit -am" gco="git checkout" gp="git push" gpl="git pull" gaa=
 
 # Functions
 run_doa() {
-    npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*barcode*"
+    npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*barcode*" --filter="*finalizer*" --filter="*mocks*"
 }
 
 run_e2e() {

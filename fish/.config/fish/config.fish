@@ -3,7 +3,7 @@ set -U fish_user_paths $HOME/bin $HOME/.deno/bin /usr/local/bin $HOME/Programmer
 set fzf_fd_opts --hidden --follow -E .git -E node_modules -E .venv -E venv/ -E .cache -E .DS_Store -E /Music -E /Library -E /Applications -E .npm/ -E .docker/ -E .cursor/ -E .local/ -E Movies/ -E .vscode/ -E go/pkg -E .pyenv/ -E Pictures/ -E .prettierd/ -E .pgadmin/ -E .runelite/
 
 fzf_configure_bindings --directory=\cg --processes=\cp
-
+set -U nvm_default_version v20.18.0
 set -U fish_greeting
 
 set -gx XDG_CONFIG_HOME $HOME/.config
@@ -33,11 +33,23 @@ function sketch
 end
 
 function run_doa
-    npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*barcode*"
+    npx turbo run dev --filter="*mocks*" --filter="*finalizer*" --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*barcode*"
 end
 
 function run_e2e
     npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*mro*" --filter="*collection*" --filter="*gates*" --filter="*workplace*" --filter="*finalizer*" --filter="*cgm*"  --filter="*maestro*" --concurrency=20
+end
+
+function measure_command_time
+    if test (count $argv) -lt 2
+        echo "Usage: measure_command_time 'your command' 'log message to search for'"
+        return 1
+    end
+
+    set command $argv[1]
+    set log_message $argv[2]
+
+    node /Users/albin/.scripts/measure_command_time.js $command $log_message
 end
 
 alias resketch "sketchybar --reload"
