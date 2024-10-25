@@ -1,9 +1,4 @@
 local function wezterm_cli_move(direction)
-  local res = vim.fn.system('wezterm cli get-pane-direction ' .. direction)
-  if res == '' then
-    vim.fn.system('aerospace focus ' .. direction:lower())
-    return
-  end
   vim.fn.system('wezterm cli activate-pane-direction ' .. direction)
 end
 

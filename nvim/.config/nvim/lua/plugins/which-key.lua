@@ -108,10 +108,10 @@ return {
           end,
           desc = '[f]ile [e]xplorer',
         },
-        { mode = 't', '<A-f>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
-        { mode = 'n', '<A-f>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
-        { mode = 'n', '<A-b>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
-        { mode = 't', '<A-b>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
+        { mode = 't', '<A-t>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
+        { mode = 'n', '<A-t>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
+        { mode = 'n', '<A-u>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
+        { mode = 't', '<A-u>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
         { mode = 'n', '<A-r>', '<cmd>FTermPosting<cr>', desc = 'toggle posting ([r]equests)' },
         { mode = 't', '<A-r>', '<cmd>FTermPosting<cr>', desc = 'toggle posting ([r]equests)' },
         { mode = 'n', '<leader>g', group = '[g]it' },
@@ -130,8 +130,30 @@ return {
         { mode = 'n', '<leader>tn', '<cmd>terminal<cr>', desc = '[n]ew [t]erminal' },
         { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
         { mode = 'n', '<leader>r', group = '[r]eload' },
-        { mode = 'n', '<leader>rb', '<cmd>bufdo e<cr>', desc = '[r]eload all [b]uffers' },
-        { mode = 'n', '<leader>rf', '<cmd>e<cr>', desc = '[r]eload [f]ile' },
+        {
+          mode = 'n',
+          '<leader>rb',
+          function()
+            vim.cmd('bufdo e')
+            vim.cmd('LspRestart')
+            -- vim.defer_fn(function()
+            vim.cmd('LspStart')
+            -- end, 1)
+          end,
+          desc = '[r]eload all [b]uffers',
+        },
+        {
+          mode = 'n',
+          '<leader>rf',
+          function()
+            vim.cmd('e')
+            vim.cmd('LspRestart')
+            -- vim.defer_fn(function()
+            vim.cmd('LspStart')
+            -- end, 1)
+          end,
+          desc = '[r]eload [f]ile',
+        },
         { mode = 'n', '<leader>s', group = '[s]plits/[s]earch' },
         { mode = 'n', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
         { mode = 'n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' } },

@@ -6,6 +6,8 @@ fzf_configure_bindings --directory=\cg --processes=\cp
 set -U nvm_default_version v20.18.0
 set -U fish_greeting
 
+set -gx PYENV_ROOT $HOME/.pyenv
+
 set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx CAREOS_LOG_FORMAT PLAIN
 set -gx CAREOS_ENABLE_SHUTDOWN_HOOKS false
@@ -34,6 +36,10 @@ end
 
 function run_doa
     npx turbo run dev --filter="*mocks*" --filter="*finalizer*" --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*barcode*"
+end
+
+function run_bankid
+    npx turbo run dev --filter="*bankid*" --filter="*toxi-doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*barcode*"
 end
 
 function run_e2e

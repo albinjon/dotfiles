@@ -1,0 +1,1 @@
+{"rcomp":{"prefix":"rcomp","body":["interface ${3:name}Props {","  ${1:value}: ${2:type};","}","","const ${3:name}: React.FC<${3:name}Props> = ({ ${1:value} }) => {","  return (","\t\t<>","\t\t\t$0","\t\t<\/>","  );","};","","export default ${3:name};"]}}
