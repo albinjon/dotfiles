@@ -21,3 +21,11 @@ vim.api.nvim_create_autocmd('BufRead', {
     end
   end,
 })
+
+-- Add to your config:
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'LazyCheck',
+  callback = function()
+    print('Cache check triggered')
+  end,
+})

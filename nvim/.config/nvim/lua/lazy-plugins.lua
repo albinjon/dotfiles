@@ -7,12 +7,14 @@ require('lazy').setup({
     notify = false, -- notify on update
   },
   performance = {
+    debug = true,
     rtp = {
       disabled_plugins = {
         'gzip',
-        -- "matchit",
+        'matchit',
         -- "matchparen",
-        -- "netrwPlugin",
+        'netrwPlugin',
+        'man',
         'tarPlugin',
         'tohtml',
         'tutor',

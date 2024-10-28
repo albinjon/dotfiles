@@ -64,8 +64,6 @@ return {
   'folke/which-key.nvim',
   event = 'VeryLazy',
   opts = {
-    -- You can add any Which-Key specific options here
-    -- or leave it empty to use the default settings
     spec = {
       {
         -- Normal mode mappings
@@ -98,13 +96,7 @@ return {
           mode = 'n',
           '<leader>fe',
           function()
-            require('mini.files').open(
-              vim.api.nvim_buf_get_name(0)
-              -- , false, {
-              -- filter = function(fs_entry)
-              --   return vim.startswith(fs_entry.name, '.DS_Store')
-              -- end,
-            )
+            require('mini.files').open(vim.api.nvim_buf_get_name(0))
           end,
           desc = '[f]ile [e]xplorer',
         },
@@ -136,9 +128,9 @@ return {
           function()
             vim.cmd('bufdo e')
             vim.cmd('LspRestart')
-            -- vim.defer_fn(function()
-            vim.cmd('LspStart')
-            -- end, 1)
+            vim.defer_fn(function()
+              vim.cmd('LspStart')
+            end, 100)
           end,
           desc = '[r]eload all [b]uffers',
         },
@@ -148,9 +140,9 @@ return {
           function()
             vim.cmd('e')
             vim.cmd('LspRestart')
-            -- vim.defer_fn(function()
-            vim.cmd('LspStart')
-            -- end, 1)
+            vim.defer_fn(function()
+              vim.cmd('LspStart')
+            end, 100)
           end,
           desc = '[r]eload [f]ile',
         },
@@ -176,6 +168,7 @@ return {
         { mode = 'n', '<c-w>q', '<cmd>q<cr>', desc = '[s]plit delete' },
         { mode = 'n', '<leader>t', group = '[t]rouble' },
         { mode = 'n', '<leader>w', group = '[w]rite' },
+        { mode = 'n', '<leader>a', group = '[a]vant' },
         { mode = 'n', '<leader>wa', '<cmd>wa<cr>', desc = 'write [a]ll' },
         { mode = 'n', '<leader>ww', '<cmd>update<cr>', desc = '[w]rite' },
 
