@@ -1,5 +1,7 @@
 return {
   {
+    ft = 'dashboard',
+    event = 'BufReadPost',
     'folke/noice.nvim',
     opts = {
       lsp = {

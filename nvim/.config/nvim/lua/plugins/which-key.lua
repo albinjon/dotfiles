@@ -60,36 +60,51 @@ local function replace_selection()
   vim.cmd(string.format('%%s/%s/%s/gc', selected_text:gsub('/', '\\/'), replacement:gsub('/', '\\/')))
 end
 
+local function reload_buffers()
+  vim.cmd('bufdo e')
+  vim.cmd('LspRestart')
+  vim.defer_fn(function()
+    vim.cmd('LspStart')
+  end, 100)
+end
+
+local function reload_file()
+  vim.cmd('e')
+  vim.cmd('LspRestart')
+  vim.defer_fn(function()
+    vim.cmd('LspStart')
+  end, 100)
+end
+
 return {
   'folke/which-key.nvim',
   event = 'VeryLazy',
   opts = {
     spec = {
       {
-        -- Normal mode mappings
+        -- Groups
         { mode = 'n', '<leader>c', group = '[c]ode' },
         { mode = 'n', '<leader>cp', group = '[c]opilot' },
         { mode = 'n', '<leader>cn', group = '[c(s)]nippets' },
         { mode = 'n', '<leader>m', group = '[m]arkdown' },
         { mode = 'n', '<leader>p', group = '[p]ostgres' },
         { mode = 'n', '<leader>d', group = '[d]ebug (dap)' },
-        { mode = 'n', '<leader>dc', "<cmd>lua require('dap').continue()<cr>", desc = 'DAP [c]ontinue' },
         { mode = 'n', '<leader>f', group = '[f]iles' },
+        { mode = 'v', '<leader>g', group = '[g]it' },
+        { mode = 'v', '<leader>c', group = '[c]ut (snippets)' },
+        { mode = 'v', '<leader>s', group = '[s]earch' },
+        { mode = 'n', '<leader>dc', require('dap').continue, desc = 'DAP [c]ontinue' },
         { mode = 'n', '<leader>fE', '<cmd>Explore<cr>', desc = '[e]xplore (netrw)' },
         {
           mode = 'n',
           '<leader>fo',
-          function()
-            open_file_in_finder()
-          end,
+          open_file_in_finder,
           desc = '[o]pen current file (finder)',
         },
         {
           mode = 'n',
           '<leader>fd',
-          function()
-            confirm_and_delete_buffer()
-          end,
+          confirm_and_delete_buffer,
           desc = 'Delete file',
         },
         {
@@ -100,6 +115,7 @@ return {
           end,
           desc = '[f]ile [e]xplorer',
         },
+        -- Floating terminals
         { mode = 't', '<A-t>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
         { mode = 'n', '<A-t>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
         { mode = 'n', '<A-u>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
@@ -107,48 +123,41 @@ return {
         { mode = 'n', '<A-r>', '<cmd>FTermPosting<cr>', desc = 'toggle posting ([r]equests)' },
         { mode = 't', '<A-r>', '<cmd>FTermPosting<cr>', desc = 'toggle posting ([r]equests)' },
         { mode = 'n', '<leader>g', group = '[g]it' },
+        -- Obsidian
         { mode = 'n', '<leader>o', group = '[o]bsidian' },
         { mode = 'n', '<leader>on', '<cmd>ObsidianNew<cr>', desc = 'open [n]ew' },
         { mode = 'n', '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = '[o]pen obsidian' },
         { mode = 'n', '<leader>os', '<cmd>ObsidianSearch<cr>', desc = '[s]earch' },
         { mode = 'n', '<leader>ow', '<cmd>ObsidianWorkspace<cr>', desc = 'open [w]orkspace' },
+        -- Database
         { mode = 'n', '<leader>po', '<cmd>DbeeToggle<cr>', desc = '[p]ostgres [o]pen' },
+        -- Snippets
+        { mode = 'n', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
+        { mode = 'n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' } },
+        { mode = 'v', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
+        -- Windows/Buffers
         { mode = 'n', '<leader>q', group = '[q]uit/session' },
         { mode = 'n', '<leader>qF', '<cmd>Bdelete!<cr>', desc = '[a]bandon file' },
         { mode = 'n', '<leader>qQ', '<cmd>qa!<cr>', desc = '[q]uit and abandon all' },
-        { mode = 'n', '<leader>qd', '<cmd>wa<cr><cmd>Dashboard<cr>', desc = '[q]uit and go to [d]ashboard' },
         { mode = 'n', '<leader>qf', '<cmd>up<cr><cmd>Bdelete<cr>', desc = '[q]uit and write file' },
         { mode = 'n', '<leader>qb', '<cmd>Bdelete!<cr>', desc = '[q]uit buffer' },
         { mode = 'n', '<leader>tn', '<cmd>terminal<cr>', desc = '[n]ew [t]erminal' },
         { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
         { mode = 'n', '<leader>r', group = '[r]eload' },
+        { mode = 'n', '<leader>qd', '<cmd>wa<cr><cmd>Dashboard<cr>', desc = '[q]uit to [d]ashboard' },
         {
           mode = 'n',
           '<leader>rb',
-          function()
-            vim.cmd('bufdo e')
-            vim.cmd('LspRestart')
-            vim.defer_fn(function()
-              vim.cmd('LspStart')
-            end, 100)
-          end,
+          reload_buffers,
           desc = '[r]eload all [b]uffers',
         },
         {
           mode = 'n',
           '<leader>rf',
-          function()
-            vim.cmd('e')
-            vim.cmd('LspRestart')
-            vim.defer_fn(function()
-              vim.cmd('LspStart')
-            end, 100)
-          end,
+          reload_file,
           desc = '[r]eload [f]ile',
         },
         { mode = 'n', '<leader>s', group = '[s]plits/[s]earch' },
-        { mode = 'n', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
-        { mode = 'n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' } },
         {
           mode = 'n',
           '<c-w>j',
@@ -168,29 +177,22 @@ return {
         { mode = 'n', '<c-w>q', '<cmd>q<cr>', desc = '[s]plit delete' },
         { mode = 'n', '<leader>t', group = '[t]rouble' },
         { mode = 'n', '<leader>w', group = '[w]rite' },
-        { mode = 'n', '<leader>a', group = '[a]vant' },
         { mode = 'n', '<leader>wa', '<cmd>wa<cr>', desc = 'write [a]ll' },
         { mode = 'n', '<leader>ww', '<cmd>update<cr>', desc = '[w]rite' },
 
-        -- Visual mode mappings
-        { mode = 'v', '<leader>g', group = '[g]it' },
-        { mode = 'v', '<leader>c', group = '[c]ut (snippets)' },
-        { mode = 'v', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
-        { mode = 'v', '<leader>s', group = '[s]earch' },
+        -- Coding assistance
+        { mode = 'n', '<leader>a', group = '[a]vant' },
+
         {
           mode = 'v',
           '<leader>sh',
-          function()
-            search_help()
-          end,
+          search_help,
           desc = 'search [h]elp (visual selection)',
         },
         {
           mode = 'v',
           '<leader>sr',
-          function()
-            replace_selection()
-          end,
+          replace_selection,
           desc = '[r]eplace (visual selection)',
         },
       },
