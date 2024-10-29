@@ -1,5 +1,5 @@
 return {
-  event = 'BufReadPost',
+  event = 'VeryLazy',
   'numToStr/Comment.nvim',
   opts = {},
 }

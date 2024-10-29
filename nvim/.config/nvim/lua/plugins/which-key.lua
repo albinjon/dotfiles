@@ -93,7 +93,7 @@ return {
         { mode = 'v', '<leader>g', group = '[g]it' },
         { mode = 'v', '<leader>c', group = '[c]ut (snippets)' },
         { mode = 'v', '<leader>s', group = '[s]earch' },
-        { mode = 'n', '<leader>dc', require('dap').continue, desc = 'DAP [c]ontinue' },
+        { mode = 'n', '<leader>dc', '<cmd>DapContinue<cr>', desc = 'DAP [c]ontinue' },
         { mode = 'n', '<leader>fE', '<cmd>Explore<cr>', desc = '[e]xplore (netrw)' },
         {
           mode = 'n',
@@ -103,7 +103,7 @@ return {
         },
         {
           mode = 'n',
-          '<leader>fd',
+          '<leader>fx',
           confirm_and_delete_buffer,
           desc = 'Delete file',
         },
@@ -182,7 +182,7 @@ return {
 
         -- Coding assistance
         { mode = 'n', '<leader>a', group = '[a]vant' },
-
+        { mode = 'n', '<leader>gb', '<cmd>BlameToggle<cr>', desc = '[g]it [b]lame' },
         {
           mode = 'v',
           '<leader>sh',

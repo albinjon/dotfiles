@@ -1,6 +1,6 @@
 ---@diagnostic disable: missing-fields
 return {
-  event = { 'BufReadPost' },
+  event = { 'BufWinEnter' },
   'rcarriga/nvim-notify',
   config = function()
     require('notify').setup({

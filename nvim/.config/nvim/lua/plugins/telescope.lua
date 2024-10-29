@@ -1,7 +1,7 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    event = 'BufReadPost',
+    event = 'VeryLazy',
     cmd = { 'TelescopeFindFiles', 'TelescopeFindConfigFiles' },
     keys = {
       { '<leader>sh', '<cmd>TelescopeHelpTags<cr>', desc = '[s]earch [h]elp' },
@@ -22,6 +22,8 @@ return {
       { '<leader>s/', '<cmd>TelescopeLiveGrepOpenFiles<cr>', desc = '[s]earch [/] in Open Files' },
       { '<leader>fc', '<cmd>TelescopeFindConfigFiles<cr>', desc = '[f]ind [c]onfig files' },
       { '<leader>sc', '<cmd>TelescopeSearchConfigFiles<cr>', desc = '[s]earch [c]onfig files' },
+      { '<leader>fd', '<cmd>TelescopeFindDotfiles<cr>', desc = '[f]ind [d]otfiles' },
+      { '<leader>sd', '<cmd>TelescopeSearchDotfiles<cr>', desc = '[s]earch [d]otfiles' },
       {
         '<leader>sc',
         '<cmd>TelescopeSearchConfigFilesSelected<cr>',
@@ -182,6 +184,12 @@ return {
           prompt_title = 'Live Grep in Open Files',
         })
       end, { desc = 'Search in Open Files' })
+      vim.api.nvim_create_user_command('TelescopeFindDotfiles', function()
+        builtin.find_files({ cwd = vim.fn.expand('~') .. '/dotfiles', hidden = true })
+      end, { desc = 'Find dotfiles' })
+      vim.api.nvim_create_user_command('TelescopeSearchDotfiles', function()
+        builtin.live_grep({ cwd = vim.fn.expand('~') .. '/dotfiles' })
+      end, { desc = 'Search dotfiles' })
       vim.api.nvim_create_user_command('TelescopeFindConfigFiles', function()
         builtin.find_files({ cwd = vim.fn.stdpath('config') })
       end, { desc = 'Find config files' })

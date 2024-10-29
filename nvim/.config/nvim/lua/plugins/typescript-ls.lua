@@ -1,7 +1,7 @@
 return {
   enabled = true,
   'pmizio/typescript-tools.nvim',
-  event = 'BufReadPost',
+  ft = { 'typescript', 'typescriptreact' },
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
   opts = {},
   config = function()
