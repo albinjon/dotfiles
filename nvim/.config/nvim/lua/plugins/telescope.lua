@@ -59,6 +59,7 @@ return {
         '--glob=!.venv',
         '--glob=!venv/',
         '--glob=!.cache',
+        '--glob=!fish/functions/',
         '--glob=!.DS_Store',
         '--glob=!Music/',
         '--glob=!Library/',
@@ -185,7 +186,7 @@ return {
         })
       end, { desc = 'Search in Open Files' })
       vim.api.nvim_create_user_command('TelescopeFindDotfiles', function()
-        builtin.find_files({ cwd = vim.fn.expand('~') .. '/dotfiles', hidden = true })
+        builtin.find_files({ cwd = vim.fn.expand('~') .. '/dotfiles', find_command = find_command })
       end, { desc = 'Find dotfiles' })
       vim.api.nvim_create_user_command('TelescopeSearchDotfiles', function()
         builtin.live_grep({ cwd = vim.fn.expand('~') .. '/dotfiles' })

@@ -6,6 +6,9 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+vim.opt.laststatus = 0
+vim.opt.ruler = false
+
 vim.opt.ttyfast = true
 
 vim.opt.tabstop = 4
