@@ -1,45 +1,109 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    event = 'VeryLazy',
-    cmd = { 'LspInfo', 'Mason', 'MasonToolsInstall', 'MasonToolsClean' },
-    dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons',
-      { 'j-hui/fidget.nvim', opts = {} },
-      { 'folke/neodev.nvim', opts = {} },
+    event = {
+      'BufReadPre *',
+      'BufNewFile *',
     },
-    config = function()
-      vim.api.nvim_create_autocmd('LspAttach', {
+    cmd = { 'LspInfo', 'LspInstall', 'LspUninstall' },
+    dependencies = {
+      {
+        'williamboman/mason.nvim',
+        cmd = 'Mason',
+        build = ':MasonUpdate',
+        config = true,
+      },
+      {
+        'williamboman/mason-lspconfig.nvim',
+        cmd = { 'LspInstall', 'LspUninstall' },
+      },
+      {
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+        cmd = { 'MasonToolsInstall', 'MasonToolsClean' },
+      },
+      {
+        'j-hui/fidget.nvim',
+        opts = {},
+        event = 'LspAttach',
+      },
+      {
+        'folke/neodev.nvim',
+        opts = {},
+        ft = 'lua',
+      },
+    },
+    init = function()
+      -- Load key mappings before LSP attaches
+
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('ExcludeLspFiletypes', { clear = true }),
+        pattern = { 'dashboard', 'lazy', 'mason', 'notify', 'help', 'noice' },
         callback = function(event)
-          local map = function(keys, func, desc)
-            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-          end
-          local map_v = function(keys, func, desc)
-            vim.keymap.set('v', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-          end
-          map('gd', require('telescope.builtin').lsp_definitions, '[g]oto [d]efinition')
-          map('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
-          map('gI', require('telescope.builtin').lsp_implementations, '[g]oto [i]mplementation')
-          map('<leader>td', require('telescope.builtin').lsp_type_definitions, 'type [d]efinition')
-          map('<leader>cr', vim.lsp.buf.rename, '[r]ename')
-          map('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
-          map('<leader>cl', '<cmd>LspInfo<cr>', 'Info')
-          map_v('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
-          map('K', vim.lsp.buf.hover, 'Hover Documentation')
-          map('gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
+          -- Disable LSP for these filetypes
+          vim.b[event.buf].lsp_attached = false
         end,
       })
+      local keys = {
+        {
+          'gd',
+          function()
+            require('telescope.builtin').lsp_definitions()
+          end,
+          '[g]oto [d]efinition',
+        },
+        {
+          'gr',
+          function()
+            require('telescope.builtin').lsp_references()
+          end,
+          '[g]oto [r]eferences',
+        },
+        {
+          'gI',
+          function()
+            require('telescope.builtin').lsp_implementations()
+          end,
+          '[g]oto [i]mplementation',
+        },
+        {
+          '<leader>td',
+          function()
+            require('telescope.builtin').lsp_type_definitions()
+          end,
+          'type [d]efinition',
+        },
+        { '<leader>cr', vim.lsp.buf.rename, '[r]ename' },
+        { '<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction' },
+        { '<leader>cl', '<cmd>LspInfo<cr>', 'Info' },
+        { 'K', vim.lsp.buf.hover, 'Hover Documentation' },
+        { 'gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration' },
+      }
 
+      -- Register keymaps on LspAttach
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+        callback = function(event)
+          -- Skip if this is a excluded filetype
+          if vim.b[event.buf].lsp_attached == false then
+            return
+          end
+
+          for _, key in ipairs(keys) do
+            vim.keymap.set('n', key[1], key[2], { buffer = event.buf, desc = 'LSP: ' .. key[3] })
+          end
+          -- Special case for visual mode
+          vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action, { buffer = event.buf, desc = 'LSP: code action' })
+        end,
+      })
+    end,
+    config = function()
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       local mason_registry = require('mason-registry')
       local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path()
         .. '/node_modules/@vue/language-server'
+
       local servers = {
         eslint = {
           settings = {
@@ -66,23 +130,16 @@ return {
         lua_ls = {
           settings = {
             Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
+              completion = { callSnippet = 'Replace' },
               diagnostics = { disable = { 'missing-fields' } },
+              workspace = { checkThirdParty = false },
             },
           },
         },
-        mdx_analyzer = {
-          filetypes = { 'mdx' },
-        },
+        mdx_analyzer = { filetypes = { 'mdx' } },
       }
 
-      require('mason').setup()
-
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        -- 'eslint-lsp',
+      local ensure_installed = vim.list_extend(vim.tbl_keys(servers), {
         'tailwindcss',
         'delve',
         'jsonlint',
@@ -100,6 +157,7 @@ return {
         'gopls',
         'vue-language-server',
       })
+
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
       require('mason-lspconfig').setup({
         handlers = {

@@ -63,17 +63,17 @@ end
 local function reload_buffers()
   vim.cmd('bufdo e')
   vim.cmd('LspRestart')
-  vim.defer_fn(function()
+  vim.schedule(function()
     vim.cmd('LspStart')
-  end, 100)
+  end)
 end
 
 local function reload_file()
   vim.cmd('e')
   vim.cmd('LspRestart')
-  vim.defer_fn(function()
+  vim.schedule(function()
     vim.cmd('LspStart')
-  end, 100)
+  end)
 end
 
 return {

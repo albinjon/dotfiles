@@ -14,7 +14,8 @@ return {
           enable = true,
           limit = 4,
           action = function(path)
-            require('telescope.builtin').find_files({ cwd = path })
+            local telescope = require('telescope.builtin')
+            telescope.find_files({ cwd = path })
           end,
         },
         mru = { limit = 5, cwd_only = true },
