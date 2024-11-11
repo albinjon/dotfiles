@@ -11,7 +11,8 @@
 
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
-after-startup-command = ['layout tiles horizontal vertical']
+# after-startup-command = ['layout tiles horizontal vertical']
+after-startup-command = ['sketch']
 
 # Start AeroSpace at login
 start-at-login = true
@@ -26,8 +27,10 @@ default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 key-mapping.preset = 'qwerty'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Notify Sketchybar about workspace change
 exec-on-workspace-change = ['/bin/bash', '-c',
-    '~/.local/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
 [gaps]
@@ -145,10 +148,6 @@ ctrl-cmd-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 cmd-alt-shift-ctrl-c = 'mode service'
 
-
-[[on-window-detected]]
-check-further-callbacks = true
-run = 'layout tiling'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'

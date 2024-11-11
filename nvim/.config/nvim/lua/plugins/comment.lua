@@ -1,5 +1,5 @@
 return {
-  event = 'VeryLazy',
+  event = { 'LspAttach' },
   'numToStr/Comment.nvim',
   opts = {},
 }

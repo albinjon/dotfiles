@@ -1,7 +1,10 @@
 return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
-    event = 'BufWinEnter',
+    cmd = {
+      'MiniExploreFiles',
+    },
+    event = { 'InsertEnter', 'LspAttach' },
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -173,6 +176,9 @@ return {
           enable = false,
         },
       })
+      vim.api.nvim_create_user_command('MiniExploreFiles', function()
+        require('mini.files').open(vim.api.nvim_buf_get_name(0))
+      end, { desc = '[f]ile [e]xplorer' })
     end,
   },
 }

@@ -20,7 +20,6 @@ config.window_padding = {
 }
 config.window_decorations = "RESIZE"
 config.leader = { key = "w", mods = "CTRL", timeout_milliseconds = 2000 }
-
 config.keys = {
 	{
 		key = "m",
@@ -54,6 +53,7 @@ config.keys = {
 	{ key = "l", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-right" }) },
 	{ key = "j", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-down" }) },
 	{ key = "k", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-up" }) },
+	{ key = "s", mods = "CTRL", action = wezterm.action({ EmitEvent = "start" }) },
 	{ key = "l", mods = "LEADER", action = wezterm.action({ EmitEvent = "split-vertical" }) },
 	{ key = "t", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ key = "j", mods = "LEADER", action = wezterm.action({ EmitEvent = "split-horizontal" }) },

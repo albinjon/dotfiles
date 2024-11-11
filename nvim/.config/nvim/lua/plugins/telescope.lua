@@ -1,7 +1,6 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    event = 'VeryLazy',
     cmd = { 'TelescopeFindFiles', 'TelescopeFindConfigFiles' },
     keys = {
       { '<leader>sh', '<cmd>TelescopeHelpTags<cr>', desc = '[s]earch [h]elp' },
@@ -59,7 +58,7 @@ return {
         '--glob=!.venv',
         '--glob=!venv/',
         '--glob=!.cache',
-        '--glob=!fish/functions/',
+        '--glob=!**/fish/functions/**',
         '--glob=!.DS_Store',
         '--glob=!Music/',
         '--glob=!Library/',
@@ -76,6 +75,7 @@ return {
         '--glob=!.prettierd/',
         '--glob=!.pgadmin/',
         '--glob=!.runelite/',
+        '--glob=!.dap/',
       }
       local find_command = {
         'rg',

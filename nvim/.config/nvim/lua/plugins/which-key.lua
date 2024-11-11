@@ -60,20 +60,8 @@ local function replace_selection()
   vim.cmd(string.format('%%s/%s/%s/gc', selected_text:gsub('/', '\\/'), replacement:gsub('/', '\\/')))
 end
 
-local function reload_buffers()
-  vim.cmd('bufdo e')
-  vim.cmd('LspRestart')
-  vim.schedule(function()
-    vim.cmd('LspStart')
-  end)
-end
-
 local function reload_file()
-  vim.cmd('e')
   vim.cmd('LspRestart')
-  vim.schedule(function()
-    vim.cmd('LspStart')
-  end)
 end
 
 return {
@@ -110,9 +98,7 @@ return {
         {
           mode = 'n',
           '<leader>fe',
-          function()
-            require('mini.files').open(vim.api.nvim_buf_get_name(0))
-          end,
+          '<cmd>MiniExploreFiles<cr>',
           desc = '[f]ile [e]xplorer',
         },
         -- Floating terminals
@@ -144,12 +130,14 @@ return {
         { mode = 'n', '<leader>tn', '<cmd>terminal<cr>', desc = '[n]ew [t]erminal' },
         { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
         { mode = 'n', '<leader>r', group = '[r]eload' },
-        { mode = 'n', '<leader>qd', '<cmd>wa<cr><cmd>Dashboard<cr>', desc = '[q]uit to [d]ashboard' },
         {
           mode = 'n',
-          '<leader>rb',
-          reload_buffers,
-          desc = '[r]eload all [b]uffers',
+          '<leader>qd',
+          function()
+            vim.cmd('wa')
+            vim.cmd('Dashboard')
+          end,
+          desc = '[q]uit to [d]ashboard',
         },
         {
           mode = 'n',

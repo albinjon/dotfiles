@@ -1,6 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
-  event = 'VeryLazy',
+  event = { 'VeryLazy' },
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     'yavorski/lualine-macro-recording.nvim',

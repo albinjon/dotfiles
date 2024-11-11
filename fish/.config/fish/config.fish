@@ -1,3 +1,5 @@
+eval (/opt/homebrew/bin/brew shellenv)
+ 
 set -U fish_user_paths $HOME/bin $HOME/.deno/bin /usr/local/bin $HOME/Programmering/apps $HOME/.local/bin $HOME/.local/bin/nvim/bin $HOME/.config/emacs/bin $fish_user_paths
 
 set fzf_fd_opts --hidden --follow -E .git -E node_modules -E .venv -E venv/ -E .cache -E .DS_Store -E /Music -E /Library -E /Applications -E .npm/ -E .docker/ -E .cursor/ -E .local/ -E Movies/ -E .vscode/ -E go/pkg -E .pyenv/ -E Pictures/ -E .prettierd/ -E .pgadmin/ -E .runelite/
@@ -31,6 +33,8 @@ alias gd "git diff"
 
 # Import secrets
 source $HOME/.secret_envs/.env
+
+bind \es 'cd ~/Programmering/careos-backend && npm run cos; commandline -f repaint'
 
 # Other aliases
 function sketch

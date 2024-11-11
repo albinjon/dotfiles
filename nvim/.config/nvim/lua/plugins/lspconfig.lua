@@ -33,13 +33,10 @@ return {
       },
     },
     init = function()
-      -- Load key mappings before LSP attaches
-
       vim.api.nvim_create_autocmd('FileType', {
         group = vim.api.nvim_create_augroup('ExcludeLspFiletypes', { clear = true }),
         pattern = { 'dashboard', 'lazy', 'mason', 'notify', 'help', 'noice' },
         callback = function(event)
-          -- Disable LSP for these filetypes
           vim.b[event.buf].lsp_attached = false
         end,
       })

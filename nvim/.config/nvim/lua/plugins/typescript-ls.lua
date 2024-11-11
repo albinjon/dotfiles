@@ -1,7 +1,7 @@
 return {
   enabled = true,
   'pmizio/typescript-tools.nvim',
-  ft = { 'typescript', 'typescriptreact' },
+  ft = { 'typescript', 'typescriptreact', 'javascriptreact', 'javascript' },
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
   opts = {},
   config = function()

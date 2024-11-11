@@ -1,4 +1,5 @@
 return {
+  event = 'BufReadPost',
   'pogyomo/winresize.nvim',
   config = function()
     local resize = require('winresize').resize

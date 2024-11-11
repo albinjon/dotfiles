@@ -1,6 +1,13 @@
 return {
   'nvimdev/dashboard-nvim',
-  event = 'VimEnter',
+  cmd = 'Dashboard',
+  init = function()
+    if vim.fn.argc() == 0 then
+      vim.schedule(function()
+        vim.cmd('Dashboard')
+      end)
+    end
+  end,
   config = function()
     require('dashboard').setup({
       theme = 'hyper',
