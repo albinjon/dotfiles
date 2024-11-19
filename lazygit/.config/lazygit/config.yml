@@ -7,3 +7,8 @@ keybinding:
   commits:
     moveDownCommit: <disabled>
     moveUpCommit: <disabled>
+
+
+git:
+  paging:
+    externalDiffCommand: "difft --color=always"

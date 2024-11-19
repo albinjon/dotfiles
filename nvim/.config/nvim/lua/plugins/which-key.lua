@@ -61,7 +61,10 @@ local function replace_selection()
 end
 
 local function reload_file()
-  vim.cmd('LspRestart')
+  vim.cmd('LspStop')
+  vim.defer_fn(function()
+    vim.cmd('LspStart')
+  end, 500)
 end
 
 return {

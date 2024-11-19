@@ -13,6 +13,9 @@ return {
   },
   config = function()
     require('noice').setup({
+      presets = {
+        lsp_doc_border = true, -- adds a border to hover docs and signature help
+      },
       routes = {
         {
           filter = {
@@ -25,14 +28,32 @@ return {
         },
       },
       lsp = {
-        override = {
-          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-          ['vim.lsp.util.stylize_markdown'] = true,
-          ['cmp.entry.get_documentation'] = true,
+        progress = {
+          enabled = true,
+          --- @type NoiceFormat|string
+          format = 'lsp_progress',
+          --- @type NoiceFormat|string
+          format_done = 'lsp_progress_done',
+          throttle = 1000 / 30, -- frequency to update lsp progress message
+          view = 'mini',
         },
-      },
-      presets = {
-        lsp_doc_border = true,
+        override = {
+          override = {
+            ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+            ['vim.lsp.util.stylize_markdown'] = true,
+            ['cmp.entry.get_documentation'] = true,
+          },
+        },
+        hover = {
+          ---@type NoiceViewOptions
+          opts = {
+            border = 'rounded',
+          },
+        },
+        signature = {
+          ---@type NoiceViewOptions
+          opts = { border = 'rounded' },
+        },
       },
     })
   end,

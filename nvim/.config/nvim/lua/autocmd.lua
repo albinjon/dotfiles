@@ -9,6 +9,11 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   end,
 })
 
+vim.lsp.handlers['textDocument/hover'] = function()
+  print('Hover handler called')
+  require('noice.lsp').hover()
+end
+
 -- This is a workaround for the issue where the filetype is not detected fork
 -- files opened with scp:// and netrw
 vim.api.nvim_create_autocmd('BufRead', {

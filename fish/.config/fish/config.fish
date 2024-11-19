@@ -64,7 +64,9 @@ function measure_command_time
 
     node /Users/albin/.scripts/measure_command_time.js $command $log_message
 end
-
+alias lower "tr '[:upper:]' '[:lower:]'"
+alias strip "tr -d '\n'"
+alias uuid "uuidgen | lower | strip | pbcopy"
 alias resketch "sketchybar --reload"
 alias pip "pip3"
 alias chx "chmod +x"

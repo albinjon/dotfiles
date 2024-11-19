@@ -53,7 +53,10 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = 'menu,menuone,noinsert' },
+        completion = {
+          completeopt = 'menu,menuone',
+          autocomplete = false,
+        },
         mapping = cmp.mapping.preset.insert({
           ['<C-j>'] = cmp.mapping.select_next_item(),
           ['<C-k>'] = cmp.mapping.select_prev_item(),
@@ -74,14 +77,20 @@ return {
           end, { 'i' }),
           ['<CR>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert })
+              cmp.confirm({
+                select = false,
+                behavior = cmp.ConfirmBehavior.Replace,
+              })
             else
               fallback()
             end
           end, { 'i' }),
           ['<c-CR>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert })
+              cmp.confirm({
+                select = false,
+                behavior = cmp.ConfirmBehavior.Replace,
+              })
             else
               fallback()
             end
@@ -105,9 +114,6 @@ return {
               fallback()
             end
           end, { 'i', 's' }),
-
-          -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-          --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         }),
         sources = {
           { name = 'nvim_lsp' },
@@ -115,7 +121,21 @@ return {
           { name = 'path' },
         },
       })
-      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+      cmp.event:on(
+        'confirm_done',
+        cmp_autopairs.on_confirm_done({
+          filetypes = {
+            ['*'] = {
+              ['('] = {
+                kind = {
+                  cmp.lsp.CompletionItemKind.Function,
+                  cmp.lsp.CompletionItemKind.Method,
+                },
+              },
+            },
+          },
+        })
+      )
     end,
   },
 }

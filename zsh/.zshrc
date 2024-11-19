@@ -11,6 +11,15 @@ path=(
   $path
 )
 
+
+function cos() {
+    BUFFER="cd ~/Programmering/careos-backend && npm run cos"
+    zle accept-line
+}
+zle -N cos
+bindkey '^[s' cos
+
+
 # Environment variables
 export XDG_CONFIG_HOME="$HOME/.config"
 export CAREOS_LOG_FORMAT="PLAIN"
