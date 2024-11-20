@@ -10,7 +10,11 @@ return {
         sql = true,
       },
       suggestion = {
-        auto_trigger = true,
+        auto_trigger = false,
+        keymap = {
+          next = '<c-p>n',
+          prev = '<c-p>p',
+        },
       },
       panel = {
         keymap = {
