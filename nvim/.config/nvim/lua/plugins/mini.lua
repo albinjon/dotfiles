@@ -62,10 +62,14 @@ return {
       })
 
       local set_window_options = function(win_id)
-        vim.wo[win_id].winblend = 8
         local config = vim.api.nvim_win_get_config(win_id)
         config.border, config.title_pos = 'rounded', 'center'
         config.style = 'minimal'
+        vim.w[win_id].winblend = 0
+
+        vim.api.nvim_set_hl(0, 'MiniFilesNormal', { bg = 'NONE', ctermbg = 'NONE' })
+        vim.api.nvim_set_hl(0, 'MiniFilesCursorLine', { fg = '#FFA01E' })
+
         vim.api.nvim_win_set_config(win_id, config)
       end
 
