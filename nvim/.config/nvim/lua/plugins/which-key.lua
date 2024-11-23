@@ -108,6 +108,8 @@ return {
         { mode = 't', '<A-t>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
         { mode = 'n', '<A-t>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
         { mode = 'n', '<A-u>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
+        { mode = 't', '<A-q>', '<cmd>FTermSql<cr>', desc = 'toggle lazys[q]l' },
+        { mode = 'n', '<A-q>', '<cmd>FTermSql<cr>', desc = 'toggle lazys[q]l' },
         { mode = 't', '<A-u>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
         { mode = 'n', '<A-r>', '<cmd>FTermPosting<cr>', desc = 'toggle posting ([r]equests)' },
         { mode = 't', '<A-r>', '<cmd>FTermPosting<cr>', desc = 'toggle posting ([r]equests)' },

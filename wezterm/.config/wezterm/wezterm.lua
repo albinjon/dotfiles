@@ -27,6 +27,11 @@ config.keys = {
 		action = wezterm.action.DisableDefaultAssignment,
 	},
 	{
+		key = "h",
+		mods = "CMD",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
+	{
 		key = "LeftArrow",
 		mods = "OPT",
 		action = act.SendKey({

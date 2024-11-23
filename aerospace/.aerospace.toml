@@ -12,8 +12,9 @@
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
 # after-startup-command = ['layout tiles horizontal vertical']
-after-startup-command = ['sketch']
-
+after-startup-command = [
+  'exec-and-forget borders active_color=0xffFFA01E inactive_color=0xff494d64 width=15.0', 'exec-and-forget sketch'
+]
 # Start AeroSpace at login
 start-at-login = true
 
@@ -34,13 +35,13 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 ]
 
 [gaps]
-inner.horizontal = 10
-inner.vertical =   10
-outer.left =       10
-outer.bottom =     10
+inner.horizontal = 30
+inner.vertical =   30
+outer.left =       30
+outer.bottom =     30
 # INFO: monitor.built-in is just for example, both have 5 right now.
-outer.top =        [ { monitor."built-in" = 5 }, 40 ]
-outer.right =      10
+outer.top =        [ { monitor."built-in" = 20 }, 50 ]
+outer.right =      30
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'
@@ -78,7 +79,6 @@ cmd-alt-shift-ctrl-t = 'exec-and-forget open -a wezterm -n --args start'
 cmd-alt-shift-ctrl-n = 'exec-and-forget open -a wezterm -n --args start nvim'
 cmd-alt-shift-ctrl-s = 'exec-and-forget /bin/bash -c cat /users/albin/testzsh.sh  > ~/out.log'
 cmd-alt-shift-ctrl-e = 'exec-and-forget /Users/albin/.scripts/emacsclient.sh'
-# cmd-alt-shift-ctrl-e = 'exec-and-forget /Users/albin/.config/aeroscripts/emacs.sh'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-period = 'layout tiles horizontal vertical'
@@ -152,6 +152,42 @@ cmd-alt-shift-ctrl-c = 'mode service'
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.electron.dockerdesktop'
+run = 'move-node-to-workspace A'
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'at.eggerapps.Postico'
+run = 'move-node-to-workspace 9'
+
+[[on-window-detected]]
+if.app-id = 'com.postmanlabs.mac'
+run = 'move-node-to-workspace 8'
+
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+run = 'move-node-to-workspace 1'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
