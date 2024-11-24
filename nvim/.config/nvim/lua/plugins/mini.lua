@@ -68,7 +68,7 @@ return {
         vim.w[win_id].winblend = 0
 
         vim.api.nvim_set_hl(0, 'MiniFilesNormal', { bg = 'NONE', ctermbg = 'NONE' })
-        vim.api.nvim_set_hl(0, 'MiniFilesCursorLine', { fg = '#FFA01E' })
+        -- vim.api.nvim_set_hl(0, 'MiniFilesCursorLine', { fg = '#FFA01E' })
 
         vim.api.nvim_win_set_config(win_id, config)
       end
