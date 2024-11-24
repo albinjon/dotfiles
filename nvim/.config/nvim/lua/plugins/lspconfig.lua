@@ -143,7 +143,6 @@ return {
       }
 
       local ensure_installed = vim.list_extend(vim.tbl_keys(servers), {
-        'tailwindcss',
         'delve',
         'jsonlint',
         'lua-language-server',
