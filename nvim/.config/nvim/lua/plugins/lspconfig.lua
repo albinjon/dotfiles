@@ -78,7 +78,13 @@ return {
         { '<leader>cr', vim.lsp.buf.rename, '[r]ename' },
         { '<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction' },
         { '<leader>cl', '<cmd>LspInfo<cr>', 'Info' },
-        { 'K', require('noice.lsp').hover, 'Hover Documentation' },
+        {
+          'K',
+          function()
+            require('noice.lsp').hover()
+          end,
+          'Hover Documentation',
+        },
         { 'gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration' },
       }
 

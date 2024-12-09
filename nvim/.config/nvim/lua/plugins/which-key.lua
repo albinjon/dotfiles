@@ -104,15 +104,6 @@ return {
           '<cmd>MiniExploreFiles<cr>',
           desc = '[f]ile [e]xplorer',
         },
-        -- Floating terminals
-        { mode = 't', '<A-t>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
-        { mode = 'n', '<A-t>', '<cmd>FTermToggle<cr>', desc = 'toggle [f]loating terminal' },
-        { mode = 'n', '<A-u>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
-        { mode = 't', '<A-q>', '<cmd>FTermSql<cr>', desc = 'toggle lazys[q]l' },
-        { mode = 'n', '<A-q>', '<cmd>FTermSql<cr>', desc = 'toggle lazys[q]l' },
-        { mode = 't', '<A-u>', '<cmd>FTermBtop<cr>', desc = 'toggle [b]top' },
-        { mode = 'n', '<A-r>', '<cmd>FTermPosting<cr>', desc = 'toggle posting ([r]equests)' },
-        { mode = 't', '<A-r>', '<cmd>FTermPosting<cr>', desc = 'toggle posting ([r]equests)' },
         { mode = 'n', '<leader>g', group = '[g]it' },
         -- Obsidian
         { mode = 'n', '<leader>o', group = '[o]bsidian' },
@@ -128,10 +119,10 @@ return {
         { mode = 'v', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
         -- Windows/Buffers
         { mode = 'n', '<leader>q', group = '[q]uit/session' },
-        { mode = 'n', '<leader>qF', '<cmd>Bdelete!<cr>', desc = '[a]bandon file' },
+        -- { mode = 'n', '<leader>qF', '<cmd>Bdelete!<cr>', desc = '[a]bandon file' },
         { mode = 'n', '<leader>qQ', '<cmd>qa!<cr>', desc = '[q]uit and abandon all' },
-        { mode = 'n', '<leader>qf', '<cmd>up<cr><cmd>Bdelete<cr>', desc = '[q]uit and write file' },
-        { mode = 'n', '<leader>qb', '<cmd>Bdelete!<cr>', desc = '[q]uit buffer' },
+        -- { mode = 'n', '<leader>qf', '<cmd>up<cr><cmd>Bdelete<cr>', desc = '[q]uit and write file' },
+        -- { mode = 'n', '<leader>qb', '<cmd>Bdelete!<cr>', desc = '[q]uit buffer' },
         { mode = 'n', '<leader>tn', '<cmd>terminal<cr>', desc = '[n]ew [t]erminal' },
         { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
         { mode = 'n', '<leader>r', group = '[r]eload' },
@@ -175,7 +166,6 @@ return {
 
         -- Coding assistance
         { mode = 'n', '<leader>a', group = '[a]vant' },
-        { mode = 'n', '<leader>gb', '<cmd>BlameToggle<cr>', desc = '[g]it [b]lame' },
         {
           mode = 'v',
           '<leader>sh',

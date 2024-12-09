@@ -10,7 +10,6 @@ return {
       { '<leader>st', '<cmd>TelescopeBuiltin<cr>', desc = '[s]earch [s]elect Telescope' },
       { '<leader>sw', '<cmd>TelescopeGrepString<cr>', desc = '[s]earch current [w]ord' },
       { '<leader>sg', '<cmd>TelescopeGrepStringSelected<cr>', mode = 'v', desc = '[g]rep selected string' },
-      { '<leader>sn', '<cmd>TelescopeNotifications<cr>', desc = '[s]earch [n]otifications' },
       { '<leader>sg', '<cmd>TelescopeLiveGrep<cr>', desc = '[s]earch live [g]rep' },
       { '<leader>s.', '<cmd>TelescopeResume<cr>', desc = '[s]earch resume (.)' },
       { '<leader>fr', '<cmd>TelescopeOldfiles<cr>', desc = '[f]ind [r]ecent Files' },
@@ -154,11 +153,6 @@ return {
       vim.api.nvim_create_user_command('TelescopeGrepStringSelected', function()
         builtin.grep_string({ search = get_selected() })
       end, { desc = 'Grep selected string' })
-      vim.api.nvim_create_user_command(
-        'TelescopeNotifications',
-        telescope.extensions.notify.notify,
-        { desc = 'Search notifications' }
-      )
       vim.api.nvim_create_user_command('TelescopeLiveGrep', builtin.live_grep, { desc = 'Search live grep' })
       vim.api.nvim_create_user_command('TelescopeResume', builtin.resume, { desc = 'Search resume' })
       vim.api.nvim_create_user_command('TelescopeOldfiles', builtin.oldfiles, { desc = 'Find recent Files' })
