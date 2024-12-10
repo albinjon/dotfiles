@@ -85,7 +85,6 @@ return {
         { mode = 'v', '<leader>c', group = '[c]ut (snippets)' },
         { mode = 'v', '<leader>s', group = '[s]earch' },
         { mode = 'n', '<leader>dc', '<cmd>DapContinue<cr>', desc = 'DAP [c]ontinue' },
-        { mode = 'n', '<leader>fE', '<cmd>Explore<cr>', desc = '[e]xplore (netrw)' },
         {
           mode = 'n',
           '<leader>fo',
