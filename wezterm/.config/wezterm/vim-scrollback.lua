@@ -18,7 +18,7 @@ wezterm.on("trigger-vim-with-scrollback", function(window, pane)
 	-- Open a new window running vim and tell it to open the file
 	window:perform_action(
 		act.SplitHorizontal({
-			args = { "/Users/albin/.local/bin/nvim/bin/nvim", name },
+			args = { "/opt/homebrew/bin/nvim", name },
 		}),
 		pane
 	)
