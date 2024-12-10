@@ -2,6 +2,7 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     cmd = { 'TelescopeFindFiles', 'TelescopeFindConfigFiles' },
+    event = 'VeryLazy',
     keys = {
       { '<leader>sh', '<cmd>TelescopeHelpTags<cr>', desc = '[s]earch [h]elp' },
       { '<leader>sk', '<cmd>TelescopeKeymaps<cr>', desc = '[s]earch [k]eymaps' },
