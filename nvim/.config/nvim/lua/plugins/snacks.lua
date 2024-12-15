@@ -5,14 +5,21 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
+    zen = { enabled = true },
+    scroll = {
+      enabled = true,
+      animate = {
+        duration = { step = 10, total = 150 },
+        easing = 'linear',
+      },
+    },
     dashboard = {
       preset = {
         keys = {
           { icon = ' ', key = 'f', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files')" },
           { icon = ' ', key = 'o', desc = 'Find Obsidian Files', action = ':ObsidianSearchAll' },
-
           { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
-          { icon = ' ', key = 'g', desc = 'Git', action = ':lua Snacks.lazygit()' },
+          { icon = ' ', key = 'G', desc = 'Git', action = ':lua Snacks.lazygit()' },
           { icon = ' ', key = 'r', desc = 'Recent Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
           {
             icon = ' ',
@@ -127,6 +134,13 @@ return {
         Snacks.lazygit.log()
       end,
       desc = 'Lazygit Log (cwd)',
+    },
+    {
+      '<leader>zm',
+      function()
+        Snacks.zen.zen()
+      end,
+      desc = 'Zen Mode',
     },
     {
       '<leader>un',

@@ -160,26 +160,6 @@ return {
         end,
       })
 
-      require('mini.animate').setup({
-        cursor = {
-          enable = false,
-        },
-        scroll = {
-          enable = true,
-          timing = function(_, n)
-            return 40 / n
-          end,
-        },
-        resize = {
-          enable = false,
-        },
-        open = {
-          enable = false,
-        },
-        close = {
-          enable = false,
-        },
-      })
       vim.api.nvim_create_user_command('MiniExploreFiles', function()
         require('mini.files').open(vim.api.nvim_buf_get_name(0))
       end, { desc = '[f]ile [e]xplorer' })

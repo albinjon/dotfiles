@@ -3,6 +3,6 @@ return {
   ft = 'dashboard',
   event = 'InsertEnter',
   opts = {
-    options = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help' }, -- sessionoptions used for saving
+    options = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help' },
   },
 }
