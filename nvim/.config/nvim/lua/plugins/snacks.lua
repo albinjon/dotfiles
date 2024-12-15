@@ -9,8 +9,8 @@ return {
     scroll = {
       enabled = true,
       animate = {
-        duration = { step = 10, total = 150 },
-        easing = 'linear',
+        duration = { step = 15, total = 250 },
+        easing = 'outQuint',
       },
     },
     dashboard = {
