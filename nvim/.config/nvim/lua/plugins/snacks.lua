@@ -9,8 +9,8 @@ return {
     scroll = {
       enabled = true,
       animate = {
-        duration = { step = 15, total = 250 },
-        easing = 'outQuint',
+        duration = { step = 15, total = 180 },
+        easing = 'linear',
       },
     },
     dashboard = {
@@ -19,7 +19,7 @@ return {
           { icon = ' ', key = 'f', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files')" },
           { icon = ' ', key = 'o', desc = 'Find Obsidian Files', action = ':ObsidianSearchAll' },
           { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
-          { icon = ' ', key = 'G', desc = 'Git', action = ':lua Snacks.lazygit()' },
+          { icon = ' ', key = 'G', desc = 'Git', action = ':lua Snacks.lazygit()' },
           { icon = ' ', key = 'r', desc = 'Recent Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
           {
             icon = ' ',

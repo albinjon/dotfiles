@@ -54,6 +54,16 @@ config.keys = {
 		mods = "OPT",
 		action = act.SendKey({ key = "w", mods = "CTRL" }),
 	},
+	{
+		key = "Tab",
+		mods = "CTRL",
+		action = act.SendString("\x1b[9;5u"),
+	},
+	{
+		key = "Tab",
+		mods = "CTRL|SHIFT",
+		action = act.SendString("\x1b[9;6u"),
+	},
 	{ key = "h", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-left" }) },
 	{ key = "l", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-right" }) },
 	{ key = "j", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-down" }) },

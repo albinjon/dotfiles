@@ -41,7 +41,7 @@ return {
     init = function()
       vim.api.nvim_create_autocmd('FileType', {
         group = vim.api.nvim_create_augroup('ExcludeLspFiletypes', { clear = true }),
-        pattern = { 'dashboard', 'lazy', 'mason', 'notify', 'help', 'noice' },
+        pattern = { 'lazy', 'mason', 'notify', 'help', 'noice' },
         callback = function(event)
           vim.b[event.buf].lsp_attached = false
         end,
@@ -164,6 +164,7 @@ return {
         'crlfmt',
         'gopls',
         'vue-language-server',
+        'js-debug-adapter',
       })
 
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })

@@ -1,7 +1,7 @@
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
-    'williamboman/mason.nvim',
+    'neovim/nvim-lspconfig',
     'rcarriga/nvim-dap-ui',
     'nvim-telescope/telescope.nvim',
   },
@@ -33,13 +33,18 @@ return {
     dap.defaults.fallback.terminal_win_cmd = 'tabnew'
 
     require('dap.ext.vscode').load_launchjs(nil, { node = { 'typescript', 'javascript' } })
-
     require('dap').configurations.typescript = {
       {
         type = 'pwa-node',
         request = 'launch',
-        name = 'Launch file',
+        name = 'TS: Launch file',
+        runtimeExecutable = 'ts-node-dev',
+        runtimeArgs = {
+          '-O {"module":"commonjs"}',
+        },
         program = '${file}',
+        env = { NODE_ENV = 'development' },
+        skipFiles = { 'node_modules/**' },
         cwd = '${workspaceFolder}',
       },
     }
@@ -47,9 +52,30 @@ return {
       {
         type = 'pwa-node',
         request = 'launch',
-        name = 'Launch file',
+        name = 'Node: Launch file',
         program = '${file}',
         cwd = '${workspaceFolder}',
+      },
+      {
+        type = 'pwa-node',
+        request = 'launch',
+        name = 'Deno: Launch file',
+        runtimeExecutable = 'deno',
+        runtimeArgs = {
+          'run',
+          '--inspect-wait',
+          '--allow-all',
+        },
+        program = '${file}',
+        cwd = '${workspaceFolder}',
+        attachSimplePort = 9229,
+      },
+      {
+        -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+        name = 'Node: Attach to process',
+        type = 'pwa-node',
+        request = 'attach',
+        processId = require('dap.utils').pick_process,
       },
     }
     local mason_registry = require('mason-registry')
@@ -64,9 +90,25 @@ return {
         args = { '${port}' },
       },
     }
+    vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#E53935' })
+    vim.api.nvim_set_hl(0, 'DapConditionalBreakpoint', { ctermbg = 0, fg = '#FFF176' })
+    vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg = 0, fg = '#61afef' })
+    vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = '#98c379' })
 
-    vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
-    -- Create user commands
+    vim.fn.sign_define(
+      'DapBreakpoint',
+      { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = 'DapBreakpoint' }
+    )
+    vim.fn.sign_define('DapBreakpointCondition', {
+      text = '',
+      texthl = 'DapConditionalBreakpoint',
+      linehl = '',
+      numhl = 'DapConditionalBreakpoint',
+    })
+    vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'DapLogPoint', numhl = 'DapLogPoint' })
+    vim.fn.sign_define('DapStopped', { text = '→', linehl = '', texthl = 'DapStopped', numhl = 'DapStopped' })
+
     vim.api.nvim_create_user_command('DapContinue', dap.continue, { desc = 'Debug: Start/Continue' })
     vim.api.nvim_create_user_command('DapStepInto', function()
       dap.step_into()
@@ -87,7 +129,6 @@ return {
     vim.api.nvim_create_user_command('DapCloseUI', dapui.close, { desc = 'Quit DAP UI' })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
   end,
 }

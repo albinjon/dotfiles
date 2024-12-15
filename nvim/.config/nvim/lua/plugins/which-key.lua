@@ -67,6 +67,24 @@ local function reload_file()
   end, 500)
 end
 
+local function repl()
+  local config = {
+    typescript = 'ts-node --esm -e ',
+    javascript = 'node',
+  }
+  local content = table.concat(vim.api.nvim_buf_get_lines(0, 0, vim.api.nvim_buf_line_count(0), false), '\n')
+  local escapedInput = content:gsub("'", "\\'")
+  local fileType = vim.bo.filetype
+  local run_command = config[fileType]
+  if not run_command then
+    vim.notify('No run command configured for filetype: ' .. fileType, vim.log.levels.ERROR)
+    return
+  end
+  local command = run_command .. "'" .. escapedInput .. "'"
+  local output = vim.fn.system(command)
+  vim.notify(output)
+end
+
 return {
   'folke/which-key.nvim',
   event = 'VeryLazy',
@@ -106,6 +124,7 @@ return {
         { mode = 'n', '<leader>g', group = '[g]it' },
         -- Obsidian
         { mode = 'n', '<leader>o', group = '[o]bsidian' },
+        { mode = 'n', '<leader>rr', repl, desc = 'open [r]epl' },
         { mode = 'n', '<leader>on', '<cmd>ObsidianNew<cr>', desc = 'open [n]ew' },
         { mode = 'n', '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = '[o]pen obsidian' },
         { mode = 'n', '<leader>os', '<cmd>ObsidianSearch<cr>', desc = '[s]earch' },
@@ -121,20 +140,13 @@ return {
         { mode = 'n', '<leader>q', group = '[q]uit/session' },
         -- { mode = 'n', '<leader>qF', '<cmd>Bdelete!<cr>', desc = '[a]bandon file' },
         { mode = 'n', '<leader>qQ', '<cmd>qa!<cr>', desc = '[q]uit and abandon all' },
+        { mode = 'n', '<C-Tab>', '<cmd>tabnext<cr>', desc = '[c]hange [t]ab' },
+        { mode = 'n', '<C-S-Tab>', '<cmd>tabprev<cr>', desc = '[c]hange [t]ab' },
         -- { mode = 'n', '<leader>qf', '<cmd>up<cr><cmd>Bdelete<cr>', desc = '[q]uit and write file' },
         -- { mode = 'n', '<leader>qb', '<cmd>Bdelete!<cr>', desc = '[q]uit buffer' },
-        { mode = 'n', '<leader>tn', '<cmd>terminal<cr>', desc = '[n]ew [t]erminal' },
+        { mode = 'n', '<leader>tn', '<cmd>tabnew<cr>', desc = '[n]ew [t]ab' },
         { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
         { mode = 'n', '<leader>r', group = '[r]eload' },
-        {
-          mode = 'n',
-          '<leader>qd',
-          function()
-            vim.cmd('wa')
-            vim.cmd('Dashboard')
-          end,
-          desc = '[q]uit to [d]ashboard',
-        },
         {
           mode = 'n',
           '<leader>rf',
@@ -160,6 +172,7 @@ return {
         },
         { mode = 'n', '<c-w>q', '<cmd>q<cr>', desc = '[s]plit delete' },
         { mode = 'n', '<leader>t', group = '[t]rouble' },
+        { mode = 'n', '<leader>z', group = '[z]en' },
         { mode = 'n', '<leader>w', group = '[w]rite' },
         { mode = 'n', '<leader>wa', '<cmd>wa<cr>', desc = 'write [a]ll' },
         { mode = 'n', '<leader>ww', '<cmd>update<cr>', desc = '[w]rite' },
