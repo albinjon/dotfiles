@@ -109,6 +109,7 @@ return {
         { mode = 'n', '<leader>on', '<cmd>ObsidianNew<cr>', desc = 'open [n]ew' },
         { mode = 'n', '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = '[o]pen obsidian' },
         { mode = 'n', '<leader>os', '<cmd>ObsidianSearch<cr>', desc = '[s]earch' },
+        { mode = 'n', '<leader>of', '<cmd>ObsidianSearchAll<cr>', desc = '[s]earch all' },
         { mode = 'n', '<leader>ow', '<cmd>ObsidianWorkspace<cr>', desc = 'open [w]orkspace' },
         -- Database
         { mode = 'n', '<leader>po', '<cmd>DbeeToggle<cr>', desc = '[p]ostgres [o]pen' },

@@ -18,6 +18,8 @@ return {
       { '<leader>ff', '<cmd>TelescopeFindFilesSelected<cr>', mode = 'v', desc = '[f]ind [f]iles' },
       { '<leader><leader>', '<cmd>TelescopeBuffers<cr>', desc = '[ ] Find existing buffers' },
       { '<leader>/', '<cmd>TelescopeCurrentBufferFuzzyFind<cr>', desc = '[/] Fuzzily search in current buffer' },
+
+      { '<leader>sf', '<cmd>TelescopeGrepCurrentFileName<cr>', desc = '[s]earch for current file' },
       { '<leader>s/', '<cmd>TelescopeLiveGrepOpenFiles<cr>', desc = '[s]earch [/] in Open Files' },
       { '<leader>fc', '<cmd>TelescopeFindConfigFiles<cr>', desc = '[f]ind [c]onfig files' },
       { '<leader>sc', '<cmd>TelescopeSearchConfigFiles<cr>', desc = '[s]earch [c]onfig files' },
@@ -192,6 +194,10 @@ return {
       vim.api.nvim_create_user_command('TelescopeSearchConfigFiles', function()
         builtin.live_grep({ cwd = vim.fn.stdpath('config') })
       end, { desc = 'Search config files' })
+      vim.api.nvim_create_user_command('TelescopeGrepCurrentFileName', function()
+        local current_file_name = vim.fn.expand('%:t')
+        builtin.grep_string({ search = current_file_name })
+      end, { desc = 'Grep current file name' })
       vim.api.nvim_create_user_command('TelescopeSearchConfigFilesSelected', function()
         builtin.grep_string({ cwd = vim.fn.stdpath('config'), search = get_selected() })
       end, { desc = 'Search config files (selected)' })
