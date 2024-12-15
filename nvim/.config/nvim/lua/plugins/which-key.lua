@@ -67,24 +67,6 @@ local function reload_file()
   end, 500)
 end
 
-local function repl()
-  local config = {
-    typescript = 'ts-node --esm -e ',
-    javascript = 'node',
-  }
-  local content = table.concat(vim.api.nvim_buf_get_lines(0, 0, vim.api.nvim_buf_line_count(0), false), '\n')
-  local escapedInput = content:gsub("'", "\\'")
-  local fileType = vim.bo.filetype
-  local run_command = config[fileType]
-  if not run_command then
-    vim.notify('No run command configured for filetype: ' .. fileType, vim.log.levels.ERROR)
-    return
-  end
-  local command = run_command .. "'" .. escapedInput .. "'"
-  local output = vim.fn.system(command)
-  vim.notify(output)
-end
-
 return {
   'folke/which-key.nvim',
   event = 'VeryLazy',
@@ -124,7 +106,7 @@ return {
         { mode = 'n', '<leader>g', group = '[g]it' },
         -- Obsidian
         { mode = 'n', '<leader>o', group = '[o]bsidian' },
-        { mode = 'n', '<leader>rr', repl, desc = 'open [r]epl' },
+        { mode = 'n', '<leader>rr', require('repl').run, desc = 'open [r]epl' },
         { mode = 'n', '<leader>on', '<cmd>ObsidianNew<cr>', desc = 'open [n]ew' },
         { mode = 'n', '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = '[o]pen obsidian' },
         { mode = 'n', '<leader>os', '<cmd>ObsidianSearch<cr>', desc = '[s]earch' },

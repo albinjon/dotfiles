@@ -22,20 +22,15 @@ return {
         cmd = { 'MasonToolsInstall', 'MasonToolsClean' },
       },
       {
-        'j-hui/fidget.nvim',
+        'folke/lazydev.nvim',
+        ft = 'lua', -- only load on lua files
         opts = {
-          notification = {
-            window = {
-              winblend = 0,
-            },
+          library = {
+            -- See the configuration section for more details
+            -- Load luvit types when the `vim.uv` word is found
+            { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
           },
         },
-        event = 'LspAttach',
-      },
-      {
-        'folke/neodev.nvim',
-        opts = {},
-        ft = 'lua',
       },
     },
     init = function()

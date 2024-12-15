@@ -9,7 +9,7 @@ return {
     scroll = {
       enabled = true,
       animate = {
-        duration = { step = 15, total = 180 },
+        duration = { step = 15, total = 100 },
         easing = 'linear',
       },
     },
@@ -43,20 +43,37 @@ return {
     words = { enabled = true },
     styles = {
       notification = {
-        wo = { wrap = true }, -- Wrap notifications
+        border = 'rounded',
+        zindex = 100,
+        ft = 'markdown',
+        wo = {
+          winblend = 0,
+          wrap = true,
+          conceallevel = 2,
+          colorcolumn = '',
+        },
+        bo = { filetype = 'snacks_notif' },
       },
     },
+
     scratch = {
       win_by_ft = {
         javascript = {
           keys = {
             ['source'] = {
               '<cr>',
-              function(self)
-                local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.buf), ':p')
-                vim.print(name)
-              end,
-              desc = 'Source buffer',
+              require('repl').run,
+              desc = 'Run',
+              mode = { 'n', 'x' },
+            },
+          },
+        },
+        typescript = {
+          keys = {
+            ['source'] = {
+              '<cr>',
+              require('repl').run,
+              desc = 'Run',
               mode = { 'n', 'x' },
             },
           },
