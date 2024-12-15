@@ -54,6 +54,19 @@ return {
         },
         bo = { filetype = 'snacks_notif' },
       },
+      scratch = {
+        width = 160,
+        height = 40,
+        bo = { buftype = '', buflisted = false, bufhidden = 'hide', swapfile = false },
+        minimal = false,
+        noautocmd = false,
+        -- position = "right",
+        zindex = 20,
+        wo = { winhighlight = 'NormalFloat:Normal' },
+        border = 'rounded',
+        title_pos = 'center',
+        footer_pos = 'center',
+      },
     },
 
     scratch = {
