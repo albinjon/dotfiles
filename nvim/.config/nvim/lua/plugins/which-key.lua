@@ -106,7 +106,12 @@ return {
         { mode = 'n', '<leader>g', group = '[g]it' },
         -- Obsidian
         { mode = 'n', '<leader>o', group = '[o]bsidian' },
-        { mode = 'n', '<leader>rr', require('repl').run, desc = 'open [r]epl' },
+        {
+          mode = 'n',
+          '<leader>rr',
+          require('repl').run,
+          desc = 'open [r]epl',
+        },
         {
           mode = 'v',
           '<leader>rr',
