@@ -107,6 +107,14 @@ return {
         -- Obsidian
         { mode = 'n', '<leader>o', group = '[o]bsidian' },
         { mode = 'n', '<leader>rr', require('repl').run, desc = 'open [r]epl' },
+        {
+          mode = 'v',
+          '<leader>rr',
+          function()
+            require('repl').run(get_visual_selection())
+          end,
+          desc = 'open [r]epl',
+        },
         { mode = 'n', '<leader>on', '<cmd>ObsidianNew<cr>', desc = 'open [n]ew' },
         { mode = 'n', '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = '[o]pen obsidian' },
         { mode = 'n', '<leader>os', '<cmd>ObsidianSearch<cr>', desc = '[s]earch' },

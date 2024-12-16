@@ -1,5 +1,5 @@
 ---@diagnostic disable: need-check-nil
-local function repl()
+local function repl(to_run)
   local filetype = vim.bo.filetype
   if filetype ~= 'typescript' and filetype ~= 'javascript' then
     vim.notify('Only TypeScript or JavaScript files are supported.', vim.log.levels.ERROR)
@@ -10,7 +10,8 @@ local function repl()
   local ext = filetype == 'javascript' and 'js' or 'ts'
   local tmp = config .. '/tmp/temp.' .. ext
 
-  vim.fn.writefile(vim.api.nvim_buf_get_lines(0, 0, -1, false), tmp)
+  local content = to_run and vim.split(to_run, '\n') or vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  vim.fn.writefile(content, tmp)
 
   if filetype == 'typescript' then
     local out = vim.fn.system(string.format('cd %s && tsc %s', config, tmp))
@@ -25,7 +26,6 @@ local function repl()
   local running = true
   local notif_id = 'repl_progress'
 
-  -- Initial notification with spinner icon
   vim.notify('Running...', vim.log.levels.INFO, {
     title = 'Result',
     id = notif_id,
@@ -34,7 +34,6 @@ local function repl()
     end,
   })
 
-  -- Timer to update notification to refresh spinner icon
   local timer = vim.loop.new_timer()
   timer:start(100, 100, function()
     if not running then
@@ -46,7 +45,6 @@ local function repl()
       vim.notify('Running...', vim.log.levels.INFO, {
         title = 'Result',
         id = notif_id,
-        -- Re-issuing the same id updates the same notification
         opts = function(notif)
           notif.icon = spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
         end,
@@ -54,7 +52,6 @@ local function repl()
     end)
   end)
 
-  -- Run the file asynchronously
   local stdout, stderr = {}, {}
   vim.fn.jobstart({ 'node', tmp }, {
     stdout_buffered = true,
