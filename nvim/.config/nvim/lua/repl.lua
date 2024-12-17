@@ -1,4 +1,21 @@
----@diagnostic disable: need-check-nil
+local notif_id = 'repl_progress'
+
+local function formatOutput(output, fallback)
+  local msg = #output > 0 and table.concat(output, '\n') or fallback
+  return output and 'Output:\n' .. msg
+end
+
+local function spinnerNotification(message)
+  local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+  vim.notify(message, vim.log.levels.INFO, {
+    title = 'Result',
+    id = notif_id,
+    opts = function(notif)
+      notif.icon = spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+    end,
+  })
+end
+
 local function repl(to_run)
   if type(to_run) ~= 'string' then
     to_run = nil
@@ -26,19 +43,15 @@ local function repl(to_run)
     tmp = tmp:gsub('%.ts$', '.js')
   end
 
-  local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
   local running = true
-  local notif_id = 'repl_progress'
-
-  vim.notify('Running...', vim.log.levels.INFO, {
-    title = 'Result',
-    id = notif_id,
-    opts = function(notif)
-      notif.icon = spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-    end,
-  })
 
   local timer = vim.loop.new_timer()
+  if timer == nil then
+    vim.notify('Failed to start timer.', vim.log.levels.WARN, { title = 'Result', id = notif_id })
+    return
+  end
+  local stdout, stderr = {}, {}
+
   timer:start(100, 100, function()
     if not running then
       timer:stop()
@@ -46,24 +59,18 @@ local function repl(to_run)
       return
     end
     vim.schedule(function()
-      vim.notify('Running...', vim.log.levels.INFO, {
-        title = 'Result',
-        id = notif_id,
-        opts = function(notif)
-          notif.icon = spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-        end,
-      })
+      local message = formatOutput(stdout, 'Running...')
+      spinnerNotification(message)
     end)
   end)
 
-  local stdout, stderr = {}, {}
   vim.fn.jobstart({ 'node', tmp }, {
-    stdout_buffered = true,
-    stderr_buffered = true,
     on_stdout = function(_, data, _)
       for _, line in ipairs(data) do
         if line ~= '' then
           table.insert(stdout, line)
+          local message = formatOutput(stdout, 'Running...')
+          spinnerNotification(message)
         end
       end
     end,
@@ -77,13 +84,13 @@ local function repl(to_run)
     on_exit = function(_, code, _)
       running = false
       vim.schedule(function()
-        local msg = ''
+        local output = ''
         if code == 0 then
-          msg = #stdout > 0 and table.concat(stdout, '\n') or ''
+          output = formatOutput(stdout, '')
         else
-          msg = #stderr > 0 and table.concat(stderr, '\n') or 'Error running file.'
+          output = formatOutput(stderr, 'Error running file.')
         end
-        vim.notify('Output:\n' .. msg, code == 0 and vim.log.levels.INFO or vim.log.levels.ERROR, {
+        vim.notify(output, code == 0 and vim.log.levels.INFO or vim.log.levels.ERROR, {
           title = 'Result',
           id = notif_id,
           timeout = 5000,
