@@ -1,5 +1,9 @@
 ---@diagnostic disable: need-check-nil
 local function repl(to_run)
+  if type(to_run) ~= 'string' then
+    to_run = nil
+  end
+
   local filetype = vim.bo.filetype
   if filetype ~= 'typescript' and filetype ~= 'javascript' then
     vim.notify('Only TypeScript or JavaScript files are supported.', vim.log.levels.ERROR)
@@ -16,7 +20,7 @@ local function repl(to_run)
   if filetype == 'typescript' then
     local out = vim.fn.system(string.format('cd %s && tsc %s', config, tmp))
     if vim.v.shell_error ~= 0 and not out:find('only allowed at the top level') then
-      vim.notify('Compilation failed: ' .. out, vim.log.levels.ERROR)
+      vim.notify('Compilation failed: ' .. out:gsub('.-*repl/tmp/.-: ', ''), vim.log.levels.ERROR)
       return
     end
     tmp = tmp:gsub('%.ts$', '.js')
@@ -82,6 +86,7 @@ local function repl(to_run)
         vim.notify('Output:\n' .. msg, code == 0 and vim.log.levels.INFO or vim.log.levels.ERROR, {
           title = 'Result',
           id = notif_id,
+          timeout = 5000,
           opts = function(notif)
             notif.icon = code == 0 and ' ' or ''
           end,
