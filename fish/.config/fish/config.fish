@@ -41,18 +41,6 @@ function sketch
     nohup sketchybar >/dev/null 2>&1 &
 end
 
-function run_doa
-    npx turbo run dev --filter="*mocks*" --filter="*finalizer*" --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*barcode*"
-end
-
-function run_bankid
-    npx turbo run dev --filter="*bankid*" --filter="*toxi-doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*barcode*"
-end
-
-function run_e2e
-    npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*mro*" --filter="*collection*" --filter="*gates*" --filter="*workplace*" --filter="*finalizer*" --filter="*cgm*"  --filter="*maestro*" --concurrency=20
-end
-
 function measure_command_time
     if test (count $argv) -lt 2
         echo "Usage: measure_command_time 'your command' 'log message to search for'"
