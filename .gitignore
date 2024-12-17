@@ -2,5 +2,5 @@
 **/*.DS_Store
 **/vscode-js-debug
 **/.sqllsrc.json
-**/js-debug
+**/.dap
 
