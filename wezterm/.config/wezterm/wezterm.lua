@@ -8,7 +8,7 @@ require("vim-scrollback")
 
 config.color_scheme = "Catppuccin Macchiato"
 config.font = wezterm.font("JetBrains Mono SemiBold")
-config.font_size = 24.0
+config.font_size = 18.0
 config.window_background_opacity = 0.82
 config.macos_window_background_blur = 20
 config.enable_tab_bar = false
