@@ -1,5 +1,6 @@
 return {
   'zbirenbaum/copilot.lua',
+  enabled = false,
   cmd = 'Copilot',
   config = function()
     require('copilot').setup({

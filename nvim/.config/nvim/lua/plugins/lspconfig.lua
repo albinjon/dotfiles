@@ -107,7 +107,6 @@ return {
       local mason_registry = require('mason-registry')
       local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path()
         .. '/node_modules/@vue/language-server'
-
       local servers = {
         eslint = {
           settings = {
@@ -130,6 +129,8 @@ return {
             },
           },
           filetypes = { 'vue' },
+        denols = {
+          root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
         },
         lua_ls = {
           settings = {
@@ -157,6 +158,7 @@ return {
         'sqlls',
         'volar',
         'crlfmt',
+        'denols',
         'gopls',
         'vue-language-server',
         'js-debug-adapter',

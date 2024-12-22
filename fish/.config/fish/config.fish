@@ -34,7 +34,7 @@ alias gd "git diff"
 # Import secrets
 source $HOME/.secret_envs/.env
 
-bind \es 'cd ~/Programmering/careos-backend && npm run cos; commandline -f repaint'
+bind \es 'cd ~/careos-backend && npm run cos; commandline -f repaint'
 
 # Other aliases
 function sketch

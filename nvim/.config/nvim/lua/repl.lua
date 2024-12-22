@@ -35,7 +35,12 @@ local function repl(to_run)
   vim.fn.writefile(content, tmp)
 
   if filetype == 'typescript' then
-    local out = vim.fn.system(string.format('cd %s && tsc %s', config, tmp))
+    local tsc_cmd = string.format(
+      'cd %s && tsc %s --lib es2023,dom --target es2022 --module node16 --moduleResolution node16',
+      config,
+      tmp
+    )
+    local out = vim.fn.system(tsc_cmd)
     if vim.v.shell_error ~= 0 and not out:find('only allowed at the top level') then
       vim.notify('Compilation failed: ' .. out:gsub('.-*repl/tmp/.-: ', ''), vim.log.levels.ERROR)
       return

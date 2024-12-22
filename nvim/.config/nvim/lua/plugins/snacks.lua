@@ -18,6 +18,7 @@ return {
         keys = {
           { icon = ' ', key = 'f', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files')" },
           { icon = ' ', key = 'o', desc = 'Find Obsidian Files', action = ':ObsidianSearchAll' },
+          { icon = '󰊕 ', key = 'L', desc = 'LeetCode', action = ':Leet' },
           { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
           { icon = ' ', key = 'G', desc = 'Git', action = ':lua Snacks.lazygit()' },
           { icon = ' ', key = 'r', desc = 'Recent Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },

@@ -1,5 +1,7 @@
 return {
-  enabled = true,
+  cond = function()
+    return vim.fs.root(0, 'package.json')
+  end,
   'pmizio/typescript-tools.nvim',
   ft = { 'typescript', 'typescriptreact', 'javascriptreact', 'javascript' },
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },

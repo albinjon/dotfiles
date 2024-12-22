@@ -48,7 +48,7 @@ return {
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       luasnip.config.setup({})
 
-      local cp_suggestions = require('copilot.suggestion')
+      -- local cp_suggestions = require('copilot.suggestion')
       cmp.setup({
         formatting = {
           format = require('lspkind').cmp_format({
@@ -71,14 +71,14 @@ return {
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
           ['<Tab>'] = cmp.mapping(function(fallback)
-            if cp_suggestions.is_visible() then
-              cp_suggestions.accept()
+            -- if cp_suggestions.is_visible() then
+            --   cp_suggestions.accept()
+            -- else
+            if cmp.visible() then
+              cmp.confirm()
             else
-              if cmp.visible() then
-                cmp.confirm()
-              else
-                fallback()
-              end
+              fallback()
+              -- end
             end
           end, { 'i' }),
           ['<CR>'] = cmp.mapping(function(fallback)
@@ -105,8 +105,8 @@ return {
           ['<C-l>'] = cmp.mapping(function(fallback)
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
-            elseif cp_suggestions.is_visible() then
-              cp_suggestions.next()
+            -- elseif cp_suggestions.is_visible() then
+            --   cp_suggestions.next()
             else
               fallback()
             end
@@ -114,8 +114,8 @@ return {
           ['<C-h>'] = cmp.mapping(function(fallback)
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
-            elseif cp_suggestions.is_visible() then
-              cp_suggestions.prev()
+            -- elseif cp_suggestions.is_visible() then
+            --   cp_suggestions.prev()
             else
               fallback()
             end
