@@ -80,6 +80,10 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
+vim.g.markdown_fenced_languages = {
+  'ts=typescript',
+}
+
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.fn.has('win32') ~= 0
 local sep = is_windows and '\\' or '/'
