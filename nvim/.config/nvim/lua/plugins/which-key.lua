@@ -159,7 +159,23 @@ return {
         },
         {
           mode = 'n',
+          '<c-w>s',
+          function()
+            split_and_switch_buffer('h')
+          end,
+          desc = '[s]plit (horizontal/down)',
+        },
+        {
+          mode = 'n',
           '<c-w>l',
+          function()
+            split_and_switch_buffer('v')
+          end,
+          desc = '[s]plit (vertical/to right)',
+        },
+        {
+          mode = 'n',
+          '<c-w>v',
           function()
             split_and_switch_buffer('v')
           end,

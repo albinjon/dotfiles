@@ -70,8 +70,10 @@ config.keys = {
 	{ key = "k", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-up" }) },
 	{ key = "s", mods = "CTRL", action = wezterm.action({ EmitEvent = "start" }) },
 	{ key = "l", mods = "LEADER", action = wezterm.action({ EmitEvent = "split-vertical" }) },
+	{ key = "v", mods = "LEADER", action = wezterm.action({ EmitEvent = "split-vertical" }) },
 	{ key = "t", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ key = "j", mods = "LEADER", action = wezterm.action({ EmitEvent = "split-horizontal" }) },
+	{ key = "s", mods = "LEADER", action = wezterm.action({ EmitEvent = "split-horizontal" }) },
 	{ key = "q", mods = "LEADER", action = wezterm.action({ EmitEvent = "close-pane" }) },
 }
 

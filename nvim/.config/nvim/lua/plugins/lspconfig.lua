@@ -129,9 +129,12 @@ return {
             },
           },
           filetypes = { 'vue', 'typescript', 'typescriptreact', 'javascriptreact', 'javascript' },
+          root_dir = vim.fs.dirname(vim.fs.find({ '.git', 'package.json' }, { upward = true })[1]),
+          single_file_support = false,
         },
         denols = {
           root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock'),
+          single_file_support = false,
         },
         lua_ls = {
           settings = {
@@ -158,7 +161,6 @@ return {
         'sqlls',
         'volar',
         'crlfmt',
-        'denols',
         'gopls',
         'vue-language-server',
         'js-debug-adapter',

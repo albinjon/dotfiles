@@ -1,5 +1,6 @@
 return {
   {
+    enabled = false,
     'nvim-telescope/telescope.nvim',
     cmd = { 'TelescopeFindFiles', 'TelescopeFindConfigFiles' },
     event = 'VeryLazy',
