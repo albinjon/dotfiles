@@ -136,6 +136,7 @@ return {
         { mode = 'n', '<C-Tab>', '<cmd>tabnext<cr>', desc = '[c]hange [t]ab' },
         { mode = 'n', '<C-S-Tab>', '<cmd>tabprev<cr>', desc = '[c]hange [t]ab' },
         { mode = 'n', '<leader>tn', '<cmd>tabnew<cr>', desc = '[n]ew [t]ab' },
+        { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
         { mode = 'n', '<leader>r', group = '[r]eload' },
         {
           mode = 'n',
