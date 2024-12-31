@@ -7,6 +7,7 @@ return {
     },
     cmd = { 'LspInfo', 'LspInstall', 'LspUninstall' },
     dependencies = {
+      { 'saghen/blink.cmp' },
       {
         'williamboman/mason.nvim',
         cmd = 'Mason',
@@ -45,33 +46,48 @@ return {
         {
           'gd',
           function()
-            require('telescope.builtin').lsp_definitions()
+            require('fzf-lua').lsp_definitions()
           end,
           '[g]oto [d]efinition',
         },
         {
           'gr',
           function()
-            require('telescope.builtin').lsp_references()
+            require('fzf-lua').lsp_references()
           end,
           '[g]oto [r]eferences',
         },
         {
           'gI',
           function()
-            require('telescope.builtin').lsp_implementations()
+            require('fzf-lua').lsp_implementations()
           end,
           '[g]oto [i]mplementation',
         },
         {
           '<leader>td',
           function()
-            require('telescope.builtin').lsp_type_definitions()
+            require('fzf-lua').lsp_type_definitions()
           end,
           'type [d]efinition',
         },
         { '<leader>cr', vim.lsp.buf.rename, '[r]ename' },
-        { '<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction' },
+        {
+          '<leader>ca',
+          function()
+            require('fzf-lua').lsp_code_actions({
+              winopts = {
+                relative = 'cursor',
+                width = 0.6,
+                height = 0.6,
+                row = 1,
+                preview = { vertical = 'up:70%' },
+              },
+            })
+          end,
+          '[c]ode [a]ctions',
+          { 'n', 'v' },
+        },
         { '<leader>cl', '<cmd>LspInfo<cr>', 'Info' },
         {
           'K',
@@ -102,7 +118,7 @@ return {
     end,
     config = function()
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
 
       local mason_registry = require('mason-registry')
       local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path()

@@ -9,7 +9,7 @@ end
 return {
   'ibhagwan/fzf-lua',
   dependencies = {
-    'nvim-tree/nvim-web-devicons',
+    { 'nvim-tree/nvim-web-devicons' },
   },
   keys = {
     {
@@ -46,6 +46,21 @@ return {
         require('fzf-lua').grep_cword()
       end,
       desc = '[s]earch current [w]ord',
+    },
+    {
+      '<leader>sc',
+      function()
+        require('fzf-lua').live_grep({ cwd = vim.fn.stdpath('config') })
+      end,
+      desc = '[s]earch live [g]rep',
+    },
+    {
+      '<leader>sc',
+      function()
+        require('fzf-lua').live_grep({ cwd = vim.fn.stdpath('config'), query = get_selected() })
+      end,
+      mode = 'v',
+      desc = '[s]earch live [g]rep',
     },
     {
       '<leader>sg',
@@ -100,7 +115,7 @@ return {
     {
       '<leader>sf',
       function()
-        require('fzf-lua').files({ query = vim.fn.expand('%:t') })
+        require('fzf-lua').live_grep({ query = vim.fn.expand('%:t') })
       end,
       desc = '[s]earch for current file',
     },
@@ -264,8 +279,16 @@ return {
       unpack(rg_exclude_patterns),
     }
 
+    require('fzf-lua').register_ui_select()
+
     require('fzf-lua').setup({
       'telescope', -- Use telescope-like UI and keybindings
+      lsp = {
+        code_actions = {
+          previewer = 'codeaction_native',
+          preview_pager = "delta --side-by-side --width=$FZF_PREVIEW_COLUMNS --hunk-header-style='omit' --file-style='omit'",
+        },
+      },
       winopts = {
         height = 0.90,
         width = 0.90,
@@ -282,7 +305,8 @@ return {
           ['<C-u>'] = 'preview-page-up',
           ['<C-j>'] = 'next-history',
           ['<C-k>'] = 'previous-history',
-          ['<C-q>'] = 'select-all+accept',
+          ['<C-a>'] = 'select-all',
+          -- ['<C-q>'] = 'accept',
           ['<C-cr>'] = actions.help,
         },
       },

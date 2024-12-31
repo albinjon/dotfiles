@@ -45,7 +45,7 @@ return {
       end,
     })
     vim.api.nvim_create_user_command('ObsidianSearchAll', function()
-      require('telescope.builtin').find_files({ cwd = obsidianRootDir })
+      require('fzf-lua').files({ cwd = obsidianRootDir })
     end, { desc = 'Find obsidian files' })
   end,
 }

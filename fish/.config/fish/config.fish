@@ -31,6 +31,8 @@ alias gmm "git merge main"
 alias gsw "git switch -"
 alias gd "git diff"
 
+alias k "kubectl"
+
 # Import secrets
 source $HOME/.secret_envs/.env
 

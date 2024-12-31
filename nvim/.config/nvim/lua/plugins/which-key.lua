@@ -133,14 +133,9 @@ return {
         { mode = 'v', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
         -- Windows/Buffers
         { mode = 'n', '<leader>q', group = '[q]uit/session' },
-        -- { mode = 'n', '<leader>qF', '<cmd>Bdelete!<cr>', desc = '[a]bandon file' },
-        { mode = 'n', '<leader>qQ', '<cmd>qa!<cr>', desc = '[q]uit and abandon all' },
         { mode = 'n', '<C-Tab>', '<cmd>tabnext<cr>', desc = '[c]hange [t]ab' },
         { mode = 'n', '<C-S-Tab>', '<cmd>tabprev<cr>', desc = '[c]hange [t]ab' },
-        -- { mode = 'n', '<leader>qf', '<cmd>up<cr><cmd>Bdelete<cr>', desc = '[q]uit and write file' },
-        -- { mode = 'n', '<leader>qb', '<cmd>Bdelete!<cr>', desc = '[q]uit buffer' },
         { mode = 'n', '<leader>tn', '<cmd>tabnew<cr>', desc = '[n]ew [t]ab' },
-        { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
         { mode = 'n', '<leader>r', group = '[r]eload' },
         {
           mode = 'n',
