@@ -1,0 +1,6 @@
+{
+  "comp": {
+    "body": ["const ${1:name} = computed(() => {", " $0", "})"],
+    "prefix": "compprop"
+  }
+}

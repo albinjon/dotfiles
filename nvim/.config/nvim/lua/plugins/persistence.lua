@@ -1,7 +1,8 @@
 return {
-	'folke/persistence.nvim',
-	event = 'BufReadPre',
-	opts = {
-		options = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help' }, -- sessionoptions used for saving
-	},
+  'folke/persistence.nvim',
+  ft = 'dashboard',
+  event = 'InsertEnter',
+  opts = {
+    options = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help' },
+  },
 }

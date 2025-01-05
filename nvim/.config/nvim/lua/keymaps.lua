@@ -8,8 +8,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 
-vim.keymap.set('n', '[c', '<cmd>cprev<cr>', { desc = 'Go to previous [q]uickfix entry' })
-vim.keymap.set('n', ']c', '<cmd>cnext<cr>', { desc = 'Go to next [q]uickfix entry' })
+vim.keymap.set('n', '<M-k>', '<cmd>cprev<cr>', { desc = 'Go to previous [q]uickfix entry' })
+vim.keymap.set('n', '<M-j>', '<cmd>cnext<cr>', { desc = 'Go to next [q]uickfix entry' })
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -26,37 +26,37 @@ vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Persistence
 vim.api.nvim_set_keymap(
-    'n',
-    '<leader>qs',
-    [[<cmd>lua require("persistence").load()<cr>]],
-    { desc = 'Re[s]tore session' }
+  'n',
+  '<leader>qs',
+  [[<cmd>lua require("persistence").load()<cr>]],
+  { desc = 'Re[s]tore session' }
 )
 -- restore the last session
 vim.api.nvim_set_keymap(
-    'n',
-    '<leader>ql',
-    [[<cmd>lua require("persistence").load({ last = true })<cr>]],
-    { desc = 'Restore [l]ast session' }
+  'n',
+  '<leader>ql',
+  [[<cmd>lua require("persistence").load({ last = true })<cr>]],
+  { desc = 'Restore [l]ast session' }
 )
 
 -- Copilot, can't have the keymaps in the plugin file since it's lazy loaded.
 vim.keymap.set(
-    { 'n' },
-    '<leader>cpe',
-    '<cmd>Copilot enable<cr>',
-    { desc = '[e]nable copilot', noremap = true, silent = true }
+  { 'n' },
+  '<leader>cpe',
+  '<cmd>Copilot enable<cr>',
+  { desc = '[e]nable copilot', noremap = true, silent = true }
 )
 vim.keymap.set(
-    { 'n' },
-    '<leader>cpd',
-    '<cmd>Copilot disable<cr>',
-    { desc = '[d]isable copilot', noremap = true, silent = true }
+  { 'n' },
+  '<leader>cpd',
+  '<cmd>Copilot disable<cr>',
+  { desc = '[d]isable copilot', noremap = true, silent = true }
 )
 vim.keymap.set('n', '<leader>cpp', function()
-    require('copilot.panel').open({ ratio = 0.5, position = 'right' })
+  require('copilot.panel').open({ ratio = 0.5, position = 'right' })
 end, { desc = '[c]o[p]ilot [p]anel' })
 vim.keymap.set('n', '<leader>cpr', function()
-    require('copilot.panel').refresh()
+  require('copilot.panel').refresh()
 end, { desc = '[c]o[p]ilot [r]efresh' })
 
 -- [[ Basic Autocommands ]]
@@ -66,9 +66,9 @@ end, { desc = '[c]o[p]ilot [r]efresh' })
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })

@@ -1,6 +1,10 @@
 return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    cmd = {
+      'MiniExploreFiles',
+    },
+    event = { 'InsertEnter', 'LspAttach' },
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -58,10 +62,14 @@ return {
       })
 
       local set_window_options = function(win_id)
-        vim.wo[win_id].winblend = 8
         local config = vim.api.nvim_win_get_config(win_id)
         config.border, config.title_pos = 'rounded', 'center'
         config.style = 'minimal'
+        vim.w[win_id].winblend = 0
+
+        vim.api.nvim_set_hl(0, 'MiniFilesNormal', { bg = 'NONE', ctermbg = 'NONE' })
+        -- vim.api.nvim_set_hl(0, 'MiniFilesCursorLine', { fg = '#FFA01E' })
+
         vim.api.nvim_win_set_config(win_id, config)
       end
 
@@ -73,12 +81,13 @@ return {
       -- kommer jag behöva spara alla kopieringar till samma mapp som alla deletions hamnar på, om jag vill kunna kopiera överallt. Det jag kanske letar efter är egentligen bara smidigare navigation i repot.
 
       -- fortsätt här:
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'MiniFilesActionDelete',
-        callback = function(args)
-          vim.notify(args.data.to)
-        end,
-      })
+      -- vim.api.nvim_create_autocmd('User', {
+      --   pattern = 'MiniFilesActionDelete',
+      --   callback = function(args)
+      --     vim.notify(args.data.to)
+      --   end,
+      -- })
+
       vim.api.nvim_create_autocmd('User', {
         pattern = 'MiniFilesWindowOpen',
         callback = function(args)
@@ -104,7 +113,7 @@ return {
         local cur_entry_path = MiniFiles.get_fs_entry().path
         local cur_directory = vim.fs.dirname(cur_entry_path)
         vim.fn.chdir(cur_directory)
-        vim.notify('Changed directory to ' .. cur_directory)
+        Snacks.notify.info('Changed directory to ' .. cur_directory)
       end
 
       vim.api.nvim_create_autocmd('User', {
@@ -151,26 +160,9 @@ return {
         end,
       })
 
-      require('mini.animate').setup({
-        cursor = {
-          enable = false,
-        },
-        scroll = {
-          enable = true,
-          timing = function(_, n)
-            return 40 / n
-          end,
-        },
-        resize = {
-          enable = false,
-        },
-        open = {
-          enable = false,
-        },
-        close = {
-          enable = false,
-        },
-      })
+      vim.api.nvim_create_user_command('MiniExploreFiles', function()
+        require('mini.files').open(vim.api.nvim_buf_get_name(0))
+      end, { desc = '[f]ile [e]xplorer' })
     end,
   },
 }

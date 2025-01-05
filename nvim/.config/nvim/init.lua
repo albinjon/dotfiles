@@ -2,11 +2,11 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
-require('options')
-require('keymaps')
-require('wezterm-nav')
-require('autocmd')
-require('lazy-bootstrap')
-require('lazy-plugins')
+-- global settings
 
--- The line beneath this is called modeline. See :help modeline
+-- vscode and nvim only settings
+if (vim.g.vscode) then
+  require('vsc')
+else
+  require('nvim')
+end

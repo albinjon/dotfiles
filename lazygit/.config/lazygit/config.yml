@@ -1,0 +1,14 @@
+gui:
+  nerdFontsVersion: "3"
+keybinding:
+  universal:
+    nextBlock: <c-j>
+    prevBlock: <c-k>
+  commits:
+    moveDownCommit: <disabled>
+    moveUpCommit: <disabled>
+
+
+git:
+  paging:
+    externalDiffCommand: "difft --color=always"

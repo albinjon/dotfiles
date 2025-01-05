@@ -29,6 +29,20 @@ wezterm.on("move-up", function(window, pane)
 	wez_nvim_action(window, pane, act.ActivatePaneDirection("Up"), act.SendKey({ key = "k", mods = "CTRL" }))
 end)
 
+wezterm.on("start", function(window, pane)
+	wez_nvim_action(
+		window,
+		pane,
+		wezterm.action_callback(function()
+			wezterm.background_child_process({
+				"cd",
+				"~/Programmering/careos-backend",
+			})
+		end),
+		act.SendKey({ key = "s", mods = "CTRL" })
+	)
+end)
+
 wezterm.on("split-vertical", function(window, pane)
 	wez_nvim_action(
 		window,

@@ -5,15 +5,15 @@
 
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.g.loaded_matchparen = 1
+
+vim.opt.ruler = false
 
 vim.opt.ttyfast = true
 
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.smarttab = true
-vim.opt.autoindent = true
+vim.opt.expandtab = true -- expand tab input with spaces characters
+vim.opt.smartindent = true -- # syntax aware indentations for newline inserts
+vim.opt.tabstop = 2 -- # num of space characters per tab
+vim.opt.shiftwidth = 2 -- # spaces per indentation level
 
 vim.opt.conceallevel = 2
 
@@ -46,6 +46,8 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.opt.shortmess:append('sI')
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
@@ -57,12 +59,33 @@ vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
+vim.opt.culopt = 'both'
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 15
 
 vim.filetype.add({
-    extension = {
-        mdx = 'jsx',
-    },
+  extension = {
+    mdx = 'jsx',
+  },
 })
+
+-- go to previous/next line with h,l,left arrow and right arrow
+-- when cursor reaches end/beginning of line
+vim.opt.whichwrap:append('<>[]hl')
+
+-- disable some default providers
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+vim.g.markdown_fenced_languages = {
+  'ts=typescript',
+}
+
+-- add binaries installed by mason.nvim to path
+local is_windows = vim.fn.has('win32') ~= 0
+local sep = is_windows and '\\' or '/'
+local delim = is_windows and ';' or ':'
+vim.env.PATH = table.concat({ vim.fn.stdpath('data'), 'mason', 'bin' }, sep) .. delim .. vim.env.PATH

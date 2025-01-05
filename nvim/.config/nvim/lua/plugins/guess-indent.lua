@@ -1,6 +1,6 @@
 -- using packer.nvim
 return {
-  event = 'BufReadPost',
+  event = 'BufRead',
   'nmac427/guess-indent.nvim',
   config = function()
     require('guess-indent').setup({})

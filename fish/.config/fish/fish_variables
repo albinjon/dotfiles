@@ -50,7 +50,8 @@ SETUVAR fish_pager_color_selected_background:\x1d
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/Users/albin/bin\x1e/Users/albin/\x2edeno/bin\x1e/usr/local/bin\x1e/Users/albin/Programmering/apps\x1e/Users/albin/\x2elocal/bin\x1e/Users/albin/\x2elocal/bin/nvim/bin\x1e/Users/albin/\x2econfig/emacs/bin
+SETUVAR fish_user_paths:/home/albin/bin\x1e/home/albin/\x2edeno/bin\x1e/usr/local/bin\x1e/home/albin/Programmering/apps\x1e/home/albin/\x2elocal/bin\x1e/home/albin/\x2elocal/bin/nvim/bin\x1e/home/albin/\x2econfig/emacs/bin\x1e/Users/albin/bin\x1e/Users/albin/\x2edeno/bin\x1e/Users/albin/Programmering/apps\x1e/Users/albin/\x2elocal/bin\x1e/Users/albin/\x2elocal/bin/nvim/bin\x1e/Users/albin/\x2econfig/emacs/bin\x1e/Users/albin/\x2ecodeium/windsurf/bin
+SETUVAR nvm_default_version:v20\x2e18\x2e0
 SETUVAR pure_begin_prompt_with_current_directory:true
 SETUVAR pure_check_for_new_release:false
 SETUVAR pure_color_at_sign:pure_color_mute

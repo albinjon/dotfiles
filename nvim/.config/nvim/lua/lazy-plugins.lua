@@ -1,23 +1,48 @@
 require('lazy').setup({
-    spec = {
-        { import = 'plugins' },
+  defaults = { lazy = true },
+  spec = {
+    { import = 'plugins' },
+  },
+  ui = {
+    icons = {
+      ft = '',
+      lazy = '󰂠 ',
+      loaded = '',
+      not_loaded = '',
     },
-    checker = {
-        enabled = true, -- check for plugin updates periodically
-        notify = false, -- notify on update
+  },
+
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        '2html_plugin',
+        'tohtml',
+        'getscript',
+        'getscriptPlugin',
+        'gzip',
+        'logipat',
+        'netrw',
+        'netrwPlugin',
+        'netrwSettings',
+        'netrwFileHandlers',
+        'matchit',
+        'tar',
+        'tarPlugin',
+        'rrhelper',
+        'spellfile_plugin',
+        'vimball',
+        'vimballPlugin',
+        'zip',
+        'zipPlugin',
+        'tutor',
+        'rplugin',
+        'syntax',
+        'synmenu',
+        'optwin',
+        'compiler',
+        'bugreport',
+        'ftplugin',
+      },
     },
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                'gzip',
-                -- "matchit",
-                -- "matchparen",
-                -- "netrwPlugin",
-                'tarPlugin',
-                'tohtml',
-                'tutor',
-                'zipPlugin',
-            },
-        },
-    },
+  },
 })

@@ -1,3 +1,7 @@
 **/*.log
 **/*.DS_Store
+**/vscode-js-debug
+**/.sqllsrc.json
+**/.dap
 
+superfile/.config/superfile/lastdir

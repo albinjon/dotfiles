@@ -3,7 +3,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
   },
-  cmd = { 'ObsidianWorkspace', 'ObsidianOpen', 'ObsidianNew', 'ObsidianSearch', 'ObsidianFindAll' },
+  cmd = { 'ObsidianWorkspace', 'ObsidianOpen', 'ObsidianNew', 'ObsidianSearch', 'ObsidianFindAll', 'ObsidianSearchAll' },
   version = '*', -- recommended, use latest release instead of latest commit
   ft = 'markdown',
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
@@ -15,15 +15,16 @@ return {
   -- },
   config = function()
     local obs = require('obsidian')
+    local obsidianRootDir = '/Users/albin/Library/Mobile Documents/iCloud~md~obsidian/Documents/'
     obs.setup({
       workspaces = {
         {
           name = 'personal',
-          path = '/Users/albin/Library/Mobile Documents/iCloud~md~obsidian/Documents/personal',
+          path = obsidianRootDir .. 'personal',
         },
         {
           name = 'work',
-          path = '/Users/albin/Library/Mobile Documents/iCloud~md~obsidian/Documents/work',
+          path = obsidianRootDir .. 'work',
         },
       },
       note_id_func = function(title)
@@ -43,5 +44,8 @@ return {
         return suffix .. '-' .. tostring(os.time())
       end,
     })
+    vim.api.nvim_create_user_command('ObsidianSearchAll', function()
+      require('fzf-lua').files({ cwd = obsidianRootDir })
+    end, { desc = 'Find obsidian files' })
   end,
 }

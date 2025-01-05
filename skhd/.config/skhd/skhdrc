@@ -4,6 +4,18 @@ fn - t : skhd -k "hyper - t"
 fn - c : skhd -k "hyper - c"
 fn - s : skhd -k "hyper - s"
 
+alt - f: skhd -t "["
+alt - j: skhd -t "]"
+
+alt + shift - f: skhd -t "{"
+alt + shift - j: skhd -t "}"
+
+alt - d: skhd -t "("
+alt - k: skhd -t ")"
+
+alt + shift - d: skhd -t "<"
+alt + shift - k: skhd -t ">"
+
 ctrl + cmd - w [
   "wezterm": skhd -k "cmd - w"
   "finder": skhd -k "cmd - w"

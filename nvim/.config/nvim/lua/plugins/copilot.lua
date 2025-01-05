@@ -1,15 +1,17 @@
 return {
   'zbirenbaum/copilot.lua',
   cmd = 'Copilot',
-  event = 'InsertEnter',
   config = function()
     require('copilot').setup({
       filetypes = {
         dashboard = false,
-        sql = true,
       },
       suggestion = {
-        auto_trigger = true,
+        auto_trigger = false,
+        keymap = {
+          next = '<c-CR>',
+          prev = '<c-S-CR>',
+        },
       },
       panel = {
         keymap = {

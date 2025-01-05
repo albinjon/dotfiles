@@ -1,5 +1,5 @@
 return {
-  event = 'BufReadPost',
+  event = { 'LspAttach' },
   'numToStr/Comment.nvim',
   opts = {},
 }

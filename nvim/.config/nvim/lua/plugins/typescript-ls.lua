@@ -1,10 +1,18 @@
 return {
+  enabled = false,
   'pmizio/typescript-tools.nvim',
-  event = 'BufReadPost',
+  ft = { 'typescript', 'typescriptreact', 'javascriptreact', 'javascript' },
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
   opts = {},
   config = function()
+    local api = require('typescript-tools.api')
     require('typescript-tools').setup({
+      handlers = {
+        ['textDocument/publishDiagnostics'] = api.filter_diagnostics(
+          -- Ignore 'This may be converted to an async function' diagnostics.
+          { 1375 }
+        ),
+      },
       settings = {
         -- spawn additional tsserver instance to calculate diagnostics on it
         separate_diagnostic_server = true,

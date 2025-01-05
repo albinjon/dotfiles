@@ -11,13 +11,15 @@
 
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
-after-startup-command = []
-
+# after-startup-command = ['layout tiles horizontal vertical']
+after-startup-command = [
+  'exec-and-forget borders active_color=0xffFFA01E inactive_color=0xff494d64 width=15.0', 'exec-and-forget sketch'
+]
 # Start AeroSpace at login
 start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
-enable-normalization-flatten-containers = false
+enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
 # Possible values: tiles|accordion
@@ -26,18 +28,20 @@ default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 key-mapping.preset = 'qwerty'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Notify Sketchybar about workspace change
 exec-on-workspace-change = ['/bin/bash', '-c',
-    '~/.local/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
 [gaps]
-inner.horizontal = 5
-inner.vertical =   5
-outer.left =       10
-outer.bottom =     10
+inner.horizontal = 30
+inner.vertical =   30
+outer.left =       30
+outer.bottom =     30
 # INFO: monitor.built-in is just for example, both have 5 right now.
-outer.top =        [ { monitor."built-in" = 5 }, 40 ]
-outer.right =      10
+outer.top =        [ { monitor."built-in" = 20 }, 50 ]
+outer.right =      30
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'
@@ -70,21 +74,11 @@ B = ['secondary', 'main']
 
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-# You can uncomment the following lines to open up terminal with ctrl-cmd + enter shortcut ()
-# ctrl-cmd-enter = '''exec-and-forget osascript -e '
-# tell application "Terminal"
-#     do script
-#     activate
-# end tell'
-# '''
-
 # User Commands
 cmd-alt-shift-ctrl-t = 'exec-and-forget open -a wezterm -n --args start'
 cmd-alt-shift-ctrl-n = 'exec-and-forget open -a wezterm -n --args start nvim'
 cmd-alt-shift-ctrl-s = 'exec-and-forget /bin/bash -c cat /users/albin/testzsh.sh  > ~/out.log'
 cmd-alt-shift-ctrl-e = 'exec-and-forget /Users/albin/.scripts/emacsclient.sh'
-# cmd-alt-shift-ctrl-e = 'exec-and-forget /Users/albin/.config/aeroscripts/emacs.sh'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-period = 'layout tiles horizontal vertical'
@@ -96,8 +90,8 @@ ctrl-cmd-j = 'focus down'
 ctrl-cmd-k = 'focus up'
 ctrl-cmd-l = 'focus right'
 ctrl-cmd-c = 'focus-monitor --wrap-around next'
-cmd-alt-shift-ctrl-l  = 'split vertical'
-cmd-alt-shift-ctrl-j = 'split horizontal'
+# cmd-alt-shift-ctrl-l  = 'split vertical'
+# cmd-alt-shift-ctrl-j = 'split horizontal'
 
 ctrl-cmd-g = 'workspace --wrap-around next'
 ctrl-cmd-s = 'workspace --wrap-around prev'
@@ -112,6 +106,11 @@ ctrl-cmd-shift-j = 'move down'
 ctrl-cmd-shift-k = 'move up'
 ctrl-cmd-shift-l = 'move right'
 ctrl-cmd-shift-c = [ 'move-node-to-monitor --wrap-around next' ,  'focus-monitor --wrap-around next' ]
+
+cmd-shift-h = ['join-with left', 'mode main']
+cmd-shift-j = ['join-with down', 'mode main']
+cmd-shift-k = ['join-with up', 'mode main']
+cmd-shift-l = ['join-with right', 'mode main']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 ctrl-cmd-shift-minus = 'resize smart -50'
@@ -149,9 +148,50 @@ ctrl-cmd-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 cmd-alt-shift-ctrl-c = 'mode service'
 
+
+[[on-window-detected]]
+if.app-id = 'net.runelite.launcher'
+run = 'layout floating'
+
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.electron.dockerdesktop'
+run = 'move-node-to-workspace A'
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'at.eggerapps.Postico'
+run = 'move-node-to-workspace 9'
+
+[[on-window-detected]]
+if.app-id = 'com.postmanlabs.mac'
+run = 'move-node-to-workspace 8'
+
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+run = 'move-node-to-workspace 1'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -160,7 +200,3 @@ c = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 
-ctrl-cmd-shift-h = ['join-with left', 'mode main']
-ctrl-cmd-shift-j = ['join-with down', 'mode main']
-ctrl-cmd-shift-k = ['join-with up', 'mode main']
-ctrl-cmd-shift-l = ['join-with right', 'mode main']
