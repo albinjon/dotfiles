@@ -74,17 +74,7 @@ return {
         { '<leader>cr', vim.lsp.buf.rename, '[r]ename' },
         {
           '<leader>ca',
-          function()
-            require('fzf-lua').lsp_code_actions({
-              winopts = {
-                relative = 'cursor',
-                width = 0.6,
-                height = 0.6,
-                row = 1,
-                preview = { vertical = 'up:70%' },
-              },
-            })
-          end,
+          vim.lsp.buf.code_action,
           '[c]ode [a]ctions',
           { 'n', 'v' },
         },
@@ -145,7 +135,7 @@ return {
             },
           },
           filetypes = { 'vue', 'typescript', 'typescriptreact', 'javascriptreact', 'javascript' },
-          root_dir = vim.fs.dirname(vim.fs.find({ '.git', 'package.json' }, { upward = true })[1]),
+          root_dir = require('lspconfig').util.root_pattern('package.json'),
           single_file_support = false,
         },
         denols = {

@@ -292,11 +292,6 @@ return {
       winopts = {
         height = 0.90,
         width = 0.90,
-        preview = {
-          horizontal = 'right:60%',
-          layout = 'horizontal',
-          flip_columns = 120,
-        },
       },
       keymap = {
         builtin = {
@@ -316,7 +311,7 @@ return {
           ['ctrl-s'] = actions.file_split,
           ['ctrl-v'] = actions.file_vsplit,
           ['ctrl-t'] = actions.file_tabedit,
-          ['ctrl-q'] = actions.file_sel_to_qf,
+          ['ctrl-q'] = { fn = actions.file_sel_to_qf, prefix = 'select-all' },
         },
       },
       files = {

@@ -54,6 +54,12 @@ local function open_file_in_finder()
   vim.fn.system('open -R ' .. file_path)
 end
 
+local function copy_current_file_name()
+  local file_path = vim.fn.expand('%:t')
+  vim.notify('Copied ' .. file_path .. ' to clipboard', vim.log.levels.INFO)
+  vim.fn.setreg('+', file_path)
+end
+
 local function replace_selection()
   local selected_text = get_visual_selection()
   local replacement = vim.fn.input('Enter replacement text: ', selected_text)
@@ -90,6 +96,12 @@ return {
           '<leader>fo',
           open_file_in_finder,
           desc = '[o]pen current file (finder)',
+        },
+        {
+          mode = 'n',
+          '<leader>fy',
+          copy_current_file_name,
+          desc = '[y]ank current file name',
         },
         {
           mode = 'n',
