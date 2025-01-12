@@ -68,3 +68,6 @@ end
 
 # Added by Windsurf
 fish_add_path /Users/albin/.codeium/windsurf/bin
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/albin/Downloads/gcloud/google-cloud-sdk/path.fish.inc' ]; . '/Users/albin/Downloads/gcloud/google-cloud-sdk/path.fish.inc'; end

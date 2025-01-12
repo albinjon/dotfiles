@@ -84,3 +84,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Global aliases
 # alias -g G='| grep' P='| pbcopy'
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
