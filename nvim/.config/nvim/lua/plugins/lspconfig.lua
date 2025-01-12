@@ -155,6 +155,7 @@ return {
       }
 
       local ensure_installed = vim.list_extend(vim.tbl_keys(servers), {
+        'terraform-ls',
         'delve',
         'jsonlint',
         'lua-language-server',

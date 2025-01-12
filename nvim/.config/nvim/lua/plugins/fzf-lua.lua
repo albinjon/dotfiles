@@ -292,6 +292,9 @@ return {
       winopts = {
         height = 0.90,
         width = 0.90,
+        treesitter = {
+          enabled = true,
+        },
       },
       keymap = {
         builtin = {

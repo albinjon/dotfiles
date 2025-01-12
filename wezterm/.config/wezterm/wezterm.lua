@@ -32,6 +32,11 @@ config.keys = {
 		action = wezterm.action.DisableDefaultAssignment,
 	},
 	{
+		key = "b",
+		mods = "CTRL",
+		action = wezterm.action.ActivateCopyMode,
+	},
+	{
 		key = "LeftArrow",
 		mods = "OPT",
 		action = act.SendKey({
