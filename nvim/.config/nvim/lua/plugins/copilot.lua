@@ -9,6 +9,7 @@ return {
       suggestion = {
         auto_trigger = false,
         keymap = {
+          accept = '<c-y>',
           next = '<c-CR>',
           prev = '<c-S-CR>',
         },
