@@ -11,6 +11,11 @@ return {
   dependencies = {
     { 'nvim-tree/nvim-web-devicons' },
   },
+  opts = {
+    oldfiles = {
+      include_current_session = true,
+    },
+  },
   keys = {
     {
       '<leader>sh',
