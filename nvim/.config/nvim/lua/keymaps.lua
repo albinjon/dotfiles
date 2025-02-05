@@ -8,8 +8,13 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 
-vim.keymap.set('n', '<M-k>', '<cmd>cprev<cr>', { desc = 'Go to previous [q]uickfix entry' })
-vim.keymap.set('n', '<M-j>', '<cmd>cnext<cr>', { desc = 'Go to next [q]uickfix entry' })
+vim.keymap.set('v', '<M-j>', ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set('v', '<M-k>', ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { silent = true })
+vim.keymap.set('n', '<M-k>', ':m .-2<CR>==', { silent = true })
+
+vim.keymap.set('n', '<C-q>k', '<cmd>cprev<cr>', { desc = 'Go to previous [q]uickfix entry' })
+vim.keymap.set('n', '<C-q>j', '<cmd>cnext<cr>', { desc = 'Go to next [q]uickfix entry' })
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })

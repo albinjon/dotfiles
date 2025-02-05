@@ -7,6 +7,7 @@ local function get_selected()
 end
 
 return {
+  enabled = true,
   'ibhagwan/fzf-lua',
   dependencies = {
     { 'nvim-tree/nvim-web-devicons' },

@@ -20,7 +20,7 @@ return {
   cmd = { 'NeotestRunDAP', 'NeotestRunFile', 'NeotestRunNearest' },
   keys = {
     { '<leader>trd', '<cmd>NeotestRunDAP<cr>', desc = 'Run test with DAP' },
-    { '<leader>trr', '<cmd>NeotestRunFile<cr>', desc = 'Run all tests in file' },
+    { '<leader>trt', '<cmd>NeotestRunFile<cr>', desc = 'Run all tests in file' },
     { '<leader>tra', '<cmd>NeotestRunNearest<cr>', desc = 'Run nearest test' },
   },
   dependencies = {
@@ -29,6 +29,7 @@ return {
     'antoinemadec/FixCursorHold.nvim',
     'nvim-treesitter/nvim-treesitter',
     'thenbe/neotest-playwright',
+    'nvim-neotest/neotest-jest',
   },
   config = function()
     local nt = require('neotest')
@@ -47,6 +48,28 @@ return {
     end, { desc = 'Run nearest test' })
     require('neotest').setup({
       adapters = {
+        require('neotest-jest')({
+          jestCommand = 'npm run test --',
+          jestConfigFile = function()
+            local packageRoot = vim.fs.find('package.json', {
+              upward = true,
+              path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
+              type = 'file',
+            })[1]
+            local folderPath = packageRoot:gsub('/package.json', '')
+            return folderPath .. '/jest.config.ts'
+          end,
+          env = { CI = true },
+          cwd = function()
+            local packageRoot = vim.fs.find('package.json', {
+              upward = true,
+              path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
+              type = 'file',
+            })[1]
+            local folderPath = packageRoot:gsub('/package.json', '')
+            return folderPath
+          end,
+        }),
         require('neotest-playwright').adapter({
           options = {
             persist_project_selection = true,

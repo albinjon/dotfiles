@@ -2,6 +2,7 @@ return {
   'yetone/avante.nvim',
   keys = {
     { '<leader>ae', '<cmd>AvanteEdit<cr>', desc = '[a]vante [e]dit', mode = 'v' },
+    { '<leader>aa', '<cmd>AvanteAsk<cr>', desc = '[a]vante [a]sk', mode = 'v' },
     { '<leader>aa', '<cmd>AvanteAsk<cr>', desc = '[a]vante [a]sk' },
   },
   version = false, -- set this if you want to always pull the latest change

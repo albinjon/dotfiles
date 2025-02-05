@@ -113,6 +113,10 @@ return {
       local mason_registry = require('mason-registry')
       local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path()
         .. '/node_modules/@vue/language-server'
+
+      -- INFO: This requres manual installation with npm i -g @styled/typescript-styled-plugin
+      local styled_components_path = '/usr/local/lib/node_modules/@styled/typescript-styled-plugin'
+
       local servers = {
         eslint = {
           settings = {
@@ -132,11 +136,25 @@ return {
                 location = vue_language_server_path,
                 languages = { 'vue' },
               },
+              {
+                name = '@styled/typescript-styled-plugin',
+                location = styled_components_path,
+                languages = { 'tsx', 'jsx' },
+              },
             },
           },
           filetypes = { 'vue', 'typescript', 'typescriptreact', 'javascriptreact', 'javascript' },
           root_dir = require('lspconfig').util.root_pattern('package.json'),
           single_file_support = false,
+        },
+        cssls = {
+          settings = {
+            css = {
+              lint = {
+                unknownAtRules = 'ignore',
+              },
+            },
+          },
         },
         denols = {
           root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock'),

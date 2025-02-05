@@ -107,10 +107,10 @@ ctrl-cmd-shift-k = 'move up'
 ctrl-cmd-shift-l = 'move right'
 ctrl-cmd-shift-c = [ 'move-node-to-monitor --wrap-around next' ,  'focus-monitor --wrap-around next' ]
 
-cmd-shift-h = ['join-with left', 'mode main']
-cmd-shift-j = ['join-with down', 'mode main']
-cmd-shift-k = ['join-with up', 'mode main']
-cmd-shift-l = ['join-with right', 'mode main']
+cmd-alt-shift-h = ['join-with left', 'mode main']
+cmd-alt-shift-j = ['join-with down', 'mode main']
+cmd-alt-shift-k = ['join-with up', 'mode main']
+cmd-alt-shift-l = ['join-with right', 'mode main']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 ctrl-cmd-shift-minus = 'resize smart -50'

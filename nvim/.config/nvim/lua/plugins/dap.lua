@@ -85,11 +85,13 @@ return {
       type = 'server',
       host = 'localhost',
       port = '${port}',
+      resolveSourceMapLocations = { '${workspaceFolder}/', '!/node_modules/**' },
       executable = {
         command = js_adapter_cmd,
         args = { '${port}' },
       },
     }
+
     vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#E53935' })
     vim.api.nvim_set_hl(0, 'DapConditionalBreakpoint', { ctermbg = 0, fg = '#FFF176' })
     vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg = 0, fg = '#61afef' })
