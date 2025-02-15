@@ -14,6 +14,7 @@ return {
         'css',
         'styled',
         'diff',
+        'http',
         'html',
         'javascript',
         'jsdoc',

@@ -43,34 +43,6 @@ return {
         end,
       })
       local keys = {
-        {
-          'gd',
-          function()
-            require('fzf-lua').lsp_definitions()
-          end,
-          '[g]oto [d]efinition',
-        },
-        {
-          'gr',
-          function()
-            require('fzf-lua').lsp_references()
-          end,
-          '[g]oto [r]eferences',
-        },
-        {
-          'gI',
-          function()
-            require('fzf-lua').lsp_implementations()
-          end,
-          '[g]oto [i]mplementation',
-        },
-        {
-          '<leader>td',
-          function()
-            require('fzf-lua').lsp_type_definitions()
-          end,
-          'type [d]efinition',
-        },
         { '<leader>cr', vim.lsp.buf.rename, '[r]ename' },
         {
           '<leader>ca',
@@ -86,7 +58,6 @@ return {
           end,
           'Hover Documentation',
         },
-        { 'gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration' },
       }
 
       -- Register keymaps on LspAttach

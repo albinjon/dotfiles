@@ -9,7 +9,6 @@ return {
       'chrisgrieser/nvim-scissors',
       cmd = { 'ScissorsAddNewSnippet', 'ScissorsEditSnippet' },
       dependencies = {
-        { 'ibhagwan/fzf-lua' },
         { 'stevearc/dressing.nvim', opts = {} },
       },
       opts = {

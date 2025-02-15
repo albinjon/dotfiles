@@ -4,7 +4,6 @@ return {
   cmd = 'Leet',
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
-    'ibhagwan/fzf-lua',
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
   },

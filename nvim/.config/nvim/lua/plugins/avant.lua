@@ -1,29 +1,34 @@
 return {
   'yetone/avante.nvim',
+  event = 'VeryLazy',
   keys = {
     { '<leader>ae', '<cmd>AvanteEdit<cr>', desc = '[a]vante [e]dit', mode = 'v' },
     { '<leader>aa', '<cmd>AvanteAsk<cr>', desc = '[a]vante [a]sk', mode = 'v' },
     { '<leader>aa', '<cmd>AvanteAsk<cr>', desc = '[a]vante [a]sk' },
   },
-  version = false, -- set this if you want to always pull the latest change
+  version = '*', -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
   opts = {
+    -- add any opts here
+    -- for example
     provider = 'openai',
-    auto_suggestions_provider = 'copilot',
     hints = { enabled = false },
+    openai = {
+      endpoint = 'https://api.openai.com/v1',
+      model = 'gpt-4o', -- your desired model (or use gpt-4o, etc.)
+      timeout = 30000, -- timeout in milliseconds
+      temperature = 0, -- adjust if needed
+      max_tokens = 4096,
+    },
   },
-  -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = 'make',
   dependencies = {
-    'nvim-treesitter/nvim-treesitter',
     'stevearc/dressing.nvim',
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
-    'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
-    -- "zbirenbaum/copilot.lua", -- for providers='copilot'
     {
-
       -- support for image pasting
       'HakonHarnes/img-clip.nvim',
+      event = 'VeryLazy',
       opts = {
         -- recommended settings
         default = {
@@ -41,9 +46,9 @@ return {
       -- Make sure to set this up properly if you have lazy=true
       'MeanderingProgrammer/render-markdown.nvim',
       opts = {
-        file_types = { 'Avante' },
+        file_types = { 'markdown', 'Avante' },
       },
-      ft = { 'Avante' },
+      ft = { 'markdown', 'Avante' },
     },
   },
 }

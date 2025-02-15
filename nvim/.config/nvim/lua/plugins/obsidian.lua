@@ -45,7 +45,7 @@ return {
       end,
     })
     vim.api.nvim_create_user_command('ObsidianSearchAll', function()
-      require('fzf-lua').files({ cwd = obsidianRootDir })
+      Snacks.picker.files({ cwd = obsidianRootDir })
     end, { desc = 'Find obsidian files' })
   end,
 }
