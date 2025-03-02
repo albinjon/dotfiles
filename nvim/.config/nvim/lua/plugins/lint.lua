@@ -1,15 +1,14 @@
 return {
   'mfussenegger/nvim-lint',
+  lazy = false,
   enabled = false,
   opts = {
     -- Event to trigger linters
-    events = { 'BufWritePost', 'BufReadPost', 'TextChanged' },
+    events = { 'BufWritePost', 'BufReadPost', 'TextChanged', 'ModeChanged' },
   },
   config = function(_, opts)
     local M = {}
-    local eslint_d = require('lint').linters.eslint_d
-    local test = require('lspconfig').util.root_pattern('tsconfig.json')()
-    eslint_d.cwd = test
+    vim.env.ESLINT_D_PPID = vim.fn.getpid()
     local lint = require('lint')
     lint.linters_by_ft = {
       fish = { 'fish' },
@@ -23,6 +22,18 @@ return {
       -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
       -- ['_'] = { 'fallback linter' },
       -- ["*"] = { "typos" },
+    }
+    local eslint = lint.linters.eslint_d
+
+    eslint.args = {
+      '--no-warn-ignored', -- <-- this is the key argument
+      '--format',
+      'json',
+      '--stdin',
+      '--stdin-filename',
+      function()
+        return vim.api.nvim_buf_get_name(0)
+      end,
     }
 
     function M.debounce(ms, fn)

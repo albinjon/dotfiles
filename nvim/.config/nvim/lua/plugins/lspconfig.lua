@@ -91,11 +91,6 @@ return {
       local servers = {
         eslint = {
           settings = {
-            workingDirectories = {
-              { pattern = 'packages/*' },
-              { pattern = 'apps/*' },
-              { pattern = 'services/*' },
-            },
             useFlatConfig = false,
           },
         },
@@ -157,6 +152,7 @@ return {
         'sqlls',
         'volar',
         'crlfmt',
+        'tailwindcss-language-server',
         'gopls',
         'vue-language-server',
         'js-debug-adapter',

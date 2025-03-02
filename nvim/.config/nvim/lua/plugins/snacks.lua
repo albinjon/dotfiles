@@ -10,6 +10,11 @@ local function get_selected()
   return selected_text
 end
 
+local function find_root_package()
+  local root = vim.fs.root(0, 'package.json')
+  return root
+end
+
 return {
   'folke/snacks.nvim',
   priority = 1000,
@@ -426,7 +431,26 @@ return {
     {
       '<leader>sg',
       function()
-        Snacks.picker.grep({ search = get_selected() })
+        Snacks.picker.grep({
+          search = get_selected(),
+          hidden = true,
+          ignored = true,
+          exclude = { '**/node_modules', '**/dist' },
+        })
+      end,
+      desc = '[s]earch with [g]rep',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>sip',
+      function()
+        Snacks.picker.grep({
+          search = get_selected(),
+          hidden = true,
+          ignored = true,
+          cwd = find_root_package(),
+          exclude = { '**/node_modules', '**/dist' },
+        })
       end,
       desc = '[s]earch with [g]rep',
       mode = { 'n', 'v' },

@@ -37,7 +37,7 @@ return {
         javascriptreact = { 'prettierd' },
         vue = { 'prettierd' },
         markdown = { 'prettierd' },
-        json = { 'prettierd' },
+        json = { 'jq' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

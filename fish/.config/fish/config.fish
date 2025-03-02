@@ -39,7 +39,15 @@ alias k "kubectl"
 # Import secrets
 source $HOME/.secret_envs/.env
 
-bind \es 'cd ~/careos-backend && npm run cos; commandline -f repaint'
+function cos
+    cd ~/careos-backend
+    npm run cos
+    history merge
+    commandline -f repaint
+end
+
+bind \es cos
+#bind \es 'cd ~/careos-backend && npm run cos; commandline -f repaint'
 
 # Other aliases
 function sketch
