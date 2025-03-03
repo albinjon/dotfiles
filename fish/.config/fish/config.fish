@@ -41,7 +41,7 @@ source $HOME/.secret_envs/.env
 
 function cos
     cd ~/careos-backend
-    npm run cos
+    npm run cos -- $argv
     history merge
     commandline -f repaint
 end
