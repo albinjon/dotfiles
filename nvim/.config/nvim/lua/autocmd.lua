@@ -21,3 +21,8 @@ vim.api.nvim_create_autocmd('BufRead', {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+  command = 'silent! EslintFixAll',
+})

@@ -34,7 +34,6 @@ require('lazy').setup({
         'vimballPlugin',
         'zip',
         'zipPlugin',
-        'tutor',
         'rplugin',
         'syntax',
         'synmenu',

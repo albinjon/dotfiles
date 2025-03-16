@@ -11,15 +11,6 @@ path=(
   $path
 )
 
-
-function cos() {
-    BUFFER="cd ~/Programmering/careos-backend && npm run cos"
-    zle accept-line
-}
-zle -N cos
-bindkey '^[s' cos
-
-
 # Environment variables
 export XDG_CONFIG_HOME="$HOME/.config"
 export CAREOS_LOG_FORMAT="PLAIN"
@@ -84,3 +75,14 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Global aliases
 # alias -g G='| grep' P='| pbcopy'
+
+
+
+cos() {
+    cd /Users/albin/careos-backend
+    npm run cos -- "$@"
+    fc -R
+}
+bindkey -s '^G' 'cos
+'
+

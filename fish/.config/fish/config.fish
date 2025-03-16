@@ -7,7 +7,7 @@ set -U fish_user_paths $HOME/bin $HOME/.deno/bin /usr/local/bin $HOME/Programmer
 
 set fzf_fd_opts --hidden --follow -E .git -E node_modules -E .venv -E venv/ -E .cache -E .DS_Store -E /Music -E /Library -E /Applications -E .npm/ -E .docker/ -E .cursor/ -E .local/ -E Movies/ -E .vscode/ -E go/pkg -E .pyenv/ -E Pictures/ -E .prettierd/ -E .pgadmin/ -E .runelite/
 
-fzf_configure_bindings --directory=\cg --processes=\cp
+fzf_configure_bindings --directory=\cf --processes=\cp
 set -U nvm_default_version v20.18.0
 set -U fish_greeting
 
@@ -39,14 +39,14 @@ alias k "kubectl"
 # Import secrets
 source $HOME/.secret_envs/.env
 
-function cos
-    cd ~/careos-backend
-    npm run cos -- $argv
-    history merge
-    commandline -f repaint
-end
-
-bind \es cos
+#function cos
+#    cd ~/careos-backend
+#    npm run cos -- $argv
+#    history merge
+#    commandline -f repaint
+#end
+#
+#bind \es cos
 #bind \es 'cd ~/careos-backend && npm run cos; commandline -f repaint'
 
 # Other aliases
