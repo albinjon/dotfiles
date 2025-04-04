@@ -39,7 +39,6 @@ inner.horizontal = 30
 inner.vertical =   30
 outer.left =       30
 outer.bottom =     30
-# INFO: monitor.built-in is just for example, both have 5 right now.
 outer.top =        [ { monitor."built-in" = 20 }, 50 ]
 outer.right =      30
 
