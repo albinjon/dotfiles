@@ -77,8 +77,6 @@ B = ['secondary', 'main']
 # User Commands
 cmd-alt-shift-ctrl-t = 'exec-and-forget open -a wezterm -n --args start'
 cmd-alt-shift-ctrl-n = 'exec-and-forget open -a wezterm -n --args start nvim'
-cmd-alt-shift-ctrl-s = 'exec-and-forget /bin/bash -c cat /users/albin/testzsh.sh  > ~/out.log'
-cmd-alt-shift-ctrl-e = 'exec-and-forget /Users/albin/.scripts/emacsclient.sh'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-period = 'layout tiles horizontal vertical'
