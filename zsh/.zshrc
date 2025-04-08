@@ -35,9 +35,9 @@ source $ZSH/lib/async_prompt.zsh
 source $ZSH/themes/$ZSH_THEME.zsh-theme
 
 # Defer loading of other Oh My Zsh components
-source $HOME/.zsh-defer/zsh-defer.plugin.zsh
-zsh-defer source $ZSH/oh-my-zsh.sh
-plugins=(zsh-autosuggestions fast-syntax-highlighting)
+# source $HOME/.zsh-defer/zsh-defer.plugin.zsh
+# zsh-defer source $ZSH/oh-my-zsh.sh
+# plugins=(zsh-autosuggestions fast-syntax-highlighting)
 
 # Aliases
 alias gcam="git commit -am" gco="git checkout" gp="git push" gpl="git pull" gaa="git add -A" \
@@ -45,16 +45,6 @@ alias gcam="git commit -am" gco="git checkout" gp="git push" gpl="git pull" gaa=
       gmm="git merge main" gsw="git switch -" gd="git diff" \
       sketch="nohup sketchybar >/dev/null 2>&1 &" resketch="sketchybar --reload" \
       pip="pip3" chx="chmod +x" py="python3"
-
-# Functions
-run_doa() {
-    npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*barcode*" --filter="*finalizer*" --filter="*mocks*"
-}
-
-run_e2e() {
-    npx turbo run dev --filter="*doa*" --filter="*file-persister*" --filter="*config*" --filter="*organization*" --filter="*mro*" --filter="*collection*" --filter="*gates*" --filter="*workplace*" --filter="*finalizer*" --filter="*cgm*"  --filter="*maestro*" --concurrency=20
-}
-# --filter="*event-dump*"
 
 # Lazy-load NVM
 export NVM_DIR="$HOME/.nvm"
@@ -68,15 +58,13 @@ node() { lazy_load_nvm && node "$@"; }
 npm() { lazy_load_nvm && npm "$@"; }
 
 # Defer FZF loading
-zsh-defer source $HOME/.fzf.zsh
+# zsh-defer source $HOME/.fzf.zsh
 
 # Disable untracked files dirty status
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Global aliases
 # alias -g G='| grep' P='| pbcopy'
-
-
 
 cos() {
     cd /Users/albin/careos-backend
