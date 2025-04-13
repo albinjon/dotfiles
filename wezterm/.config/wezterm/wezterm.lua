@@ -12,6 +12,7 @@ config.font_size = 18.0
 config.window_background_opacity = 0.82
 config.macos_window_background_blur = 20
 config.enable_tab_bar = false
+config.enable_wayland = false
 config.window_padding = {
 	left = 5,
 	right = 5,
