@@ -74,3 +74,4 @@ cos() {
 bindkey -s '^G' 'cos
 '
 
+eval "$(mise activate)"

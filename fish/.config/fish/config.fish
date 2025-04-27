@@ -1,7 +1,7 @@
 eval (/opt/homebrew/bin/brew shellenv)
 
-set -gx GOROOT $(/opt/homebrew/bin/brew  --prefix go)/libexec
-set -gx GOPATH $HOME/go
+# set -gx GOROOT $(/opt/homebrew/bin/brew  --prefix go)/libexec
+# set -gx GOPATH $HOME/go
 
 set -U fish_user_paths $HOME/bin $HOME/.deno/bin /usr/local/bin $HOME/Programmering/apps $HOME/.local/bin $HOME/.local/bin/nvim/bin $HOME/.config/emacs/bin $GOPATH/bin $GOROOT/bin $fish_user_paths
 
@@ -82,3 +82,4 @@ fish_add_path /Users/albin/.codeium/windsurf/bin
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/albin/Downloads/gcloud/google-cloud-sdk/path.fish.inc' ]; . '/Users/albin/Downloads/gcloud/google-cloud-sdk/path.fish.inc'; end
+eval "$(mise activate)"

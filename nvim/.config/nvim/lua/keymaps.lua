@@ -4,10 +4,12 @@
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 
+-- Moving lines
 vim.keymap.set('v', '<M-j>', ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set('v', '<M-k>', ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { silent = true })
@@ -18,6 +20,13 @@ vim.keymap.set('n', '<C-q>j', '<cmd>cnext<cr>', { desc = 'Go to next [q]uickfix 
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, { desc = '[r]ename' })
+vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = '[c]ode [a]ctions' })
+vim.keymap.set('n', '<leader>cl', '<cmd>LspInfo<cr>', { desc = 'Info' })
+vim.keymap.set('n', 'K', function()
+  require('noice.lsp').hover()
+end, { desc = 'Hover Documentation' })
 
 vim.keymap.set({ 'i', 'x', 'c' }, '<M-b>', '<C-Left>', { desc = 'Move cursor word backwards' })
 vim.keymap.set({ 'i', 'x', 'c' }, '<M-f>', '<C-Right>', { desc = 'Move cursor word forwards' })

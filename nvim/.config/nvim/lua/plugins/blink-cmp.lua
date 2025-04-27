@@ -22,6 +22,17 @@ return {
         },
       },
     },
+    {
+      "folke/lazydev.nvim",
+      ft = "lua",
+      opts = {
+        library = {
+          -- See the configuration section for more details
+          -- Load luvit types when the `vim.uv` word is found
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+      },
+    },
   },
   version = '*',
   ---@module 'blink.cmp'
@@ -55,7 +66,7 @@ return {
       default = function()
         local success, node = pcall(vim.treesitter.get_node)
         if vim.bo.filetype == 'lua' then
-          return { 'lsp', 'path' }
+          return { 'lsp', 'path', 'lazydev' }
         elseif vim.bo.filetype == 'markdown' then
           return { 'buffer' }
         elseif success and node and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
@@ -64,6 +75,13 @@ return {
           return { 'lsp', 'path', 'snippets', 'buffer' }
         end
       end,
+      providers = {
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
+        },
+      },
     },
   },
   opts_extend = { 'sources.default' },
