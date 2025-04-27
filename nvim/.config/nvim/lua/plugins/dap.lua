@@ -1,9 +1,8 @@
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
-    'neovim/nvim-lspconfig',
     'rcarriga/nvim-dap-ui',
-    'nvim-telescope/telescope.nvim',
+    "nvim-neotest/nvim-nio"
   },
   cmd = {
     'DapContinue',
@@ -16,14 +15,14 @@ return {
     'DapSetConditionalBreakpoint',
   },
   keys = {
-    { '<F5>', '<cmd>DapContinue<cr>', desc = 'Debug: Start/Continue' },
-    { '<F1>', '<cmd>DapStepInto<cr>', desc = 'Debug: Step Into' },
-    { '<F2>', '<cmd>DapStepOver<cr>', desc = 'Debug: Step Over' },
-    { '<F3>', '<cmd>DapStepOut<cr>', desc = 'Debug: Step Out' },
-    { '<leader>b', '<cmd>DapToggleBreakpoint<cr>', desc = 'Debug: Toggle Breakpoint' },
-    { '<leader>B', '<cmd>DapSetConditionalBreakpoint<cr>', desc = 'Debug: Set Conditional Breakpoint' },
-    { '<leader>du', '<cmd>DapToggleUI<cr>', desc = 'Debug: Toggle UI' },
-    { '<leader>dq', '<cmd>DapCloseUI<cr>', desc = 'Debug: Close UI' },
+    { '<F5>',       '<cmd>DapContinue<cr>',                 desc = 'Debug: Start/Continue' },
+    { '<F1>',       '<cmd>DapStepInto<cr>',                 desc = 'Debug: Step Into' },
+    { '<F2>',       '<cmd>DapStepOver<cr>',                 desc = 'Debug: Step Over' },
+    { '<F3>',       '<cmd>DapStepOut<cr>',                  desc = 'Debug: Step Out' },
+    { '<leader>b',  '<cmd>DapToggleBreakpoint<cr>',         desc = 'Debug: Toggle Breakpoint' },
+    { '<leader>B',  '<cmd>DapSetConditionalBreakpoint<cr>', desc = 'Debug: Set Conditional Breakpoint' },
+    { '<leader>du', '<cmd>DapToggleUI<cr>',                 desc = 'Debug: Toggle UI' },
+    { '<leader>dq', '<cmd>DapCloseUI<cr>',                  desc = 'Debug: Close UI' },
   },
 
   config = function()
