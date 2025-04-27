@@ -1,7 +1,20 @@
-eval (/opt/homebrew/bin/brew shellenv)
 
-# set -gx GOROOT $(/opt/homebrew/bin/brew  --prefix go)/libexec
-# set -gx GOPATH $HOME/go
+
+# macOS Setup
+if test -f /opt/homebrew/bin/brew
+    eval (/opt/homebrew/bin/brew shellenv)
+    set -gx GOROOT $(/opt/homebrew/bin/brew  --prefix go)/libexec
+    set -gx GOPATH $HOME/go
+
+    function sketch
+        nohup sketchybar >/dev/null 2>&1 &
+    end
+
+end
+
+if test -f $HOME/.secret_envs/.env
+    source $HOME/.secret_envs/.env
+end
 
 set -U fish_user_paths $HOME/bin $HOME/.deno/bin /usr/local/bin $HOME/Programmering/apps $HOME/.local/bin $HOME/.local/bin/nvim/bin $HOME/.config/emacs/bin $GOPATH/bin $GOROOT/bin $fish_user_paths
 
@@ -36,24 +49,6 @@ alias gd "git diff"
 
 alias k "kubectl"
 
-# Import secrets
-source $HOME/.secret_envs/.env
-
-#function cos
-#    cd ~/careos-backend
-#    npm run cos -- $argv
-#    history merge
-#    commandline -f repaint
-#end
-#
-#bind \es cos
-#bind \es 'cd ~/careos-backend && npm run cos; commandline -f repaint'
-
-# Other aliases
-function sketch
-    nohup sketchybar >/dev/null 2>&1 &
-end
-
 function measure_command_time
     if test (count $argv) -lt 2
         echo "Usage: measure_command_time 'your command' 'log message to search for'"
@@ -72,13 +67,6 @@ alias resketch "sketchybar --reload"
 alias pip "pip3"
 alias chx "chmod +x"
 alias py "python3"
-
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
-
-# Added by Windsurf
-fish_add_path /Users/albin/.codeium/windsurf/bin
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/albin/Downloads/gcloud/google-cloud-sdk/path.fish.inc' ]; . '/Users/albin/Downloads/gcloud/google-cloud-sdk/path.fish.inc'; end
