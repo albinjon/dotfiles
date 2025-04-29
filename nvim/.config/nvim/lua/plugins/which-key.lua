@@ -66,12 +66,12 @@ local function replace_selection()
   vim.cmd(string.format('%%s/%s/%s/gc', selected_text:gsub('/', '\\/'), replacement:gsub('/', '\\/')))
 end
 
-local function reload_file()
-  vim.cmd('LspStop')
-  vim.defer_fn(function()
-    vim.cmd('LspStart')
-  end, 500)
-end
+-- local function reload_file()
+--   vim.cmd('LspStop')
+--   vim.defer_fn(function()
+--     vim.cmd('LspStart')
+--   end, 500)
+-- end
 
 return {
   'folke/which-key.nvim',
@@ -80,17 +80,17 @@ return {
     spec = {
       {
         -- Groups
-        { mode = 'n', '<leader>c', group = '[c]ode' },
+        { mode = 'n', '<leader>c',  group = '[c]ode' },
         { mode = 'n', '<leader>cp', group = '[c]opilot' },
         { mode = 'n', '<leader>cn', group = '[c(s)]nippets' },
-        { mode = 'n', '<leader>m', group = '[m]arkdown' },
-        { mode = 'n', '<leader>p', group = '[p]ostgres' },
-        { mode = 'n', '<leader>d', group = '[d]ebug (dap)' },
-        { mode = 'n', '<leader>f', group = '[f]iles' },
-        { mode = 'v', '<leader>g', group = '[g]it' },
-        { mode = 'v', '<leader>c', group = '[c]ut (snippets)' },
-        { mode = 'v', '<leader>s', group = '[s]earch' },
-        { mode = 'n', '<leader>dc', '<cmd>DapContinue<cr>', desc = 'DAP [c]ontinue' },
+        { mode = 'n', '<leader>m',  group = '[m]arkdown' },
+        { mode = 'n', '<leader>p',  group = '[p]ostgres' },
+        { mode = 'n', '<leader>d',  group = '[d]ebug (dap)' },
+        { mode = 'n', '<leader>f',  group = '[f]iles' },
+        { mode = 'v', '<leader>g',  group = '[g]it' },
+        { mode = 'v', '<leader>c',  group = '[c]ut (snippets)' },
+        { mode = 'v', '<leader>s',  group = '[s]earch' },
+        { mode = 'n', '<leader>dc', '<cmd>DapContinue<cr>',    desc = 'DAP [c]ontinue' },
         {
           mode = 'n',
           '<leader>fo',
@@ -132,31 +132,32 @@ return {
           end,
           desc = 'open [r]epl',
         },
-        { mode = 'n', '<leader>on', '<cmd>ObsidianNew<cr>', desc = 'open [n]ew' },
-        { mode = 'n', '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = '[o]pen obsidian' },
-        { mode = 'n', '<leader>os', '<cmd>ObsidianSearch<cr>', desc = '[s]earch' },
-        { mode = 'n', '<leader>of', '<cmd>ObsidianSearchAll<cr>', desc = '[s]earch all' },
-        { mode = 'n', '<leader>ow', '<cmd>ObsidianWorkspace<cr>', desc = 'open [w]orkspace' },
+        { mode = 'n', '<leader>on',  '<cmd>ObsidianNew<cr>',           desc = 'open [n]ew' },
+        { mode = 'n', '<leader>oo',  '<cmd>ObsidianOpen<cr>',          desc = '[o]pen obsidian' },
+        { mode = 'n', '<leader>os',  '<cmd>ObsidianSearch<cr>',        desc = '[s]earch' },
+        { mode = 'n', '<leader>of',  '<cmd>ObsidianSearchAll<cr>',     desc = '[s]earch all' },
+        { mode = 'n', '<leader>ow',  '<cmd>ObsidianWorkspace<cr>',     desc = 'open [w]orkspace' },
         -- Database
-        { mode = 'n', '<leader>po', '<cmd>DbeeToggle<cr>', desc = '[p]ostgres [o]pen' },
+        { mode = 'n', '<leader>po',  '<cmd>DbeeToggle<cr>',            desc = '[p]ostgres [o]pen' },
         -- Snippets
         { mode = 'n', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
-        { mode = 'n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' } },
+        { mode = 'n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>',   { desc = '[e]dit snippet' } },
         { mode = 'v', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
         -- Windows/Buffers
-        { mode = 'n', '<leader>q', group = '[q]uit/session' },
-        { mode = 'n', '<C-Tab>', '<cmd>tabnext<cr>', desc = '[c]hange [t]ab' },
-        { mode = 'n', '<C-S-Tab>', '<cmd>tabprev<cr>', desc = '[c]hange [t]ab' },
-        { mode = 'n', '<leader>tn', '<cmd>tabnew<cr>', desc = '[n]ew [t]ab' },
-        { mode = 'n', '<leader>qq', '<cmd>wa<cr><cmd>qa<cr>', desc = '[q]uit and write all' },
-        { mode = 'n', '<leader>r', group = '[r]eload' },
-        {
-          mode = 'n',
-          '<leader>rf',
-          reload_file,
-          desc = '[r]eload [f]ile',
-        },
-        { mode = 'n', '<leader>s', group = '[s]plits/[s]earch' },
+        { mode = 'n', '<leader>q',   group = '[q]uit/session' },
+        { mode = 'n', '<C-Tab>',     '<cmd>tabnext<cr>',               desc = '[c]hange [t]ab' },
+        { mode = 'n', '<C-S-Tab>',   '<cmd>tabprev<cr>',               desc = '[c]hange [t]ab' },
+        { mode = 'n', '<leader>tn',  '<cmd>tabnew<cr>',                desc = '[n]ew [t]ab' },
+        { mode = 'n', '<leader>qq',  '<cmd>wa<cr><cmd>qa<cr>',         desc = '[q]uit and write all' },
+        { mode = 'n', '<leader>r',   group = '[r]eload' },
+        -- INFO: Currently breaking the LSP.
+        -- {
+        --   mode = 'n',
+        --   '<leader>rf',
+        --   reload_file,
+        --   desc = '[r]eload [f]ile',
+        -- },
+        { mode = 'n', '<leader>s',   group = '[s]plits/[s]earch' },
         {
           mode = 'n',
           '<c-w>j',
@@ -189,15 +190,15 @@ return {
           end,
           desc = '[s]plit (vertical/to right)',
         },
-        { mode = 'n', '<c-w>q', '<cmd>q<cr>', desc = '[s]plit delete' },
-        { mode = 'n', '<leader>t', group = '[t]rouble' },
-        { mode = 'n', '<leader>z', group = '[z]en' },
-        { mode = 'n', '<leader>w', group = '[w]rite' },
-        { mode = 'n', '<leader>wa', '<cmd>wa<cr>', desc = 'write [a]ll' },
-        { mode = 'n', '<leader>ww', '<cmd>update<cr>', desc = '[w]rite' },
+        { mode = 'n', '<c-w>q',     '<cmd>q<cr>',       desc = '[s]plit delete' },
+        { mode = 'n', '<leader>t',  group = '[t]rouble' },
+        { mode = 'n', '<leader>z',  group = '[z]en' },
+        { mode = 'n', '<leader>w',  group = '[w]rite' },
+        { mode = 'n', '<leader>wa', '<cmd>wa<cr>',      desc = 'write [a]ll' },
+        { mode = 'n', '<leader>ww', '<cmd>update<cr>',  desc = '[w]rite' },
 
         -- Coding assistance
-        { mode = 'n', '<leader>a', group = '[a]vant' },
+        { mode = 'n', '<leader>a',  group = '[a]vant' },
         {
           mode = 'v',
           '<leader>sh',

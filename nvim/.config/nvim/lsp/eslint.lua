@@ -1,6 +1,3 @@
--- NOTE: You need to install the eslint language server to use this config.
--- npm i -g vscode-langservers-extracted
-
 local node_path = '/usr/local/bin/'
 local eslint = node_path .. 'vscode-eslint-language-server'
 
@@ -33,8 +30,6 @@ return {
   },
   -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
   settings = {
-    validate = 'on',
-    packageManager = nil,
     useESLintClass = false,
     experimental = {
       useFlatConfig = false,
@@ -44,7 +39,7 @@ return {
       mode = 'all',
     },
     format = false,
-    quiet = false,
+    quiet = true,
     onIgnoredFiles = 'off',
     rulesCustomizations = {},
     run = 'onType',

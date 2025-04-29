@@ -6,6 +6,7 @@ local act = wezterm.action
 require("vim-nav")
 require("vim-scrollback")
 
+-- What else?
 config.color_scheme = "Catppuccin Macchiato"
 config.font = wezterm.font("JetBrains Mono SemiBold")
 config.font_size = 18.0
@@ -13,6 +14,11 @@ config.window_background_opacity = 0.82
 config.macos_window_background_blur = 20
 config.enable_tab_bar = false
 config.enable_wayland = false
+
+-- Stops the cursor animations which looks ridiculous.
+config.cursor_blink_ease_in = 'Constant'
+config.cursor_blink_ease_out = 'Constant'
+
 config.window_padding = {
 	left = 5,
 	right = 5,
@@ -70,11 +76,11 @@ config.keys = {
 		mods = "CTRL|SHIFT",
 		action = act.SendString("\x1b[9;6u"),
 	},
-	{ key = "h", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-left" }) },
-	{ key = "l", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-right" }) },
-	{ key = "j", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-down" }) },
-	{ key = "k", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-up" }) },
-	{ key = "s", mods = "CTRL", action = wezterm.action({ EmitEvent = "start" }) },
+	{ key = "h", mods = "CTRL",   action = wezterm.action({ EmitEvent = "move-left" }) },
+	{ key = "l", mods = "CTRL",   action = wezterm.action({ EmitEvent = "move-right" }) },
+	{ key = "j", mods = "CTRL",   action = wezterm.action({ EmitEvent = "move-down" }) },
+	{ key = "k", mods = "CTRL",   action = wezterm.action({ EmitEvent = "move-up" }) },
+	{ key = "s", mods = "CTRL",   action = wezterm.action({ EmitEvent = "start" }) },
 	{ key = "l", mods = "LEADER", action = wezterm.action({ EmitEvent = "split-vertical" }) },
 	{ key = "v", mods = "LEADER", action = wezterm.action({ EmitEvent = "split-vertical" }) },
 	{ key = "t", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
