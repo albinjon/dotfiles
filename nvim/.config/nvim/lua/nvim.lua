@@ -8,6 +8,7 @@ require('lazy-plugins')
 vim.lsp.enable({
   'eslint',
   'lua',
+  'css',
   'prisma',
   'typescript'
 })

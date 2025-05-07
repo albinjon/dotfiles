@@ -1,4 +1,4 @@
-local styled_components_path = '/usr/local/bin/node_modules/@styled/typescript-styled-plugin'
+local node_path = '/usr/local/lib/node_modules/'
 
 -- The Docs suggest that this is needed, from my expermentation, it's not making any
 -- difference.
@@ -11,15 +11,15 @@ return {
     plugins = {
       {
         name = '@vue/typescript-plugin',
-        location = '/usr/local/lib/node_modules/@vue/language-server',
+        location = node_path .. '@vue/language-server',
         languages = { "vue" },
       },
       {
         name = '@styled/typescript-styled-plugin',
-        location = styled_components_path,
+        location = node_path .. '@styled/typescript-styled-plugin',
         languages = { 'tsx', 'jsx' },
       },
     },
   },
-  root_markers = { 'package.json' },
+  root_markers = { '.git', 'package-lock.json' },
 }

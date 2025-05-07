@@ -1,9 +1,8 @@
 local function get_selected()
   local original_register = vim.fn.getreg('"')
-  local old = vim.fn.getreg('"')
   vim.cmd('normal! "vy')
   local selected_text = vim.fn.getreg('"')
-  if old == selected_text then
+  if original_register == selected_text then
     return
   end
   vim.fn.setreg('"', original_register)
