@@ -70,4 +70,4 @@ alias py "python3"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/albin/Downloads/gcloud/google-cloud-sdk/path.fish.inc' ]; . '/Users/albin/Downloads/gcloud/google-cloud-sdk/path.fish.inc'; end
-eval "$(mise activate)"
+mise activate fish | source
