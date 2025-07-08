@@ -29,10 +29,11 @@
  * ----------------------------------------------------- */
 
 * {
-  font-family: "Fira Sans semibold", FontAwesome, Roboto, Helvetica, Arial,
+  font-family: "JetBrains Mono SemiBold", FontAwesome, Roboto, Helvetica, Arial,
     sans-serif;
   border: none;
   border-radius: 0px;
+  margin: 1.5px;
 }
 
 window#waybar {
@@ -48,30 +49,23 @@ window#waybar {
  * ----------------------------------------------------- */
 
 #workspaces {
-  margin: 3px 7px 3px 3px;
-  border: 0px;
-  font-size: 14px;
-  color: @textcolor1;
+  background: rgba(94, 94, 94, 0.3);
+  border-radius: 5px;
+  padding: 4px;
 }
 
 #workspaces button {
-  border: 0px;
-  margin: 4px 5px 4px 0px;
-  padding: 0px 4px 0px 4px;
-  color: @textcolor3;
-  transition: all 0.5s ease-in-out;
+  padding: 0 5px;
+  background: transparent;
+  color: white;
+  margin: 2px;
 }
 
 #workspaces button.active {
-  color: red;
-  opacity: 1;
-  background: @workspacesbackground2;
-}
-
-#workspaces button:hover {
-  color: @textcolor1;
-  background: @workspacesbackground2;
-  border-radius: 5px;
+  color: black;
+  background: white;
+  opacity: 0.7;
+  border-radius: 2px;
 }
 
 /* -----------------------------------------------------
@@ -94,11 +88,11 @@ window#waybar.empty #window {
  * Modules
  * ----------------------------------------------------- */
 
-.modules-left > widget:first-child > #workspaces {
+.modules-left>widget:first-child>#workspaces {
   margin-left: 0;
 }
 
-.modules-right > widget:last-child > #workspaces {
+.modules-right>widget:last-child>#workspaces {
   margin-right: 0;
 }
 
@@ -150,8 +144,7 @@ window#waybar.empty #window {
   margin: 10px 15px 8px 0px;
 }
 
-#custom-updates.green {
-}
+#custom-updates.green {}
 
 #custom-updates.yellow {
   color: #ff9a3c;
@@ -271,11 +264,11 @@ window#waybar.empty #window {
   margin: 0px 10px 0px 0px;
 }
 
-#tray > .passive {
+#tray>.passive {
   -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
   -gtk-icon-effect: highlight;
   background-color: #eb4d4b;
 }
