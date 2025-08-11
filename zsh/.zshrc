@@ -66,12 +66,4 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Global aliases
 # alias -g G='| grep' P='| pbcopy'
 
-cos() {
-    cd /Users/albin/careos-backend
-    npm run cos -- "$@"
-    fc -R
-}
-bindkey -s '^G' 'cos
-'
-
 eval "$(mise activate)"

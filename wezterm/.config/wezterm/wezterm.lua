@@ -1,6 +1,9 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
+local is_darwin <const> = wezterm.target_triple:find("darwin") ~= nil
+local is_linux <const> = wezterm.target_triple:find("linux") ~= nil
+
 local config = wezterm.config_builder()
 local act = wezterm.action
 require("vim-nav")
@@ -14,7 +17,7 @@ config.window_background_opacity = 0.82
 config.macos_window_background_blur = 20
 config.enable_tab_bar = false
 config.enable_wayland = false
-config.default_prog = { "/usr/bin/fish", "-l" }
+config.default_prog = is_darwin and { "/opt/homebrew/bin/fish", "-l" } or { "/usr/bin/fish", "-l" }
 
 -- Stops the cursor animations which looks ridiculous.
 config.cursor_blink_ease_in = "Constant"
