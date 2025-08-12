@@ -1,11 +1,11 @@
 return {
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    lazy = false,
-    branch = 'master',
-    build = ':TSUpdate',
-    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
-    opts = {
+  'nvim-treesitter/nvim-treesitter',
+  lazy = false,
+  branch = 'master',
+  build = ':TSUpdate',
+  config = function()
+    local configs = require('nvim-treesitter.configs')
+    configs.setup({
       ensure_installed = {
         'bash',
         'c',
@@ -40,21 +40,9 @@ return {
         'xml',
         'yaml',
       },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = 'gn',
-          node_incremental = 'gn',
-          scope_incremental = false,
-          node_decremental = '<bs>',
-        },
-      },
-    },
-  },
+      sync_install = false,
+      highlight = { enable = true },
+      indent = { enable = true },
+    })
+  end,
 }

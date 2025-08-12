@@ -66,4 +66,3 @@ alias pip "pip3"
 alias chx "chmod +x"
 alias py "python3"
 
-# mise activate fish | source

@@ -1,26 +1,24 @@
 #!/bin/bash
 
 # Check if mise is installed, if not install it
-if ! command -v mise &> /dev/null; then
-    echo "Installing mise..."
-    curl https://mise.run | sh
-    # Add mise to shell
-    echo 'eval "$(mise activate)"' >> ~/.bashrc
-    echo 'eval "$(mise activate)"' >> ~/.zshrc
-    echo 'eval "$(mise activate)"' >> ~/.config/fish/config.fish
-fi
+# if ! command -v mise &> /dev/null; then
+#     echo "Installing mise..."
+#     curl https://mise.run | sh
+#     # Add mise to shell
+#     echo 'eval "$(mise activate)"' >> ~/.bashrc
+#     echo 'eval "$(mise activate)"' >> ~/.zshrc
+#     echo 'eval "$(mise activate)"' >> ~/.config/fish/config.fish
+# fi
 
-# Install tools with mise first
-echo "Installing tools with mise..."
-mise install \
+brew install \
+  stylua \
   deno@latest \
   fzf@latest \
   go@latest \
   lazygit@latest \
   lua-language-server@latest \
   node@lts \
-  ripgrep@latest \
-  stylua@latest \
+  ripgrep@latest
 
 # Install Go tools
 echo "Installing Go tools..."
