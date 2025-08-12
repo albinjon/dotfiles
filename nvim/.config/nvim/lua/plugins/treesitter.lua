@@ -15,6 +15,7 @@ return {
         'http',
         'html',
         'javascript',
+        'java',
         'jsdoc',
         'json',
         'jsonc',
