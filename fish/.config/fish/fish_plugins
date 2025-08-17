@@ -1,6 +1,5 @@
 jorgebucaran/fisher
-jorgebucaran/nvm.fish
+pure-fish/pure
 patrickf1/fzf.fish
 catppuccin/fish
-pure-fish/pure
-mattgreen/lucid.fish
+jorgebucaran/nvm.fish

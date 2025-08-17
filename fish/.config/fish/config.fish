@@ -1,5 +1,3 @@
-
-
 # macOS Setup
 if test -f /opt/homebrew/bin/brew
     eval (/opt/homebrew/bin/brew shellenv)
@@ -21,7 +19,7 @@ set -U fish_user_paths $HOME/bin $HOME/.deno/bin  $HOME/Programmering/apps $HOME
 
 set fzf_fd_opts --hidden --follow -E .git -E node_modules -E .venv -E venv/ -E .cache -E .DS_Store -E /Music -E /Library -E /Applications -E .npm/ -E .docker/ -E .cursor/ -E .local/ -E Movies/ -E .vscode/ -E go/pkg -E .pyenv/ -E Pictures/ -E .prettierd/ -E .pgadmin/ -E .runelite/
 
-# fzf_configure_bindings --directory=\cf --processes=\cp
+fzf_configure_bindings --directory=\cf --processes=\cp
 set -U fish_greeting
 
 set -gx PYENV_ROOT $HOME/.pyenv
