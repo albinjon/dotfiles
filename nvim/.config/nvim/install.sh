@@ -18,7 +18,8 @@ brew install \
   lazygit@latest \
   lua-language-server@latest \
   node@lts \
-  ripgrep@latest
+  ripgrep@latest \
+  vtsls@latest
 
 # Install Go tools
 echo "Installing Go tools..."
@@ -39,7 +40,8 @@ npm install -g \
   @vue/language-server \
   @prisma/language-server \
   @volar/language-server \
+  @vue/language-server \
   @styled/typescript-styled-plugin \
-  neovim
+  @emmetio/css-parser
 
 echo "All tools have been installed successfully!"

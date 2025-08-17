@@ -26,3 +26,12 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
   command = 'silent! EslintFixAll',
 })
+
+vim.api.nvim_create_autocmd('ExitPre', {
+  callback = function()
+    local file = vim.uv.os_tmpdir() .. '/nvim_cwd'
+    local f = io.open(file, 'w')
+    f:write('cd ' .. vim.fn.getcwd() .. '\n')
+    f:close()
+  end,
+})

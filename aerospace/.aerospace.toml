@@ -92,6 +92,7 @@ ctrl-cmd-c = 'focus-monitor --wrap-around next'
 
 ctrl-cmd-g = 'workspace --wrap-around next'
 ctrl-cmd-s = 'workspace --wrap-around prev'
+ctrl-cmd-q = 'close'
 
 ctrl-cmd-shift-g = [ 'move-node-to-workspace --wrap-around next' ,  'workspace --wrap-around next' ]
 ctrl-cmd-shift-s = [ 'move-node-to-workspace --wrap-around prev' ,  'workspace --wrap-around prev' ]

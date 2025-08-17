@@ -21,7 +21,7 @@ set -U fish_user_paths $HOME/bin $HOME/.deno/bin  $HOME/Programmering/apps $HOME
 
 set fzf_fd_opts --hidden --follow -E .git -E node_modules -E .venv -E venv/ -E .cache -E .DS_Store -E /Music -E /Library -E /Applications -E .npm/ -E .docker/ -E .cursor/ -E .local/ -E Movies/ -E .vscode/ -E go/pkg -E .pyenv/ -E Pictures/ -E .prettierd/ -E .pgadmin/ -E .runelite/
 
-fzf_configure_bindings --directory=\cf --processes=\cp
+# fzf_configure_bindings --directory=\cf --processes=\cp
 set -U fish_greeting
 
 set -gx PYENV_ROOT $HOME/.pyenv
@@ -58,6 +58,16 @@ function measure_command_time
 
     node /Users/albin/.scripts/measure_command_time.js $command $log_message
 end
+
+function nvim
+    set -l f (set -q TMPDIR; and echo $TMPDIR/nvim_cwd; or echo /tmp/nvim_cwd)
+    command nvim $argv
+    and test -s $f
+    and eval (cat $f)
+    and rm -f $f
+end
+
+
 alias lower "tr '[:upper:]' '[:lower:]'"
 alias strip "tr -d '\n'"
 alias uuid "uuidgen | lower | strip | pbcopy"

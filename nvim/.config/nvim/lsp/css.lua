@@ -7,6 +7,6 @@ return {
       },
     },
   },
-  filetypes = { 'css', 'vue', 'html' },
+  filetypes = { 'css', 'html' },
   root_markers = { 'package.json' },
 }

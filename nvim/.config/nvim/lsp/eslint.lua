@@ -1,4 +1,4 @@
-local node_path = '/usr/local/bin/'
+local node_path = '/Users/albin/.local/share/nvm/v22.18.0/bin/'
 local eslint = node_path .. 'vscode-eslint-language-server'
 
 return {
