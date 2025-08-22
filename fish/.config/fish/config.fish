@@ -29,6 +29,9 @@ set -gx ALTERNATE_EDITOR nvim
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 
+set --universal nvm_default_version v22.18.0
+nvm use default > /dev/null
+
 # Git aliases
 alias gcam "git commit -am"
 alias gco "git checkout"
@@ -73,5 +76,7 @@ alias resketch "sketchybar --reload"
 alias pip "pip3"
 alias chx "chmod +x"
 alias py "python3"
+
+alias ls="n -dex"
 
 mise activate fish | source

@@ -76,6 +76,7 @@ B = ['secondary', 'main']
 # User Commands
 cmd-alt-shift-ctrl-t = 'exec-and-forget open -a wezterm -n --args start'
 cmd-alt-shift-ctrl-n = 'exec-and-forget open -a wezterm -n --args start nvim'
+cmd-alt-shift-ctrl-s = 'exec-and-forget pmset displaysleepnow'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-period = 'layout tiles horizontal vertical'
@@ -158,6 +159,10 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.electron.dockerdesktop'
 run = 'move-node-to-workspace A'
+
+[[on-window-detected]]
+if.app-id = 'com.linear'
+run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'

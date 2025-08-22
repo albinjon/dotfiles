@@ -1,12 +1,13 @@
 -- REQUIRED: install globally (or point to your local paths)
 -- npm i -g @vtsls/language-server @vue/language-server @styled/typescript-styled-plugin
 
-local node_path = '/opt/homebrew/lib/node_modules/'
+local node_path = '/Users/albin/.local/share/nvm/v22.18.0/lib/node_modules/'
 
 local vue_plugin = {
   name = '@vue/typescript-plugin',
   location = node_path .. '@vue/language-server',
   languages = { 'vue' },
+  configNamespace = 'typescript',
 }
 
 local styled_plugin = {
@@ -27,9 +28,6 @@ return {
     'typescript.tsx',
   },
   root_markers = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' },
-  init_options = {
-    -- typescript = { tsdk = '/usr/local/lib/node_modules/typescript/lib' }, -- optional
-  },
   settings = {
     vtsls = {
       tsserver = { globalPlugins = { vue_plugin, styled_plugin } },

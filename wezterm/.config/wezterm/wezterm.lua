@@ -38,6 +38,11 @@ config.keys = {
 		action = wezterm.action.DisableDefaultAssignment,
 	},
 	{
+		key = "N",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
+	{
 		key = "h",
 		mods = "CMD",
 		action = wezterm.action.DisableDefaultAssignment,
