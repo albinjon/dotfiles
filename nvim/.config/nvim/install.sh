@@ -1,25 +1,19 @@
 #!/bin/bash
-
-# Check if mise is installed, if not install it
-# if ! command -v mise &> /dev/null; then
-#     echo "Installing mise..."
-#     curl https://mise.run | sh
-#     # Add mise to shell
-#     echo 'eval "$(mise activate)"' >> ~/.bashrc
-#     echo 'eval "$(mise activate)"' >> ~/.zshrc
-#     echo 'eval "$(mise activate)"' >> ~/.config/fish/config.fish
-# fi
-
-brew install \
-  stylua \
-  deno@latest \
-  fzf@latest \
-  go@latest \
-  lazygit@latest \
-  lua-language-server@latest \
-  node@lts \
+if [[ $OSTYPE == 'linux-gnu' ]]; then
+   sudo pacman -S go stylua deno fzf lazygit lua-language-server nodejs ripgrep nvm --needed
+elif [[ $OSTYPE == 'darwin' ]]; then
+  brew install \
+    go@latest \
+    stylua \
+    deno@latest \
+    fzf@latest \
+    go@latest \
+    lazygit@latest \
+    lua-language-server@latest \
+    node@lts \
   ripgrep@latest \
   vtsls@latest
+fi
 
 # Install Go tools
 echo "Installing Go tools..."
@@ -29,6 +23,7 @@ go install golang.org/x/tools/gopls@latest
 
 # Install npm packages
 echo "Installing npm packages..."
+
 npm install -g \
   @fsouza/prettierd \
   @tailwindcss/language-server \
