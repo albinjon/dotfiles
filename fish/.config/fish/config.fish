@@ -15,7 +15,7 @@ if test -f $HOME/.secret_envs/.env
 end
 
 set -gx FLYCTL_INSTALL /home/albin/.fly
-set -U fish_user_paths $HOME/bin $HOME/.deno/bin  $HOME/Programmering/apps $HOME/.local/bin $HOME/.local/bin/nvim/bin $HOME/.config/emacs/bin $GOPATH/bin $GOROOT/bin $FLYCTL_INSTALL/bin $HOME/.rbenv/bin /usr/local/bin $fish_user_paths
+set -U fish_user_paths $HOME/bin $HOME/.deno/bin  $HOME/Programmering/apps $HOME/.local/bin $HOME/.local/bin/nvim/bin $HOME/.config/emacs/bin $GOPATH/bin $GOROOT/bin $FLYCTL_INSTALL/bin $HOME/.rbenv/bin /usr/local/bin $HOME/.jenv/bin:$PATH $fish_user_paths
 
 set fzf_fd_opts --hidden --follow -E .git -E node_modules -E .venv -E venv/ -E .cache -E .DS_Store -E /Music -E /Library -E /Applications -E .npm/ -E .docker/ -E .cursor/ -E .local/ -E Movies/ -E .vscode/ -E go/pkg -E .pyenv/ -E Pictures/ -E .prettierd/ -E .pgadmin/ -E .runelite/
 
@@ -47,6 +47,9 @@ alias gsw "git switch -"
 alias gd "git diff"
 
 alias k "kubectl"
+
+alias va "source .venv/bin/activate.fish"
+alias da "deactivate"
 
 function measure_command_time
     if test (count $argv) -lt 2
@@ -80,3 +83,4 @@ alias py "python3"
 alias ls="n -dex"
 
 mise activate fish | source
+status --is-interactive; and source (jenv init -|psub)
