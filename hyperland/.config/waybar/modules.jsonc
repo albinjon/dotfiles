@@ -67,20 +67,14 @@
 
   // Pulseaudio
   "pulseaudio": {
-    "format": "{icon}  {volume}%",
-    "format-bluetooth": "{icon}  {volume}%",
-    "format-muted": " ",
+    "format": "{icon}",
+    "on-click": "wezterm start --always-new-process --class=Wiremix -e wiremix -v output",
+    "tooltip-format": "Playing at {volume}%",
+    "scroll-step": 5,
+    "format-muted": "󰝟",
     "format-icons": {
-      "headphones": "",
-      "handsfree": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", ""]
-    },
-    "scroll-step": 1,
-    "on-click": "pavucontrol"
+      "default": ["", "", ""]
+    }
   },
 
   // Group Hardware
@@ -96,7 +90,7 @@
 
   // System
   "custom/system": {
-    "format": "",
+    "format": "󱎴",
     "tooltip": false
   },
 
