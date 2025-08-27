@@ -3,7 +3,7 @@ if test -f $HOME/.secret_envs/.env
 end
 
 set -gx FLYCTL_INSTALL /home/albin/.fly
-set -U fish_user_paths $HOME/bin $HOME/.deno/bin  $HOME/Programmering/apps $HOME/.local/bin $HOME/.local/bin/nvim/bin $HOME/.config/emacs/bin $GOPATH/bin $GOROOT/bin $FLYCTL_INSTALL/bin $HOME/.rbenv/bin /usr/local/bin $HOME/.jenv/bin:$PATH $fish_user_paths
+set -U fish_user_paths $HOME/bin $HOME/.deno/bin  $HOME/Programmering/apps $HOME/.local/bin $HOME/.local/bin/nvim/bin $HOME/.config/emacs/bin $GOPATH/bin $GOROOT/bin $FLYCTL_INSTALL/bin $HOME/.rbenv/bin /usr/local/bin $HOME/.jenv/bin:$PATH $HOME/bin $fish_user_paths
 
 set fzf_fd_opts --hidden --follow -E .git -E node_modules -E .venv -E venv/ -E .cache -E .DS_Store -E /Music -E /Library -E /Applications -E .npm/ -E .docker/ -E .cursor/ -E .local/ -E Movies/ -E .vscode/ -E go/pkg -E .pyenv/ -E Pictures/ -E .prettierd/ -E .pgadmin/ -E .runelite/
 

@@ -8,7 +8,6 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 require("vim-nav")
 require("wiremix")
-require("vim-scrollback")
 
 -- What else?
 config.warn_about_missing_glyphs = false
@@ -66,11 +65,6 @@ config.keys = {
 		key = "RightArrow",
 		mods = "OPT",
 		action = act.SendKey({ key = "f", mods = "ALT" }),
-	},
-	{
-		key = "e",
-		mods = "CTRL",
-		action = act.EmitEvent("trigger-vim-with-scrollback"),
 	},
 	{
 		key = "Backspace",

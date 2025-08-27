@@ -1,0 +1,13 @@
+#!/bin/bash
+
+browser=$(xdg-settings get default-web-browser)
+
+if [[ ${browser,,} =~ "zex" ]]; then
+  browser="zen.desktop"
+else
+  /usr/bin/notify-send 'some ting wong'
+fi
+
+echo $HOME
+
+# exec setsid uwsm app -- $(sed -n 's/^Exec=\([^ ]*\).*/\1/p' {~/.local,~/.nix-profile,/usr}/share/applications/$browser 2>/dev/null | head -1) --app="$1" "${@:2}"
