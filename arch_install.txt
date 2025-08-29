@@ -7,6 +7,7 @@ btrfs-progs 6.16-1
 chromium 139.0.7258.138-1
 deno 2.3.6-1
 difftastic 0.64.0-2
+discord 1:0.0.106-1
 dkms 3.2.1-1
 docker 1:28.3.3-1
 docker-compose 2.39.2-1
@@ -53,9 +54,11 @@ pipewire 1:1.4.7-1
 pipewire-alsa 1:1.4.7-1
 pipewire-jack 1:1.4.7-1
 pipewire-pulse 1:1.4.7-1
+playwright 1.52.0-1
 polkit-kde-agent 6.4.4-1
 qt5-wayland 5.15.17+kde+r57-1
 qt6-wayland 6.9.1-1
+runelite 1:2.7.5-1
 slack-desktop-wayland 4.45.64-1
 slurp 1.5.0-1
 smartmontools 7.5-1
@@ -63,6 +66,8 @@ sof-firmware 2025.05.1-1
 spotify-launcher 0.6.3-2
 stow 2.4.1-1
 stylua 2.1.0-1
+terraform 1.12.1-1
+terraform-ls 0.36.5-1
 tofi 0.9.1-2
 ttf-fira-code 6.2-2
 ttf-jetbrains-mono-nerd 3.4.0-1
