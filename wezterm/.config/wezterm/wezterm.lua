@@ -7,9 +7,10 @@ local is_linux <const> = wezterm.target_triple:find("linux") ~= nil
 local config = wezterm.config_builder()
 local act = wezterm.action
 require("vim-nav")
-require("vim-scrollback")
+require("wiremix")
 
 -- What else?
+config.warn_about_missing_glyphs = false
 config.color_scheme = "Catppuccin Macchiato"
 config.font = wezterm.font("JetBrains Mono SemiBold")
 config.font_size = 22.0
@@ -66,11 +67,6 @@ config.keys = {
 		action = act.SendKey({ key = "f", mods = "ALT" }),
 	},
 	{
-		key = "e",
-		mods = "CTRL",
-		action = act.EmitEvent("trigger-vim-with-scrollback"),
-	},
-	{
 		key = "Backspace",
 		mods = "OPT",
 		action = act.SendKey({ key = "w", mods = "CTRL" }),
@@ -86,6 +82,7 @@ config.keys = {
 		action = act.SendString("\x1b[9;6u"),
 	},
 	{ key = "h", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-left" }) },
+	{ key = "Escape", action = wezterm.action({ EmitEvent = "escape" }) },
 	{ key = "l", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-right" }) },
 	{ key = "j", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-down" }) },
 	{ key = "k", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-up" }) },
