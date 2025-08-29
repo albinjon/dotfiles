@@ -42,6 +42,11 @@ return {
       preset = 'enter',
       ['<C-k>'] = { 'select_prev', 'fallback' },
       ['<C-j>'] = { 'select_next', 'fallback' },
+      ['<Nul>'] = {
+        function(cmp)
+          cmp.show({ providers = { 'snippets' } })
+        end,
+      },
     },
     appearance = {
       nerd_font_variant = 'mono',
@@ -54,6 +59,8 @@ return {
         end,
       },
       documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 800,
         window = {
           border = 'rounded',
         },
@@ -62,18 +69,11 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = function()
-        local success, node = pcall(vim.treesitter.get_node)
-        if vim.bo.filetype == 'lua' then
-          return { 'lsp', 'path', 'lazydev' }
-        elseif vim.bo.filetype == 'markdown' then
-          return { 'buffer' }
-        elseif success and node and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
-          return { 'buffer' }
-        else
-          return { 'lsp', 'path', 'snippets', 'buffer' }
-        end
-      end,
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      per_filetype = {
+        lua = { 'lazydev', inherit_defaults = true },
+        markdown = { 'buffer' },
+      },
       providers = {
         lazydev = {
           name = 'LazyDev',

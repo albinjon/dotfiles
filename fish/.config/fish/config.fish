@@ -1,3 +1,15 @@
+# macOS Setup
+if test -f /opt/homebrew/bin/brew
+    eval (/opt/homebrew/bin/brew shellenv)
+    set -gx GOROOT $(/opt/homebrew/bin/brew  --prefix go)/libexec
+    set -gx GOPATH $HOME/go
+
+    function sketch
+        nohup sketchybar >/dev/null 2>&1 &
+    end
+
+end
+
 if test -f $HOME/.secret_envs/.env
     source $HOME/.secret_envs/.env
 end
@@ -71,15 +83,6 @@ alias py "python3"
 alias ls="n -dex"
 
 mise activate fish | source
+zoxide init --cmd j fish | source
+status --is-interactive; and source (jenv init -|psub)
 
-# macOS Setup
-if test -f /opt/homebrew/bin/brew
-    eval (/opt/homebrew/bin/brew shellenv)
-    set -gx GOROOT $(/opt/homebrew/bin/brew  --prefix go)/libexec
-    set -gx GOPATH $HOME/go
-
-    function sketch
-        nohup sketchybar >/dev/null 2>&1 &
-    end
-    status --is-interactive; and source (jenv init -|psub)
-end
