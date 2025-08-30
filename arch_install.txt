@@ -26,6 +26,7 @@ hyprland 0.50.1-1
 hyprpaper 0.7.5-3
 intel-ucode 20250812-1
 iwd 3.9-1
+jq 1.8.1-1
 lazydocker 0.24.1-2
 lazygit 0.54.2-1
 lazysql-bin 0.4.0-1
@@ -68,6 +69,7 @@ stow 2.4.1-1
 stylua 2.1.0-1
 terraform 1.12.1-1
 terraform-ls 0.36.5-1
+tldr 3.4.1-1
 tofi 0.9.1-2
 ttf-fira-code 6.2-2
 ttf-jetbrains-mono-nerd 3.4.0-1
@@ -90,4 +92,5 @@ xdg-utils 1.2.1-1
 xorg-server 21.1.18-2
 xorg-xinit 1.4.4-1
 zen-browser-bin 1.14.11b-1
+zoxide 0.9.8-2
 zram-generator 1.2.1-1

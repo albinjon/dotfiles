@@ -2,11 +2,58 @@ local wezterm = require("wezterm")
 local mux = require("wezterm").mux
 local act = wezterm.action
 
+function dump(o)
+	if type(o) == "table" then
+		local s = "{ "
+		for k, v in pairs(o) do
+			if type(k) ~= "number" then
+				k = '"' .. k .. '"'
+			end
+			s = s .. "[" .. k .. "] = " .. dump(v) .. ","
+		end
+		return s .. "} "
+	else
+		return tostring(o)
+	end
+end
+
+local function debug_log(message)
+	file = io.open(".wezterm.log", "a") -- Open file in append mode
+	file:write(dump(message) .. "\n") -- Add a new line
+	file:close() -- Close the file
+end
+
+local function is_nvim_context(process, depth)
+	depth = depth or 3
+	if depth <= 0 then
+		return false
+	end
+
+	if process.name == "nvim" then
+		return true
+	end
+
+	if process.children then
+		for _, child in pairs(process.children) do
+			if is_nvim_context(child, depth - 1) then
+				return true
+			end
+		end
+	end
+
+	return false
+end
+
 local wez_nvim_action = function(window, pane, action_wez, forward_key_nvim)
-	local current_process = mux.get_window(window:window_id()):active_pane():get_foreground_process_name()
-	if string.match(current_process, "[^/]+$") == "nvim" then
+	local current_process = mux.get_window(window:window_id()):active_pane()
+	local name = current_process:get_foreground_process_name()
+	-- INFO: This is because editors can be opened through file managers.
+	local process = current_process:get_foreground_process_info()
+	local is_nvim = is_nvim_context(process)
+
+	if is_nvim then
 		window:perform_action(forward_key_nvim, pane)
-	elseif string.match(current_process, "[^/]+$") == "posting" then
+	elseif string.match(name, "[^/]+$") == "posting" then
 		window:perform_action(forward_key_nvim, pane)
 	else
 		window:perform_action(action_wez, pane)
