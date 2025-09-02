@@ -12,8 +12,8 @@ if test -f /opt/homebrew/bin/brew
 
 end
 
-if test -f $HOME/.secret_envs/.env
-    source $HOME/.secret_envs/.env
+if test -f $HOME/.secret_envs/credentials.fish
+    source $HOME/.secret_envs/credentials.fish
 end
 
 set -gx FLYCTL_INSTALL /home/albin/.fly
