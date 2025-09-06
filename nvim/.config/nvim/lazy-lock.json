@@ -6,6 +6,7 @@
   "conform.nvim": { "branch": "master", "commit": "a0ab60ed666c56b37fd7ed1847d2ac52f2482ce0" },
   "copilot.lua": { "branch": "master", "commit": "f0c0d981de2737abc50bd7b5bb034ae440826827" },
   "dressing.nvim": { "branch": "master", "commit": "2d7c2db2507fa3c4956142ee607431ddb2828639" },
+  "easy-dotnet.nvim": { "branch": "main", "commit": "ff7cca4d4f7c8df0c07507c592b55a709a8124b5" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
   "ftFT.nvim": { "branch": "master", "commit": "f3e43c9584e14b27f04c27a95a9d9f0e58dfec02" },
   "guess-indent.nvim": { "branch": "main", "commit": "84a4987ff36798c2fc1169cbaff67960aed9776f" },

@@ -9,6 +9,7 @@ discord 1:0.0.106-1
 docker 1:28.3.3-1
 docker-compose 2.39.2-1
 dolphin 25.08.0-1
+dotnet-sdk 9.0.8.sdk109-1
 dunst 1.12.2-1
 efibootmgr 18-3
 fd 10.2.0-1
