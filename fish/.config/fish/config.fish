@@ -1,7 +1,7 @@
 # macOS Setup
 if test -f /opt/homebrew/bin/brew
 
-    status --is-interactive; and source (jenv init -|psub)
+    # status --is-interactive; and source (jenv init -|psub)
     eval (/opt/homebrew/bin/brew shellenv)
     set -gx GOROOT $(/opt/homebrew/bin/brew  --prefix go)/libexec
     set -gx GOPATH $HOME/go

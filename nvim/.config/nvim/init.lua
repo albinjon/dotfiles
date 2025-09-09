@@ -13,6 +13,7 @@ require('keymaps')
 require('wezterm-nav')
 require('autocmd')
 require('lazy-bootstrap')
+require('quickfix-tools')
 require('lazy-plugins')
 
 -- INFO: Will take all the lua files in the lsp dir and enable them, otherwise you'll have
