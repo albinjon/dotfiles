@@ -248,7 +248,7 @@
 	# If true, require a match to allow a selection to be made. If false,
 	# making a selection with no matches will print input to stdout.
 	# In drun mode, this is always true.
-	require-match = true
+	require-match = false
 
 	# If true, automatically accept a result if it is the only one
 	# remaining. If there's only one result on startup, window creation is

@@ -27,8 +27,10 @@ lua-language-server 3.15.0-1
 lxqt-policykit 2.2.0-1
 ly 1.1.2-1
 mise 2025.8.7-1
+mosquitto 2.0.22-2
 nano 8.6-1
 neovim 0.11.3-1
+netcoredbg 3.1.2_1054-5
 network-manager-applet 1.36.0-1
 nnn 5.1-1
 nordvpn-bin 4.0.0-1
@@ -46,6 +48,9 @@ sof-firmware 2025.05.1-1
 spotify-launcher 0.6.3-2
 stow 2.4.1-1
 stylua 2.1.0-1
+swappy 1.7.1-1
+swig 4.3.1-1
+tcpdump 4.99.5-1
 terraform 1.12.1-1
 terraform-ls 0.36.5-1
 tldr 3.4.1-1

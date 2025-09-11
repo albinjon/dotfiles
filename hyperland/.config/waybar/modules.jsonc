@@ -118,16 +118,9 @@
     "tooltip-format": "Clipboard Manager"
   },
 
-  // Power Menu
-  "custom/exit": {
-    "format": "",
-    "on-click": "wlogout",
-    "tooltip": false
-  },
-
   // Clock
   "clock": {
-    "format": "{:%Y/%Om/%Od - %H:%M}",
+    "format": "{:%Om/%Od - %H:%M}",
     // "timezone": "America/New_York",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
@@ -136,20 +129,6 @@
   "tray": {
     "icon-size": 21,
     "spacing": 10
-  },
-
-  // Network
-  "network": {
-    "format": "{ifname}",
-    "format-wifi": "   {signalStrength}%",
-    "format-ethernet": "  {ifname}",
-    "format-disconnected": "Disconnected",
-    "tooltip-format": " {ifname} via {gwaddri}",
-    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
-    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
-    "tooltip-format-disconnected": "Disconnected",
-    "max-length": 50,
-    "on-click": "~/.config/.settings/networkmanager.sh"
   },
 
   // Other

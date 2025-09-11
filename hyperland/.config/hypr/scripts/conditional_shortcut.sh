@@ -13,6 +13,7 @@ if [[ "$focused_class" != "org.wezfurlong.wezterm" ]]; then
         "SUPER,Z,") modified_key="CTRL,Z," ;;
         "SUPER,A,") modified_key="CTRL,A," ;;
         "SUPER,F,") modified_key="CTRL,F," ;;
+        "SUPER,R,") modified_key="CTRL,R," ;;
         "ALT_SHIFT,Left,") modified_key="CTRL_SHIFT,Left," ;;
         "ALT_SHIFT,Right,") modified_key="CTRL_SHIFT,Right," ;;
         "ALT,Left,") modified_key="CTRL,Left," ;;

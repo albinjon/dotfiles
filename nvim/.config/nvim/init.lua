@@ -11,6 +11,7 @@ vim.filetype.add({
 require('options')
 require('keymaps')
 require('wezterm-nav')
+require('pico')
 require('autocmd')
 require('lazy-bootstrap')
 require('quickfix-tools')
