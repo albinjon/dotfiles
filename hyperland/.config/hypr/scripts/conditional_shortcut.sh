@@ -10,6 +10,7 @@ if [[ "$focused_class" != "org.wezfurlong.wezterm" ]]; then
         "SUPER,C,") modified_key="CTRL,C," ;;
         "SUPER,V,") modified_key="CTRL,V," ;;
         "SUPER,X,") modified_key="CTRL,X," ;;
+        "SUPER,K,") modified_key="CTRL,K," ;;
         "SUPER,Z,") modified_key="CTRL,Z," ;;
         "SUPER,A,") modified_key="CTRL,A," ;;
         "SUPER,F,") modified_key="CTRL,F," ;;
