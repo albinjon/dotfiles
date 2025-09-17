@@ -1,7 +1,8 @@
 local function term_run(cmd)
-  vim.cmd('botright 12split | terminal')
-  local chan = vim.b.terminal_job_id
-  vim.fn.chansend(chan, cmd .. '\n')
+  Snacks.terminal(cmd, { win = { border = 'rounded' } })
+  -- vim.cmd('botright 12split | terminal')
+  -- local chan = vim.b.terminal_job_id
+  -- vim.fn.chansend(chan, cmd .. '\n')
 end
 
 -- Run current buffer on Pico (no copy)
