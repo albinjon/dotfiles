@@ -2,7 +2,7 @@
 # e.g. ~/.config/fish/functions/n.fish
 # or, add the lines to the 'config.fish' file.
 
-function n --wraps nnn --description 'support nnn quit and change directory'
+function nnn_cd --wraps nnn --description 'support nnn quit and change directory'
     # Block nesting of nnn in subshells
     if test -n "$NNNLVL" -a "$NNNLVL" -ge 1
         echo "nnn is already running"

@@ -83,7 +83,7 @@ alias pip "pip3"
 alias chx "chmod +x"
 alias py "python3"
 
-alias ls="n -dex"
+alias ll="nnn_cd -dex"
 
 mise activate fish | source
 zoxide init --cmd j fish | source
