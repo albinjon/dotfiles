@@ -16,7 +16,6 @@ if test -f $HOME/.secret_envs/credentials.fish
     source $HOME/.secret_envs/credentials.fish
 end
 
-set TERM wezterm
 set -gx FLYCTL_INSTALL /home/albin/.fly
 set -U fish_user_paths $HOME/bin $HOME/.deno/bin  $HOME/Programmering/apps $HOME/.local/bin $HOME/.local/bin/nvim/bin $HOME/.config/emacs/bin $GOPATH/bin $GOROOT/bin $FLYCTL_INSTALL/bin $HOME/.rbenv/bin /usr/local/bin $HOME/.jenv/bin:$PATH $HOME/.dotnet/tools $HOME/bin $fish_user_paths
 
@@ -26,6 +25,8 @@ fzf_configure_bindings --directory=\cf --processes=\cp
 set -U fish_greeting
 
 set -gx PYENV_ROOT $HOME/.pyenv
+set -gx DOTNET_ROOT /opt/homebrew/share/dotnet
+set -gx DOTNET_ROOT_ARM64 /opt/homebrew/share/dotnet
 
 set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx ALTERNATE_EDITOR nvim
