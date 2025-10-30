@@ -1,15 +1,20 @@
-# macOS Setup
-if test -f /opt/homebrew/bin/brew
+switch (uname)
+    case Linux
+        set -gx DOTNET_ROOT /opt/homebrew/share/dotnet
+        set -gx DOTNET_ROOT_ARM64 /opt/homebrew/share/dotnet
 
-    # status --is-interactive; and source (jenv init -|psub)
-    eval (/opt/homebrew/bin/brew shellenv)
-    set -gx GOROOT $(/opt/homebrew/bin/brew  --prefix go)/libexec
-    set -gx GOPATH $HOME/go
+    case Darwin
+        set -gx DOTNET_ROOT /opt/homebrew/share/dotnet
+        set -gx DOTNET_ROOT_ARM64 /opt/homebrew/share/dotnet
+        set -gx GOROOT $(/opt/homebrew/bin/brew  --prefix go)/libexec
+        set -gx GOPATH $HOME/go
+        eval (/opt/homebrew/bin/brew shellenv)
+        function sketch
+            nohup sketchybar >/dev/null 2>&1 &
+        end
 
-    function sketch
-        nohup sketchybar >/dev/null 2>&1 &
-    end
-
+    case '*'
+            echo Hi, stranger!
 end
 
 if test -f $HOME/.secret_envs/credentials.fish
@@ -25,8 +30,6 @@ fzf_configure_bindings --directory=\cf --processes=\cp
 set -U fish_greeting
 
 set -gx PYENV_ROOT $HOME/.pyenv
-set -gx DOTNET_ROOT /opt/homebrew/share/dotnet
-set -gx DOTNET_ROOT_ARM64 /opt/homebrew/share/dotnet
 
 set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx ALTERNATE_EDITOR nvim
