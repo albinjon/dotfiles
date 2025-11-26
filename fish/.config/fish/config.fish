@@ -22,7 +22,7 @@ if test -f $HOME/.secret_envs/credentials.fish
 end
 
 set -gx FLYCTL_INSTALL /home/albin/.fly
-set -U fish_user_paths $HOME/bin $HOME/.deno/bin  $HOME/Programmering/apps $HOME/.local/bin $HOME/.local/bin/nvim/bin $HOME/.config/emacs/bin $GOPATH/bin $GOROOT/bin $FLYCTL_INSTALL/bin $HOME/.rbenv/bin /usr/local/bin $HOME/.jenv/bin:$PATH $HOME/.dotnet/tools $HOME/bin $fish_user_paths
+set -U fish_user_paths $HOME/bin $HOME/.deno/bin  $HOME/Programmering/apps $HOME/.local/bin $HOME/.local/bin/nvim/bin $HOME/.config/emacs/bin $GOPATH/bin $GOROOT/bin $FLYCTL_INSTALL/bin $HOME/.rbenv/bin /usr/local/bin $HOME/.jenv/bin:$PATH $HOME/.dotnet/tools $HOME/.bun/bin $HOME/bin $fish_user_paths
 
 set fzf_fd_opts --hidden --follow -E .git -E node_modules -E .venv -E venv/ -E .cache -E .DS_Store -E /Music -E /Library -E /Applications -E .npm/ -E .docker/ -E .cursor/ -E .local/ -E Movies/ -E .vscode/ -E go/pkg -E .pyenv/ -E Pictures/ -E .prettierd/ -E .pgadmin/ -E .runelite/
 
@@ -35,9 +35,6 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx ALTERNATE_EDITOR nvim
 set -gx EDITOR nvim
 set -gx VISUAL nvim
-
-set --universal nvm_default_version v22.18.0
-nvm use default > /dev/null
 
 # Git aliases
 alias gcam "git commit -am"
@@ -52,6 +49,12 @@ alias gstp "git stash pop"
 alias gmm "git merge main"
 alias gsw "git switch -"
 alias gd "git diff"
+
+alias gw='./gradlew'
+alias gwf='./gradlew ktlintFormat'
+alias gwt='./gradlew test'
+alias gwit='./gradlew integrationTest'
+alias gwc='./gradlew check'
 
 alias k "kubectl"
 
@@ -89,5 +92,9 @@ alias py "python3"
 
 alias ll="nnn_cd -dex"
 
-mise activate fish | source
+~/.local/bin/mise activate fish | source
 zoxide init --cmd j fish | source
+
+if test -f ~/.local/share/google-cloud-sdk/path.fish.inc
+    source ~/.local/share/google-cloud-sdk/path.fish.inc
+end

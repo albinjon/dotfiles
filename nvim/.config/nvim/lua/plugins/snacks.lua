@@ -1,12 +1,17 @@
 local function get_selected()
-  local original_register = vim.fn.getreg('"')
-  vim.cmd('normal! "vy')
-  local selected_text = vim.fn.getreg('"')
-  if original_register == selected_text then
-    return
+  local mode = vim.fn.mode()
+
+  -- If we're in visual mode, yank the visual selection
+  if mode:match('[vV\x16]') then
+    local original_register = vim.fn.getreg('"')
+    vim.cmd('normal! "vy')
+    local selected_text = vim.fn.getreg('"')
+    vim.fn.setreg('"', original_register)
+    return selected_text
   end
-  vim.fn.setreg('"', original_register)
-  return selected_text
+
+  -- In normal mode, get the word under the cursor
+  -- return vim.fn.expand('<cword>')
 end
 
 local function find_root_package()
@@ -20,6 +25,7 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
+    image = { enabled = true },
     bigfile = { enabled = true },
     zen = { enabled = true },
     scroll = {

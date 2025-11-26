@@ -1,5 +1,6 @@
 return {
   'yetone/avante.nvim',
+  enabled = false,
   event = 'VeryLazy',
   keys = {
     { '<leader>ae', '<cmd>AvanteEdit<cr>', desc = '[a]vante [e]dit', mode = 'v' },

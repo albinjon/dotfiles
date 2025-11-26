@@ -141,6 +141,8 @@ ctrl-cmd-shift-9 = [ 'move-node-to-workspace 9', 'workspace 9' ]
 ctrl-cmd-shift-p = [ 'move-node-to-workspace A', 'workspace A' ]
 ctrl-cmd-shift-0 = [ 'move-node-to-workspace B', 'workspace B' ]
 
+ctrl-cmd-b = 'exec-and-forget borders active_color=0xffFFA01E inactive_color=0xff494d64 width=15.0'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 ctrl-cmd-tab = 'workspace-back-and-forth'
 

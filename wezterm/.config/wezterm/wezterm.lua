@@ -32,7 +32,10 @@ config.window_padding = {
 }
 config.window_decorations = "RESIZE"
 config.leader = { key = "w", mods = "CTRL", timeout_milliseconds = 2000 }
+
 config.keys = {
+	-- Claude code wants this.
+	{ key = "Enter", mods = "SHIFT", action = wezterm.action({ SendString = "\x1b\r" }) },
 	{
 		key = "m",
 		mods = "CMD",

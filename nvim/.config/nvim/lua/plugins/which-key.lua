@@ -72,6 +72,27 @@ local function replace_selection()
   vim.cmd(string.format('%%s/%s/%s/gc', selected_text:gsub('/', '\\/'), replacement:gsub('/', '\\/')))
 end
 
+local function console_log()
+  local mode = vim.fn.mode()
+  local word = mode:match('[vV]') and get_visual_selection() or vim.fn.expand('<cword>')
+
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', true)
+
+  if not word or word == '' then
+    return
+  end
+
+  -- get current line indentation
+  local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+  local current_line = vim.api.nvim_get_current_line()
+  local indent = current_line:match('^(%s*)') or ''
+
+  -- insert new line below with same indentation
+  vim.api.nvim_buf_set_lines(0, row, row, false, {
+    string.format('%sconsole.log("%s: ", %s);', indent, word, word),
+  })
+end
+
 -- local function reload_file()
 --   vim.cmd('LspStop')
 --   vim.defer_fn(function()
@@ -132,13 +153,13 @@ return {
         { mode = 'n', '<leader>o', group = '[o]bsidian' },
         {
           mode = 'n',
-          '<leader>rr',
+          '<leader>Rr',
           require('repl').run,
           desc = 'open [r]epl',
         },
         {
           mode = 'v',
-          '<leader>rr',
+          '<leader>Rr',
           function()
             require('repl').run(get_visual_selection())
           end,
@@ -155,6 +176,7 @@ return {
         { mode = 'n', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
         { mode = 'n', '<leader>cnr', '<cmd>ScissorsEditSnippet<CR>', { desc = '[e]dit snippet' } },
         { mode = 'v', '<leader>cna', '<cmd>ScissorsAddNewSnippet<CR>', { desc = '[a]dd new snippet' } },
+        { mode = { 'v', 'n' }, '<leader>lg', console_log, { desc = '[l]og current word' } },
         -- Windows/Buffers
         { mode = 'n', '<leader>q', group = '[q]uit/session' },
         { mode = 'n', '<C-Tab>', '<cmd>tabnext<cr>', desc = '[c]hange [t]ab' },
@@ -210,7 +232,7 @@ return {
         { mode = 'n', '<leader>ww', '<cmd>update<cr>', desc = '[w]rite' },
 
         -- Coding assistance
-        { mode = 'n', '<leader>a', group = '[a]vant' },
+        { mode = 'n', '<leader>a', group = '[a]ss_ist' },
         {
           mode = 'v',
           '<leader>sh',

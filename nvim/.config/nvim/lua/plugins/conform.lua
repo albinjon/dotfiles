@@ -37,6 +37,7 @@ return {
         javascriptreact = { 'prettierd' },
         vue = { 'prettierd' },
         markdown = { 'prettierd' },
+        http = { 'kulala-fmt' },
         json = { 'jq' },
         -- Conform can also run multiple formatters sequentially
         python = { 'ruff' },
