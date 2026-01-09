@@ -2,7 +2,7 @@ return {
   'mfussenegger/nvim-dap',
   dependencies = {
     'rcarriga/nvim-dap-ui',
-    "nvim-neotest/nvim-nio"
+    'nvim-neotest/nvim-nio',
   },
   cmd = {
     'DapContinue',
@@ -15,14 +15,14 @@ return {
     'DapSetConditionalBreakpoint',
   },
   keys = {
-    { '<F5>',       '<cmd>DapContinue<cr>',                 desc = 'Debug: Start/Continue' },
-    { '<F1>',       '<cmd>DapStepInto<cr>',                 desc = 'Debug: Step Into' },
-    { '<F2>',       '<cmd>DapStepOver<cr>',                 desc = 'Debug: Step Over' },
-    { '<F3>',       '<cmd>DapStepOut<cr>',                  desc = 'Debug: Step Out' },
-    { '<leader>b',  '<cmd>DapToggleBreakpoint<cr>',         desc = 'Debug: Toggle Breakpoint' },
-    { '<leader>B',  '<cmd>DapSetConditionalBreakpoint<cr>', desc = 'Debug: Set Conditional Breakpoint' },
-    { '<leader>du', '<cmd>DapToggleUI<cr>',                 desc = 'Debug: Toggle UI' },
-    { '<leader>dq', '<cmd>DapCloseUI<cr>',                  desc = 'Debug: Close UI' },
+    { '<leader>dl', '<cmd>DapContinue<cr>', desc = 'Debug: Start/Continue' },
+    { '<leader>di', '<cmd>DapStepInto<cr>', desc = 'Debug: Step Into' },
+    { '<leader>do', '<cmd>DapStepOver<cr>', desc = 'Debug: Step Over' },
+    { '<leader>dO', '<cmd>DapStepOut<cr>', desc = 'Debug: Step Out' },
+    { '<leader>b', '<cmd>DapToggleBreakpoint<cr>', desc = 'Debug: Toggle Breakpoint' },
+    { '<leader>B', '<cmd>DapSetConditionalBreakpoint<cr>', desc = 'Debug: Set Conditional Breakpoint' },
+    { '<leader>du', '<cmd>DapToggleUI<cr>', desc = 'Debug: Toggle UI' },
+    { '<leader>dq', '<cmd>DapCloseUI<cr>', desc = 'Debug: Close UI' },
   },
 
   config = function()
@@ -32,64 +32,96 @@ return {
     dap.defaults.fallback.terminal_win_cmd = 'tabnew'
 
     require('dap.ext.vscode').load_launchjs(nil, { node = { 'typescript', 'javascript' } })
-    require('dap').configurations.typescript = {
-      {
-        type = 'pwa-node',
-        request = 'launch',
-        name = 'TS: Launch file',
-        runtimeExecutable = 'ts-node-dev',
-        runtimeArgs = {
-          '-O {"module":"commonjs"}',
-        },
-        program = '${file}',
-        env = { NODE_ENV = 'development' },
-        skipFiles = { 'node_modules/**' },
-        cwd = '${workspaceFolder}',
-      },
-    }
-    require('dap').configurations.javascript = {
-      {
-        type = 'pwa-node',
-        request = 'launch',
-        name = 'Node: Launch file',
-        program = '${file}',
-        cwd = '${workspaceFolder}',
-      },
-      {
-        type = 'pwa-node',
-        request = 'launch',
-        name = 'Deno: Launch file',
-        runtimeExecutable = 'deno',
-        runtimeArgs = {
-          'run',
-          '--inspect-wait',
-          '--allow-all',
-        },
-        program = '${file}',
-        cwd = '${workspaceFolder}',
-        attachSimplePort = 9229,
-      },
-      {
-        -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-        name = 'Node: Attach to process',
-        type = 'pwa-node',
-        request = 'attach',
-        processId = require('dap.utils').pick_process,
-      },
-    }
-    local mason_registry = require('mason-registry')
-    local js_adapter_cmd = mason_registry.get_package('js-debug-adapter'):get_install_path() .. '/js-debug-adapter'
 
-    require('dap').adapters['pwa-node'] = {
-      type = 'server',
-      host = 'localhost',
-      port = '${port}',
-      resolveSourceMapLocations = { '${workspaceFolder}/', '!/node_modules/**' },
-      executable = {
-        command = js_adapter_cmd,
-        args = { '${port}' },
-      },
-    }
+    local enter_launch_url = function()
+      local co = coroutine.running()
+      return coroutine.create(function()
+        vim.ui.input({ prompt = 'Enter URL: ', default = 'http://localhost:' }, function(url)
+          if url == nil or url == '' then
+            return
+          else
+            coroutine.resume(co, url)
+          end
+        end)
+      end)
+    end
+
+    for _, language in ipairs({ 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'vue' }) do
+      dap.configurations[language] = {
+        {
+          type = 'pwa-node',
+          request = 'launch',
+          name = 'Launch file using Node.js (nvim-dap)',
+          program = '${file}',
+          cwd = '${workspaceFolder}',
+        },
+        {
+          type = 'pwa-node',
+          request = 'attach',
+          name = 'Attach to process using Node.js (nvim-dap)',
+          processId = require('dap.utils').pick_process,
+          cwd = '${workspaceFolder}',
+        },
+        -- requires ts-node to be installed globally or locally
+        {
+          type = 'pwa-node',
+          request = 'launch',
+          name = 'Launch file using Node.js with ts-node/register (nvim-dap)',
+          program = '${file}',
+          cwd = '${workspaceFolder}',
+          runtimeArgs = { '-r', 'ts-node/register' },
+        },
+        {
+          type = 'pwa-chrome',
+          request = 'launch',
+          name = 'Launch Chrome (nvim-dap)',
+          url = enter_launch_url,
+          webRoot = '${workspaceFolder}',
+          sourceMaps = true,
+        },
+        {
+          type = 'pwa-msedge',
+          request = 'launch',
+          name = 'Launch Edge (nvim-dap)',
+          url = enter_launch_url,
+          webRoot = '${workspaceFolder}',
+          sourceMaps = true,
+        },
+      }
+    end
+    local js_adapter_cmd = vim.fn.stdpath('config') .. '/lib/js-debug/src/dapDebugServer.js'
+
+    for _, adapterType in ipairs({ 'node', 'chrome', 'msedge' }) do
+      local pwaType = 'pwa-' .. adapterType
+
+      dap.adapters[pwaType] = {
+        type = 'server',
+        host = 'localhost',
+        port = '${port}',
+        resolveSourceMapLocations = { '${workspaceFolder}/', '!/node_modules/**' },
+        executable = {
+          command = 'node',
+          args = {
+            js_adapter_cmd,
+            '${port}',
+          },
+        },
+      }
+
+      -- this allow us to handle launch.json configurations
+      -- which specify type as "node" or "chrome" or "msedge"
+      dap.adapters[adapterType] = function(cb, config)
+        local nativeAdapter = dap.adapters[pwaType]
+
+        config.type = pwaType
+
+        if type(nativeAdapter) == 'function' then
+          nativeAdapter(cb, config)
+        else
+          cb(nativeAdapter)
+        end
+      end
+    end
 
     vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#E53935' })
     vim.api.nvim_set_hl(0, 'DapConditionalBreakpoint', { ctermbg = 0, fg = '#FFF176' })

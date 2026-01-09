@@ -5,3 +5,4 @@
 **/.dap
 
 superfile/.config/superfile/lastdir
+nvim/.config/nvim/lib/js-debug
