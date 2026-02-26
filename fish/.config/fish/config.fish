@@ -2,6 +2,8 @@ switch (uname)
     case Linux
         set -gx DOTNET_ROOT /opt/homebrew/share/dotnet
         set -gx DOTNET_ROOT_ARM64 /opt/homebrew/share/dotnet
+        /usr/bin/mise activate fish | source
+
 
     case Darwin
         set -gx DOTNET_ROOT /opt/homebrew/share/dotnet
@@ -13,6 +15,7 @@ switch (uname)
         function sketch
             nohup sketchybar >/dev/null 2>&1 &
         end
+        ~/.local/bin/mise activate fish | source
 
     case '*'
             echo Hi, stranger!
@@ -87,13 +90,12 @@ alias lower "tr '[:upper:]' '[:lower:]'"
 alias strip "tr -d '\n'"
 alias uuid "uuidgen | lower | strip | pbcopy"
 alias resketch "sketchybar --reload"
-alias pip "pip3"
+# alias pip "pip3"
 alias chx "chmod +x"
 alias py "python3"
 
 alias ll="nnn_cd -dex"
 
-~/.local/bin/mise activate fish | source
 zoxide init --cmd j fish | source
 
 if test -f ~/.local/share/google-cloud-sdk/path.fish.inc

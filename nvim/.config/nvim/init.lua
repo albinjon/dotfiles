@@ -10,7 +10,8 @@ vim.filetype.add({
 
 require('options')
 require('keymaps')
-require('wezterm-nav')
+-- INFO: Disabled for going to kitty
+-- require('wezterm-nav')
 require('pico')
 require('autocmd')
 require('lazy-bootstrap')

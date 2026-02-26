@@ -34,7 +34,8 @@ vim.keymap.set({ 'i', 'x', 'c' }, '<M-f>', '<C-Right>', { desc = 'Move cursor wo
 vim.keymap.set('n', '<C-å>', '<C-]>', { desc = 'Follow link' })
 
 -- Deletion keymaps
-vim.keymap.set({ 'i', 'c' }, '<M-Del>', '<S-Right><C-W>', { desc = 'Delete word forwards' })
+vim.keymap.set({ 'i', 'c', 't' }, '<M-Del>', '<S-Right><C-W>', { desc = 'Delete word forwards' })
+vim.keymap.set({ 'i', 'c', 't' }, '<M-BS>', '<C-W>', { desc = 'Delete word backwards' })
 
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 

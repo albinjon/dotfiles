@@ -4,7 +4,7 @@ original_key="$1"
 
 focused_class=$(hyprctl activewindow -j | jq -r '.class')
 
-if [[ "$focused_class" != "org.wezfurlong.wezterm" ]]; then
+if [[ "$focused_class" != "kitty" ]]; then
     # Not in terminal - convert to CTRL equivalent
     case "$original_key" in
         "SUPER,C,") modified_key="CTRL,C," ;;
