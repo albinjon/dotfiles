@@ -97,6 +97,7 @@ alias py "python3"
 alias ll="nnn_cd -dex"
 
 zoxide init --cmd j fish | source
+direnv hook fish | source
 
 if test -f ~/.local/share/google-cloud-sdk/path.fish.inc
     source ~/.local/share/google-cloud-sdk/path.fish.inc

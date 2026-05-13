@@ -19,6 +19,43 @@ local function find_root_package()
   return root
 end
 
+local function open_lazygit_with_worktree_support(opts)
+  local new_dir_file = vim.fs.joinpath(vim.fn.stdpath('cache'), 'lazygit-newdir')
+  local cwd_before = vim.fn.getcwd()
+  local on_close = opts and opts.win and opts.win.on_close
+
+  vim.fn.delete(new_dir_file)
+
+  opts = vim.tbl_deep_extend('force', {
+    env = {
+      LAZYGIT_NEW_DIR_FILE = new_dir_file,
+    },
+    win = {
+      on_close = function(self)
+        if on_close then
+          on_close(self)
+        end
+
+        if vim.fn.filereadable(new_dir_file) == 0 then
+          return
+        end
+
+        local new_dir = vim.trim(table.concat(vim.fn.readfile(new_dir_file), '\n'))
+        vim.fn.delete(new_dir_file)
+
+        if new_dir == '' or vim.fn.isdirectory(new_dir) == 0 or new_dir == cwd_before then
+          return
+        end
+
+        vim.cmd.cd(vim.fn.fnameescape(new_dir))
+        vim.notify(('LazyGit switched to worktree: %s'):format(new_dir), vim.log.levels.INFO)
+      end,
+    },
+  }, opts or {})
+
+  return Snacks.lazygit(opts)
+end
+
 return {
   'folke/snacks.nvim',
   priority = 1000,
@@ -42,7 +79,7 @@ return {
           { icon = ' ', key = 'o', desc = 'Find Obsidian Files', action = ':ObsidianSearchAll' },
           { icon = '󰊕 ', key = 'L', desc = 'LeetCode', action = ':Leet' },
           { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
-          { icon = ' ', key = 'G', desc = 'Git', action = ':lua Snacks.lazygit()' },
+          { icon = ' ', key = 'G', desc = 'Git', action = open_lazygit_with_worktree_support },
           { icon = ' ', key = 'r', desc = 'Recent Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
           {
             icon = ' ',
@@ -187,7 +224,7 @@ return {
     {
       '<leader>gg',
       function()
-        Snacks.lazygit()
+        open_lazygit_with_worktree_support()
       end,
       desc = 'Lazygit',
     },

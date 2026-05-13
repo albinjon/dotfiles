@@ -1,14 +1,7 @@
 -- npm i -g @vtsls/language-server @vue/language-server @styled/typescript-styled-plugin
 
-local function path_exists(p)
-  return vim.uv.fs_stat(p) ~= nil
-end
-
 local node_path = vim.fn.system({ 'which', 'node' }):gsub('%s+', '')
 local modules_path = vim.fn.fnamemodify(node_path, ':h:h') .. '/lib/node_modules/'
-
--- local is_next = path_exists('next.config.js')
--- local next_path = vim.fn.getcwd() .. '/node_modules/typescript/lib/tsserver.js'
 
 local vue_plugin = {
   name = '@vue/typescript-plugin',
