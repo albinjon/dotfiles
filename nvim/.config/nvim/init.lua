@@ -28,4 +28,6 @@ for _, filepath in ipairs(lsp_files) do
   table.insert(lsps_table, name_without_ext)
 end
 
+-- table.insert(lsps_table, 'roslyn_ls')
+table.insert(lsps_table, 'roslyn_ls')
 vim.lsp.enable(lsps_table)
