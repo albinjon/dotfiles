@@ -1,66 +1,29 @@
-local fs = vim.fs
-
-local roslyn_dll = fs.joinpath(
-  vim.fn.stdpath('data'),
-  'roslyn',
-  'neutral',
-  'content',
-  'LanguageServer',
-  'neutral',
-  'Microsoft.CodeAnalysis.LanguageServer.dll'
-)
-
-local log_dir = fs.joinpath(vim.fn.stdpath('cache'), 'roslyn_ls', 'logs')
-vim.fn.mkdir(log_dir, 'p')
+-- Calibration on top of nvim-lspconfig's lsp/roslyn_ls.lua.
+-- Deep-merged: only the keys below override upstream defaults.
 
 ---@type vim.lsp.Config
 return {
-  cmd = {
-    'dotnet',
-    roslyn_dll,
-    '--logLevel',
-    'Warning',
-    '--extensionLogDirectory',
-    log_dir,
-    '--stdio',
+  handlers = {
+    -- Auto-restore on demand, but don't toast every "Restore started",
+    -- "Determining projects...", "Restored X in Yms" status line. Real
+    -- failures still surface.
+    ['workspace/_roslyn_projectNeedsRestore'] = function(_, result, ctx)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+      ---@diagnostic disable-next-line: param-type-mismatch
+      client:request('workspace/_roslyn_restore', result, function(err)
+        if err then
+          vim.notify('roslyn restore: ' .. err.message, vim.log.levels.ERROR, { title = 'roslyn_ls' })
+        end
+      end)
+      return vim.NIL
+    end,
   },
 
   settings = {
+    -- Analyze open files only -> snappy cold start on large solutions.
     ['csharp|background_analysis'] = {
-      -- Start conservative. This avoids Roslyn/analyzer noise on large solutions.
       dotnet_analyzer_diagnostics_scope = 'openFiles',
       dotnet_compiler_diagnostics_scope = 'openFiles',
-    },
-
-    ['csharp|completion'] = {
-      dotnet_show_name_completion_suggestions = true,
-      dotnet_show_completion_items_from_unimported_namespaces = true,
-      dotnet_provide_regex_completions = true,
-    },
-
-    ['csharp|inlay_hints'] = {
-      csharp_enable_inlay_hints_for_implicit_object_creation = true,
-      csharp_enable_inlay_hints_for_implicit_variable_types = true,
-      csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-      csharp_enable_inlay_hints_for_types = true,
-
-      dotnet_enable_inlay_hints_for_indexer_parameters = true,
-      dotnet_enable_inlay_hints_for_literal_parameters = true,
-      dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-      dotnet_enable_inlay_hints_for_other_parameters = true,
-      dotnet_enable_inlay_hints_for_parameters = true,
-
-      dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-      dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-      dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-    },
-
-    ['csharp|symbol_search'] = {
-      dotnet_search_reference_assemblies = true,
-    },
-
-    ['csharp|code_lens'] = {
-      dotnet_enable_references_code_lens = true,
     },
   },
 }

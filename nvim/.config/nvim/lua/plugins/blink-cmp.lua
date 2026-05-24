@@ -7,6 +7,8 @@ return {
     { 'rafamadriz/friendly-snippets' },
     {
       'chrisgrieser/nvim-scissors',
+      -- last commit supporting nvim 0.11; drop pin when upgrading to 0.12
+      commit = '855ce6b',
       cmd = { 'ScissorsAddNewSnippet', 'ScissorsEditSnippet' },
       dependencies = {
         { 'stevearc/dressing.nvim', opts = {} },

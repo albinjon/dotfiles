@@ -27,6 +27,21 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   command = 'silent! EslintFixAll',
 })
 
+-- Drop nvim's informational "watch.watch: ENOENT" / "watch.watchdirs: ENOENT"
+-- notify_once spam. The Roslyn LSP registers watchers on bin/, obj/, and
+-- NuGet paths that often don't exist yet — nvim notifies once per missing
+-- root, which floods the UI on first .cs open.
+do
+  local orig_notify_once = vim.notify_once
+  ---@diagnostic disable-next-line: duplicate-set-field
+  vim.notify_once = function(msg, level, opts)
+    if type(msg) == 'string' and msg:match('^watch%.watch[a-z]*: ENOENT') then
+      return false
+    end
+    return orig_notify_once(msg, level, opts)
+  end
+end
+
 vim.api.nvim_create_autocmd('ExitPre', {
   callback = function()
     local file = vim.uv.os_tmpdir() .. '/nvim_cwd'
