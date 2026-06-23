@@ -21,8 +21,8 @@ switch (uname)
             echo Hi, stranger!
 end
 
-if test -f $HOME/.secret_envs/credentials.fish
-    source $HOME/.secret_envs/credentials.fish
+if test -f $HOME/.secret_envs/.env
+    source $HOME/.secret_envs/.env
 end
 
 set -gx FLYCTL_INSTALL /home/albin/.fly

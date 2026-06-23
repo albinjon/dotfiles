@@ -10,7 +10,7 @@ return {
       function()
         require('smart-splits').move_cursor_left()
       end,
-      mode = { 'n', 't' },
+      mode = { 'n', 'i' },
       desc = 'Move to left split/pane',
     },
     {
@@ -18,7 +18,7 @@ return {
       function()
         require('smart-splits').move_cursor_down()
       end,
-      mode = { 'n', 't' },
+      mode = { 'n', 'i' },
       desc = 'Move to lower split/pane',
     },
     {
@@ -26,7 +26,7 @@ return {
       function()
         require('smart-splits').move_cursor_up()
       end,
-      mode = { 'n', 't' },
+      mode = { 'n', 'i' },
       desc = 'Move to upper split/pane',
     },
     {
@@ -34,7 +34,7 @@ return {
       function()
         require('smart-splits').move_cursor_right()
       end,
-      mode = { 'n', 't' },
+      mode = { 'n', 'i' },
       desc = 'Move to right split/pane',
     },
   },
