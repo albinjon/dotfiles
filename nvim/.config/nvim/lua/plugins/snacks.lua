@@ -101,6 +101,7 @@ return {
           keys = {
             ['<c-w>j'] = { 'edit_split', mode = { 'n' } },
             ['<c-w>l'] = { 'edit_vsplit', mode = { 'n' } },
+            ['<M-BS>'] = { '<C-s-w>', mode = 'i', expr = true },
           },
         },
       },

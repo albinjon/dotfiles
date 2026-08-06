@@ -8,5 +8,6 @@ keybinding:
     moveDownCommit: <disabled>
     moveUpCommit: <disabled>
 git:
-  pagers:
-    - externalDiffCommand: "difft --color=always"
+  diffRenderers:
+    - command: "difft --color=always"
+      type: extDiff

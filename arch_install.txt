@@ -4,6 +4,7 @@ azure-cli 2.81.0-1
 base 3-2
 bluez-utils 5.85-1
 chromium 143.0.7499.169-1
+cursor-bin 2.5.26-1
 deno 2.6.2-1
 difftastic 0.67.0-1
 discord 1:0.0.119-1
