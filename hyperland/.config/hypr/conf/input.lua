@@ -1,0 +1,22 @@
+-- -----------------------------------------------------
+-- Input / keyboard
+-- https://wiki.hypr.land/Configuring/Basics/Variables/
+-- -----------------------------------------------------
+
+hl.config({
+    input = {
+        kb_layout          = "se",
+        kb_variant         = "mac",
+        kb_model           = "",
+        kb_options         = "grp:win_space_toggle,caps:escape",
+        numlock_by_default = true,
+        mouse_refocus      = false,
+
+        follow_mouse = 1,
+        sensitivity  = 0, -- -1.0 - 1.0, 0 means no modification.
+
+        touchpad = {
+            natural_scroll = true,
+        },
+    },
+})
